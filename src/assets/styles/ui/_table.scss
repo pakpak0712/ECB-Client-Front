@@ -1,0 +1,104 @@
+#root {
+	.rdt_Table {
+		display: table;
+		border: none;
+		background-color: transparent;
+		.rdt_TableHead {
+			display: table-header-group;
+			color: var(--app-component-color);
+		}
+		.rdt_TableBody {
+			display: table-row-group;
+		}
+		.rdt_TableHeadRow,
+		.rdt_TableRow {
+			display: table-row;
+			border: none;
+			font-size: 1rem;
+		}
+		.rdt_TableRow {
+			background-color: transparent;
+			color: var(--app-component-color);
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+		}
+		.rdt_TableCol,
+		.rdt_TableCell {
+			display: table-cell;
+			width: auto;
+			min-width: auto;
+			padding: 10px;
+			cursor: pointer;
+			&.sc-jJTsDX {
+				width: 34px;
+			}
+		}
+		.rdt_TableCol_Sortable {
+			// justify-content: center;
+			align-content: center;
+			> span {
+				margin-left: 0.5rem;
+				font-size: 0.6154rem;
+			}
+		}
+		.rdt_TableHead {
+			position: sticky;
+			top: 0;
+			z-index: 5;
+		}
+		.rdt_TableHeadRow {
+			background-color: var(--app-sidebar-bg);
+		}
+		input[type='checkbox'] {
+			width: 1.2308rem;
+			height: 1.2308rem;
+			margin-top: -1px !important;
+			background-color: var(--app-component-bg);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			border: 1px solid var(--app-component-border-color);
+			appearance: none;
+			font-size: $font-size-base !important;
+			@include transition($form-check-transition);
+			@include border-radius($form-check-input-border-radius);
+
+			&:checked {
+				background-color: $navy;
+				border-color: $navy;
+
+				&[type='checkbox'] {
+					@if $enable-gradients {
+						background-image: escape-svg($form-check-input-checked-bg-image), var(--#{$prefix}gradient);
+					} @else {
+						background-image: escape-svg($form-check-input-checked-bg-image);
+					}
+				}
+			}
+
+			&:disabled {
+				pointer-events: none;
+				filter: none;
+				opacity: $form-check-input-disabled-opacity;
+			}
+
+			&[disabled],
+			&:disabled {
+				~ .form-check-label {
+					cursor: default;
+					opacity: $form-check-label-disabled-opacity;
+				}
+			}
+		}
+	}
+}
+
+.list-data-table {
+	> div {
+		display: block;
+		overflow: auto;
+		height: 100%;
+		border: 1px solid var(--app-component-border-color);
+	}
+}

@@ -1,0 +1,53 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { initialParams, initialViewList } from '@/constants/initial';
+import { getLineStation } from '@/utils/common';
+
+// type handleChangeDeviceInfoType = (name: string, value: string | number) => void;
+
+export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T>>) {
+	const { id } = useParams();
+	const [viewList, setViewList] = useState(initialViewList);
+	const [propertyKey, setPropertyKey] = useState('');
+	const [stationParams, setStationParams] = useState(initialParams);
+
+	const setViewListFromData = (data: string) => {
+		if (data) {
+			const viewList = getLineStation(data);
+			setViewList(viewList);
+		}
+	};
+
+	const handleChangeViewList = (name: string, value: string) => {
+		const splitedName = name.split('-');
+		const viewListName = splitedName[0];
+		const viewListKey = splitedName[1];
+		setViewList((prev) => {
+			if (viewListKey === 'line') {
+				return { [viewListKey]: value, station: '' };
+			} else {
+				return { ...prev, [viewListKey]: value };
+			}
+		});
+		setPropertyKey(viewListName);
+	};
+
+	useEffect(() => {
+		setStateAction((prev) => {
+			return { ...prev, [propertyKey]: `${viewList.line} ${viewList.station}` };
+		});
+		if (viewList.line) {
+			const lineCode = viewList.line.replaceAll(/[^0-9]/g, '');
+			setStationParams((prev) => {
+				return { ...prev, searchDTO: { ...prev.searchDTO, searchType: lineCode } };
+			});
+		}
+	}, [viewList]);
+
+	useEffect(() => {
+		if (!id) setViewList(initialViewList);
+	}, [id]);
+
+	return { viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList };
+}

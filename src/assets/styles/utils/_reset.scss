@@ -1,0 +1,30 @@
+
+html,
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+	@include media-breakpoint-down(sm) {
+        font-size: 12px;
+	}
+}
+
+button {
+    border: none;
+    color: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input[type=checkbox], select {
+    cursor: pointer;
+}
+
+.hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip: rect(0, 0, 0, 0);
+}

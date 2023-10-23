@@ -1,0 +1,50 @@
+
+
+$white: #ffffff !default; 
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #2d353c !default;
+$gray-900: #20252a !default;
+$black: #000000 !default; 
+
+$skyblue: #348fe2 !default;
+$navy: #4659ab !default;
+$theme: #293896 !default;
+$red: #ff5b57 !default;
+$theme-colors: (
+	'theme': $theme,
+	'gray': $gray-600,
+    'default': $gray-200,
+	'navy': $navy,
+	'skyblue': $skyblue,
+    'red': $red,
+);
+
+// z-idnex
+$app-header-zindex: 1050 !default;
+$app-sidebar-zindex: 1000 !default;
+
+// width
+$app-sidebar-width: 220px !default;
+
+// height
+$app-header-height: 50px !default;
+$app-header-height-sm: 30px !default;
+$input-btn-padding-y: 7px !default;
+$input-btn-padding-x: 0.75rem !default;
+
+// font
+$font-family-base: 'Noto Sans KR', sans-serif !default;
+$font-size-base: 12px !default;
+$font-size-sm: 11px !default;
+$font-size-lg: 14px !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 600 !default;
+$font-weight-bolder: 700 !default;
+
+

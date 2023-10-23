@@ -1,0 +1,55 @@
+.btn {
+    padding: 0.5385rem 0.9231rem;
+    font-size: 0.9231rem;
+	white-space: nowrap;
+	& + & {
+		margin-left: 0.5rem;
+	}
+}
+
+
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+          $bg:                 $value;
+          $border:             $value;
+          $textColor:          $white;
+          $hoverBg:            shade-color($value, 25%);
+          $hoverBorder:        shade-color($value, 25%);
+          $hoverTextColor:     $white;
+          $activeBg:           shade-color($value, 25%);
+          $activeBorder:       shade-color($value, 25%);
+          $activeTextColor:    $white;
+          $disabledBg:         tint-color($value, 25%);
+          $disabledBorder:     tint-color($value, 25%);
+          $disabledTextColor:  $white;
+          
+          @if $color == 'default' or $color == 'white' {
+              $textColor: $gray-900;
+              $hoverTextColor: $gray-900;
+              $activeTextColor: $gray-900;
+              $disabledTextColor: $gray-900;
+          }
+          @if $color == 'default' {
+              $hoverBg: $gray-400;
+              $hoverBorder: $gray-400;
+              $activeBg: $gray-400;
+              $activeBorder: $gray-400;
+          }
+          @if $color == 'white' {
+              $border: $gray-400;
+              $hoverBg: $gray-200;
+              $hoverBorder: $gray-500;
+              $activeBg: $gray-200;
+              $activeBorder: $gray-500;
+              $disabledBg: tint-color($gray-200, 25%);
+              $disabledBorder: tint-color($gray-500, 25%);
+          }
+          
+          @include button-variant(
+              $bg, $border, $textColor, $hoverBg, 
+              $hoverBorder, $hoverTextColor, 
+              $activeBg, $activeBorder, $activeTextColor,  
+              $disabledBg, $disabledBorder, $disabledTextColor
+          );
+    }
+  }

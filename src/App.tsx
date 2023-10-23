@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+
+import Footer from '@/features/ui/layout/Footer';
+import Header from '@/features/ui/layout/Header';
+import Sidebar from '@/features/ui/sidebar/Sidebar';
+import { hookReceiver } from '@/plugin/hookReceiver';
+import { navbarToggleState } from '@/state/common';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	hookReceiver.navigate = useNavigate();
+	hookReceiver.location = useLocation();
+
+	const [navbarToggle, setNavbarToggle] = useRecoilState(navbarToggleState);
+
+	useEffect(() => {
+		setNavbarToggle('');
+	}, [hookReceiver.location]);
+
+	return (
+		<div className={`app hljs ${navbarToggle}`}>
+			<Header />
+			<Sidebar />
+			<div className={'app-contents'}>
+				<Outlet />
+			</div>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

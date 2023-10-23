@@ -1,19 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// css
+import '@fortawesome/fontawesome-free/css/all.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import 'bootstrap';
+import 'react-datepicker/dist/react-datepicker.css';
+import ReactDom from 'react-dom/client';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import { RouterProvider } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// bootstrap
+import '@/assets/styles/app.scss';
+import AlertModal from '@/features/ui/modal/AlertModal';
+import ConfirmModal from '@/features/ui/modal/ConfirmModal';
+import ContentsModal from '@/features/ui/modal/ContentsModal';
+import router from '@/router';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 10000,
+			keepPreviousData: true,
+			refetchOnWindowFocus: true,
+		},
+	},
+});
+
+ReactDom.createRoot(document.getElementById('root') as HTMLElement).render(
+	// <React.StrictMode>
+	<QueryClientProvider client={queryClient}>
+		<RecoilRoot>
+			<RouterProvider router={router} />
+			<AlertModal />
+			<ConfirmModal />
+			<ContentsModal />
+			<ReactQueryDevtools initialIsOpen={false} />
+		</RecoilRoot>
+	</QueryClientProvider>,
+	// </React.StrictMode>
+);
