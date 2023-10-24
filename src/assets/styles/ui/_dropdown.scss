@@ -1,0 +1,32 @@
+.dropdown {
+	.caret {
+		margin-left: 0.25rem;
+	}
+	&-toggle {
+		&:after {
+			border-width: 0.375rem;
+			border-top-width: 0.45rem;
+		}
+		&.show {
+			&:after {
+				transform: rotateX(180deg);
+			}
+		}
+	}
+	&-menu {
+		inset: 0 0 auto auto !important;
+		min-width: auto;
+		background-color: var(--app-component-modal-bg);
+		font-size: 0.9rem;
+		text-align: center;
+	}
+	&-item {
+        padding: 0.3846rem 1.1538rem;
+		color: var(--app-component-color);
+		&:active,
+		&:hover {
+            background-color: var(--app-component-disabled-bg);
+			color: var(--app-component-active-color);
+		}
+	}
+}

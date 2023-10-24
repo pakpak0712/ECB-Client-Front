@@ -29,16 +29,15 @@ export default function Profile() {
 		<>
 			<div className="navbar-item navbar-user dropdown">
 				<a href="#/" className="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-					{/*<img src="./scss/default/images/user/user-13.jpg" alt="" />*/}
 					<span>{userInfo.member_name} </span>
-					<b className="caret ms-1"></b>
+					<b className="caret"></b>
 				</a>
-				<div className="dropdown-menu dropdown-menu-end">
-					<span className="dropdown-item cursor-pointer" onClick={handleEditClick}>
+				<div className="dropdown-menu">
+					<button type="button" className="dropdown-item" onClick={handleEditClick}>
 						정보 수정
-					</span>
+					</button>
 					<div className="dropdown-divider"></div>
-					<button type="button" className="dropdown-item cursor-pointer" onClick={handleLogout}>
+					<button type="button" className="dropdown-item" onClick={handleLogout}>
 						로그아웃
 					</button>
 				</div>

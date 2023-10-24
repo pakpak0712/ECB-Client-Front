@@ -65,16 +65,14 @@ export default function Alive() {
 	};
 
 	return (
-		<>
+		<div className="page">
 			<PageHeader title="고장 통계">
-				<>
-					<ButtonRefetch {...refetchProps} />
-				</>
+				<ButtonRefetch {...refetchProps} />
 			</PageHeader>
 			<PageBody title="고장 목록">
 				<AliveList {...listProps} />
 			</PageBody>
 			{isLoading && <LoadingFrame />}
-		</>
+		</div>
 	);
 }

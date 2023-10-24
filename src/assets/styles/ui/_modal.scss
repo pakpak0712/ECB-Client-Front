@@ -1,5 +1,7 @@
 @keyframes moveUp {
-	to { transform: translateY(-100%); }
+	to {
+		transform: translateY(-100%);
+	}
 }
 .modal {
 	display: block;
@@ -12,27 +14,33 @@
 		height: 100%;
 	}
 
-	& .modal-dialog {
+	&-dialog {
 		max-width: none;
+		min-width: 15.3846rem;
 	}
 
-	& .modal-header {
+	&-header {
 		display: flex;
 		flex: 1;
 		align-items: center;
 		border-color: var(--app-component-border-color);
 	}
 
-	& .modal-content { 
+	&-title {
+		font-size: 1.25rem !important;
+		font-weight: 500;
+	}
+
+	&-content {
 		width: auto;
 		margin: auto;
 		box-shadow: $box-shadow;
 		border: 1px solid var(--app-component-border-color);
 		background-color: var(--app-component-modal-bg);
-		color: var(--app-component-color)
+		color: var(--app-component-color);
 	}
-	
-	& .modal-footer {
+
+	&-footer {
 		border-color: var(--app-component-border-color);
 	}
 
@@ -53,7 +61,7 @@
 		& .modal-content {
 			border-radius: 0;
 			background-color: $danger;
-			color: $white
+			color: $white;
 		}
 		& .modal-body,
 		& .modal-header,
@@ -69,7 +77,7 @@
 		}
 	}
 
-	&.modal-confirm { 
+	&.modal-confirm {
 		.modal-dialog {
 			position: absolute;
 			top: 10%;
@@ -79,8 +87,8 @@
 	}
 
 	&.modal-dim {
-		background-color: rgba(0,0,0,0.6);
-		
+		background-color: rgba(0, 0, 0, 0.6);
+
 		@include media-breakpoint-down(sm) {
 			.modal-content {
 				max-height: 90vh;

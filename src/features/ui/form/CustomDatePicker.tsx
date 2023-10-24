@@ -26,7 +26,7 @@ export default function CustomDatePicker(props: CustomDatePicker) {
 				{title && (
 					<div className="col-form-label">
 						{title}
-						{required && <span className="hljs-string">&nbsp;*</span>}
+						{required && <span className="required">&nbsp;*</span>}
 					</div>
 				)}
 

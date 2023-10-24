@@ -4,9 +4,9 @@ export default function ConfirmModal() {
 	const { modalDataState } = useConfirm();
 	return (
 		<div className={`modal modal-confirm fade ${modalDataState?.isShow ? 'show' : ''}`}>
-			<div className="modal-dialog m-3">
+			<div className="modal-dialog">
 				<div className="modal-content">
-					<div className="modal-body fs-13px">
+					<div className="modal-body">
 						<div className="text-nowrap">{modalDataState?.content}</div>
 					</div>
 					<div className="modal-footer border-top-0">

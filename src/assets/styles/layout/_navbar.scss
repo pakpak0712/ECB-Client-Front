@@ -1,36 +1,14 @@
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-	position: relative;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: $app-header-zindex;
-    height: var(--app-header-height);
-    padding: 0 var(--app-contents-padding);
-	background: var(--app-header-bg);
-    color: var(--app-header-color);
-
-	&-title {
-		font-size: 1.3846rem;
-		line-height: 1.2;
-		word-break: keep-all;
-
-		@include media-breakpoint-down(sm) {
-			font-size: 1.15rem;
-		}
-	}
-	& .navbar-nav {
-        display: flex;
+.navbar {
+	&-nav {
+		display: flex;
 		flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
+		align-items: center;
+		justify-content: flex-end;
 		font-size: 1rem;
-    }
-	& .navbar-mobile-toggler {
+	}
+	&-mobile-toggler {
 		position: relative;
-        margin-left: 0.625rem;
+		margin-left: 0.625rem;
 		margin-right: -0.625rem;
 		padding: 0.625rem;
 		background-color: transparent;
@@ -39,7 +17,7 @@
 		outline: none;
 		color: var(--app-component-color);
 		border-radius: $border-radius;
-		
+
 		@include media-breakpoint-up(lg) {
 			display: none;
 		}
@@ -64,7 +42,6 @@
 			&:last-child {
 				transform: translateY(300%);
 			}
-
 		}
 		&:hover {
 			background: none;

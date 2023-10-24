@@ -40,60 +40,52 @@ export default function Login() {
 	};
 
 	return (
-		<>
-			<div className="login">
-				<div className="login-cover">
-					<div className="login-cover-img"></div>
-					<div className="login-cover-bg"></div>
-				</div>
+		<div className="login">
+			<div className="login-cover"></div>
 
-				<div className="login-container w-75 p-4" style={{ maxWidth: '400px' }}>
-					<div className="login-header">
-						<h1 className="login-title fs-5 fs-md-4 text-center">서울교통공사 비상벨통합관제시스템</h1>
-					</div>
-					<div className="login-content mt-4">
-						<form onSubmit={handleLogin} className="login-form row">
-							<div className="col-md-8">
-								<div className="form-floating">
-									<input
-										type="text"
-										className="login-form-control form-control"
-										placeholder="아이디를 입력하세요"
-										aria-label="login-id-input"
-										value={id}
-										onChange={(e) => setId(e.target.value.trim())}
-									/>
-									<label htmlFor="id" className="login-label">
-										아이디
-									</label>
-								</div>
-								<div className="form-floating mt-2">
-									<input
-										type="password"
-										className="login-form-control form-control"
-										placeholder="비밀번호를 입력하세요"
-										aria-label="login-password-input"
-										autoComplete="off"
-										value={password}
-										onChange={(e) => setPassword(e.target.value.trim())}
-									/>
-									<label htmlFor="password" className="login-label">
-										비밀번호
-									</label>
-								</div>
+			<div className="login-container" style={{ maxWidth: '400px' }}>
+				<div className="login-header">
+					<h1 className="login-title text-center">서울교통공사 비상벨통합관제시스템</h1>
+				</div>
+				<div className="login-content">
+					<form onSubmit={handleLogin} className="login-form row">
+						<div className="col-md-8">
+							<div className="form-floating">
+								<input
+									type="text"
+									className="login-form-control form-control"
+									placeholder="아이디를 입력하세요"
+									aria-label="login-id-input"
+									value={id}
+									onChange={(e) => setId(e.target.value.trim())}
+								/>
+								<label htmlFor="id" className="login-label">
+									아이디
+								</label>
 							</div>
-							<div className="col-md-4 mt-3 mt-md-0">
-								<button type="submit" className="login-btn btn btn-navy py-3" aria-label="login-button">
-									로그인
-								</button>
+							<div className="form-floating">
+								<input
+									type="password"
+									className="login-form-control form-control"
+									placeholder="비밀번호를 입력하세요"
+									aria-label="login-password-input"
+									autoComplete="off"
+									value={password}
+									onChange={(e) => setPassword(e.target.value.trim())}
+								/>
+								<label htmlFor="password" className="login-label">
+									비밀번호
+								</label>
 							</div>
-						</form>
-						{/* <button className="btn btn-sm mt-2" onClick={openPasswordChangeModal}>
-							비밀번호 변경
-						</button> */}
-					</div>
+						</div>
+						<div className="col-md-4">
+							<button type="submit" className="login-button btn btn-navy" aria-label="login-button">
+								로그인
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

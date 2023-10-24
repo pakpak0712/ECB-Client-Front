@@ -306,7 +306,7 @@ export default function MemberInfo() {
 					</CustomRow>
 					{isModifyMember && (
 						<>
-							<div className="info-title mt-4">관리역 정보</div>
+							<div className="info-title">관리역 정보</div>
 							<CustomRow>
 								<div className="form-grid">
 									<CustomSelect

@@ -1,8 +1,5 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
-
-@import './utils/index';
-@import './ui/index';
-@import './layout/index';
-@import './views/index';
-
-@import './common.scss';
+@import './utils/utils';
+@import './ui/ui';
+@import './layout/layout';
+@import './views/views';
