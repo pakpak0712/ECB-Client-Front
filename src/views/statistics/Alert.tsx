@@ -64,16 +64,14 @@ export default function Alert() {
 	};
 
 	return (
-		<>
+		<div className="page">
 			<PageHeader title="알람 관리">
-				<>
-					<ButtonRefetch {...refetchProps} />
-				</>
+				<ButtonRefetch {...refetchProps} />
 			</PageHeader>
 			<PageBody title="알람 목록">
 				<AlertList {...listProps} />
 			</PageBody>
 			{isLoading && <LoadingFrame />}
-		</>
+		</div>
 	);
 }

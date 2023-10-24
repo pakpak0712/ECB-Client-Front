@@ -75,15 +75,13 @@ export default function Device() {
 	};
 
 	return (
-		<>
+		<div className="page">
 			<PageHeader title="장비 관리">
-				<>
-					<ButtonRefetch {...refetchProps} />
-				</>
+				<ButtonRefetch {...refetchProps} />
 			</PageHeader>
 			<PageBody title="장비 목록">
 				{userInfo.member_flag === 1 && (
-					<div className="d-flex justify-content-end mb-3">
+					<div className="d-flex justify-content-end">
 						<button type="button" className="btn btn-navy" onClick={handleRegisterationClick}>
 							등록하기
 						</button>
@@ -93,6 +91,6 @@ export default function Device() {
 				<DeviceList {...listProps} />
 			</PageBody>
 			{isLoading && <LoadingFrame />}
-		</>
+		</div>
 	);
 }

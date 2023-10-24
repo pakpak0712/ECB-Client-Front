@@ -1,53 +1,70 @@
-
-
 // 로그인
 .login {
-    width: 100vw;
-    height: 100vh;
-    &-cover {
-        width: 100%;
-        height: 100%;
-    }
-    &-cover-img {
-        width: 100%;
-        height: 100%;
-    }
-    &-cover-bg {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: rgba(0, 0, 0, 0.8);
-    }
+	width: 100vw;
+	height: 100vh;
+	&-cover {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		background-image: url(../../images/background_polygon.png);
+		background-blend-mode: luminosity;
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.7);
+		}
+	}
 
-    &-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        background-color: rgba(255,255,255,0.9);
-        border-radius: 8px;
-        transform: translate(-50%, -50%);
-    }
-    &-title {
-        word-break: keep-all;
-    }
-    &-form {
-        align-items: initial;
-    }
-    &-form-control {
-        height: 45px !important;
-        font-size: 13px;
-    }
-    &-label {
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-        color: #888;
-    }
-    &-btn {
-        width: 100%;
-        height: 100%;
-    }
+	&-container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 65%;
+		padding: 2rem 1.75rem;
+		background-color: rgba(255, 255, 255, 0.9);
+		border-radius: 8px;
+		transform: translate(-50%, -50%);
+	}
+	&-title {
+		word-break: keep-all;
+		font-size: 1.5rem;
+		line-height: 1.4;
+	}
+	&-form {
+		margin-top: 1.5rem;
+		align-items: initial;
 
+		.col-md-4 {
+			@include media-breakpoint-up(md) {
+				padding-left: 0;
+			}
+			@include media-breakpoint-down(md) {
+				margin-top: 0.75rem;
+			}
+		}
+	}
+	&-form-control {
+		height: 45px !important;
+		font-size: 13px;
+	}
+	&-label {
+		display: flex;
+		align-items: center;
+		font-size: 13px;
+		color: #888;
+	}
+	&-button {
+		width: 100%;
+		height: 100%;
+		padding: 1.1rem;
+		font-size: 1.1rem;
+	}
+	.form-floating + .form-floating {
+		margin-top: 0.5rem;
+	}
 }

@@ -1,10 +1,10 @@
 .app-sidebar {
-    position: absolute;
+	position: absolute;
 	left: 0;
 	top: 0;
 	bottom: 0;
 	z-index: $app-sidebar-zindex;
-    width: $app-sidebar-width;
+	width: $app-sidebar-width;
 	padding-top: $app-header-height;
 	background: var(--app-sidebar-bg);
 	color: var(--app-sidebar-color);
@@ -33,7 +33,7 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 0.625rem var(--app-contents-padding);
+			padding: 0.625rem var(--page-padding-x);
 			&:hover {
 				color: var(--app-sidebar-hover-color) !important;
 			}
@@ -46,18 +46,17 @@
 			overflow: hidden;
 			position: relative;
 			height: 0;
-			padding-left: calc(var(--app-contents-padding) + 15px);
+			padding-left: calc(var(--page-padding-x) + 15px);
 			border-top: 1px solid var(--app-component-border-color);
-			
+
 			& .menu-item {
 				& .menu-link {
 					padding-left: 1.5385rem;
 					text-decoration: none;
 					position: relative;
-					line-height: 18px;
 					font-size: 0.95rem;
-					color: $gray-500;
-					
+					color: var(--app-sidebar-color);
+
 					&:after {
 						content: '';
 						position: absolute;
@@ -68,7 +67,7 @@
 						background: var(--app-sidebar-active-component-bg);
 					}
 				}
-				
+
 				&:before {
 					content: '';
 					position: absolute;
@@ -117,12 +116,12 @@
 						color: var(--app-sidebar-hover-color);
 					}
 					&:after {
-						background-color: var(--app-sidebar-active-component-bg);;
+						background-color: var(--app-sidebar-active-component-bg);
 					}
 				}
 			}
 		}
-		&.active.has-sub:not(.closed), 
+		&.active.has-sub:not(.closed),
 		&.expand {
 			.menu-submenu {
 				height: auto;
@@ -133,29 +132,28 @@
 		&.expand {
 			& .menu-caret {
 				&:before {
-					opacity: 1.0;
+					opacity: 1;
 					transform: rotate(90deg);
 				}
 			}
 		}
 	}
-	
+
 	.menu-caret {
 		display: block;
 		width: 1.5385rem;
 		text-align: center;
-		font-size: $font-size-sm;
 		border: none;
-	
+
 		@include fontawesome();
 		margin-left: auto;
-	
+
 		&:before {
 			content: '\f054';
 			display: block;
 			text-align: center;
 			opacity: 0.5;
-			transition: all .2s linear;
+			transition: all 0.2s linear;
 		}
 	}
 }
@@ -168,7 +166,7 @@
 	bottom: 0;
 	width: $app-sidebar-width;
 	z-index: $app-sidebar-zindex - 10;
-	
+
 	@include media-breakpoint-down(lg) {
 		padding-top: 0;
 		left: -$app-sidebar-width;
@@ -187,11 +185,11 @@
 	height: calc(100vh - #{$app-header-height});
 	padding: 0;
 	border: 0;
-	background-color: rgba(0,0,0,0.6);
+	background-color: rgba(0, 0, 0, 0.6);
 	margin: 0;
 	outline: none;
 	display: none;
-	
+
 	@at-root .show-mobile-navbar & {
 		display: block;
 		@include media-breakpoint-up(lg) {

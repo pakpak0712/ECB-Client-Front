@@ -5,7 +5,6 @@ import SidebarNav from '@/features/ui/sidebar/SidebarNav';
 
 const Sidebar = () => {
 	useEffect(() => {
-		// menu
 		const menuLinkSelector = '.app-sidebar .menu > .menu-item.has-sub' + ' > .menu-link';
 		const menus = [].slice.call(document.querySelectorAll(menuLinkSelector));
 		menus.map(function (menu: any) {
@@ -40,12 +39,12 @@ const Sidebar = () => {
 	}, []);
 	return (
 		<>
-			<div id="sidebar" className="app-sidebar">
+			<aside id="sidebar" className="app-sidebar">
 				<SidebarNav />
-			</div>
+			</aside>
 			<div className="app-sidebar-bg"></div>
 			<div className="app-sidebar-mobile-backdrop">
-				<Link to="/" className="stretched-link"></Link>
+				<Link to="/"></Link>
 			</div>
 		</>
 	);

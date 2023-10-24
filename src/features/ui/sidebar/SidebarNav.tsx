@@ -17,7 +17,7 @@ function NavItem({ menu, ...props }: { menu: any }) {
 	);
 
 	return (
-		<div className={'menu-item' + (match || match2 ? ' active' : '') + (menu.subMenu ? ' has-sub' : '')}>
+		<div className={`menu-item ${match || match2 ? ' active' : ''} ${menu.subMenu ? ' has-sub' : ''}`}>
 			<NavLink className="menu-link" to={menu.path} {...props} reloadDocument>
 				{title}
 				{caret}
@@ -49,10 +49,10 @@ const SidebarNav = () => {
 		return organizedMenu.memberFlag.indexOf(userInfo?.member_flag) >= 0;
 	});
 	return (
-		<div className="menu">
-			<div className="menu-header hidden">메뉴</div>
+		<nav className="menu">
+			<h1 className="hidden">메뉴</h1>
 			{menu?.map((menu: any, i: number) => <NavItem key={i} menu={menu} />)}
-		</div>
+		</nav>
 	);
 };
 

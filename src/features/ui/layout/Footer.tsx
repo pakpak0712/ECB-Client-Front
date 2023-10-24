@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 
 export default function Footer() {
 	return (
-		<div id="footer" className="app-footer">
+		<footer id="footer" className="app-footer">
 			<LightModeToggle />
-			<div className="copyright text-end">Copyright SAFETY-LAB CO,LTD Allright Reserved.</div>
-		</div>
+			<div className="copyright text-end">
+				<small>Copyright SAFETY-LAB CO,LTD Allright Reserved.</small>
+			</div>
+		</footer>
 	);
 }
 
@@ -19,13 +21,13 @@ function LightModeToggle() {
 
 	return (
 		<div className="form-check form-switch">
-			<label className="form-check-label" htmlFor="btn_lightMode_toggle">
+			<label className="form-check-label" htmlFor="check-lightMode">
 				라이트모드
 			</label>
 			<input
 				className="form-check-input"
 				type="checkbox"
-				id="btn_lightMode_toggle"
+				id="check-lightMode"
 				checked={lightMode}
 				onChange={(event) => setLightMode(event.target.checked)}
 			/>

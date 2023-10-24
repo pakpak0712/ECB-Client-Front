@@ -19,13 +19,15 @@ function App() {
 	}, [hookReceiver.location]);
 
 	return (
-		<div className={`app hljs ${navbarToggle}`}>
+		<div className={`app ${navbarToggle}`}>
 			<Header />
-			<Sidebar />
-			<div className={'app-contents'}>
-				<Outlet />
+			<div className="app-body">
+				<Sidebar />
+				<main className="app-main">
+					<Outlet />
+					<Footer />
+				</main>
 			</div>
-			<Footer />
 		</div>
 	);
 }

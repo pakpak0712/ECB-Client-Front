@@ -1,4 +1,3 @@
-// css
 import '@fortawesome/fontawesome-free/css/all.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -9,7 +8,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { RouterProvider } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
-// bootstrap
 import '@/assets/styles/app.scss';
 import AlertModal from '@/features/ui/modal/AlertModal';
 import ConfirmModal from '@/features/ui/modal/ConfirmModal';

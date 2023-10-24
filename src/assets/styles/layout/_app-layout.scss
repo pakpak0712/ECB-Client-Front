@@ -1,0 +1,66 @@
+.app {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	&-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: $app-header-zindex;
+		height: $app-header-height;
+		padding: 0 var(--page-padding-x);
+		background: var(--app-header-bg);
+		color: var(--app-header-color);
+
+		&-title {
+			font-size: 1.3846rem;
+			line-height: 1.2;
+			word-break: keep-all;
+
+			@include media-breakpoint-down(sm) {
+				font-size: 1.2rem;
+			}
+		}
+	}
+
+	&-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		overflow: hidden;
+	}
+
+	&-main {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		flex: 1;
+		overflow: hidden;
+		background-color: var(--app-contents-bg);
+		color: var(--app-contents-color);
+
+		@include media-breakpoint-up(lg) {
+			margin-left: $app-sidebar-width;
+		}
+	}
+
+	&-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: $app-header-height;
+		padding: 0 var(--page-padding-x);
+		border-top: 1px solid var(--app-component-border-color);
+		background-color: var(--app-contents-bg);
+		color: var(--app-footer-color);
+
+		@include media-breakpoint-down(sm) {
+			height: $app-footer-height-sm;
+			font-size: 0.9rem;
+		}
+	}
+}

@@ -1,0 +1,15 @@
+// 상세 페이지
+.info-title {
+	padding-bottom: 0.5rem;
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--app-header-color);
+
+	& ~ & {
+		margin-top: 1.5rem;
+	}
+
+	@include media-breakpoint-down(sm) {
+		font-size: 0.85rem;
+	}
+}

@@ -3,12 +3,14 @@
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
+	margin-top: 0.75rem;
 	margin-bottom: 0;
 	font-weight: 400;
-	
+
 	.pagination {
 		flex: 1;
 		justify-content: center;
+		margin-top: 0.75rem;
 	}
 	.page-item {
 		padding: 0 0.3077rem;
@@ -18,8 +20,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 2.3077rem;
-		height: 2.3077rem;
+		width: 2.3846rem;
+		height: 2.3846rem;
 		padding: 0;
 		border-color: var(--app-component-border-color);
 		border-radius: 0.3077rem;
@@ -48,10 +50,10 @@
 	}
 	@include media-breakpoint-down(sm) {
 		.form-content {
-			order: 0
+			order: 0;
 		}
 		.pagination {
-			order: 1
+			order: 1;
 		}
 	}
 }

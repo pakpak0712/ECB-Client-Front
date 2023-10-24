@@ -1,62 +1,59 @@
 :root {
-	--app-component-bg: #{$white};
-	--app-component-color: #{$gray-900};
-	--app-component-border-color: #{$gray-400};
-	--app-component-disabled-bg: #{$gray-200};
-	--app-component-disabled-color: #{$gray-400};
-
-	--app-header-height: 50px;
 	--app-header-bg: #{$white};
 	--app-header-color: #{$gray-900};
-		
+
 	--app-sidebar-bg: #{$gray-200};
-	--app-sidebar-color: #{$gray-700};
+	--app-sidebar-color: #{$gray-600};
 	--app-sidebar-active-component-bg: #{$theme};
 	--app-sidebar-hover-color: #{$gray-900};
 
-	
-	--app-contents-padding: 30px;
+	--page-padding-x: #{$page-padding};
 	--app-contents-bg: #{$gray-300};
 	--app-contents-color: #{$black};
 
 	--app-footer-color: #{$gray-600};
-
-	
-	--app-contents-padding: 30px;
-	--page-contents-bg: #{$gray-100};
-	--page-contents-header-bg: #{tint-color($gray-200, 30%)};
+	--app-component-bg: #{$white};
+	--app-component-color: #{$gray-900};
+	--app-component-active-color: #{$black};
+	--app-component-border-color: #{$gray-400};
+	--app-component-disabled-bg: #{$gray-200};
+	--app-component-disabled-color: #{$gray-400};
 
 	--app-component-modal-bg: #{$white};
 
+	--page-contents-bg: #{$gray-100};
+	--page-contents-header-bg: #{tint-color($gray-200, 30%)};
+
 	@include media-breakpoint-down(sm) {
-		--app-contents-padding: 15px;
+		--page-padding-x: #{$page-padding / 2};
 	}
 }
 
 .dark-mode {
-	--app-component-bg: #{$gray-800};
-	--app-component-color: #{$white};
-	--app-component-border-color: #{$gray-700};
-	--app-component-disabled-bg: #{$gray-700};
-	--app-component-disabled-color: #{$gray-600};
-
 	--app-header-bg: #{shade-color($gray-800, 15%)};
 	--app-header-color: #{$white};
-	
+
 	--app-sidebar-bg: #{$gray-900};
-	--app-sidebar-color: #{$gray-400};
+	--app-sidebar-color: #{$gray-500};
 	--app-sidebar-active-component-bg: #{$theme};
 	--app-sidebar-hover-color: #{$white};
 
 	--app-contents-bg: #{shade-color($gray-900, 15%)};
 	--app-contents-color: #{$white};
-	
+
+	--app-component-bg: #{$gray-800};
+	--app-component-color: #{$gray-100};
+	--app-component-active-color: #{$white};
+	--app-component-border-color: #{$gray-700};
+	--app-component-disabled-bg: #{$gray-700};
+	--app-component-disabled-color: #{$gray-600};
+
+	--app-component-modal-bg: #{$gray-800};
+
 	--page-contents-bg: #{$gray-800};
 	--page-contents-header-bg: #{shade-color($gray-800, 30%)};
 
-	--app-component-modal-bg: #{$gray-800};
-	
-	& .btn {
+	& .button {
 		&-default {
 			background: $gray-600;
 			border-color: $gray-600;
@@ -89,5 +86,4 @@
 			background-blend-mode: screen;
 		}
 	}
-
 }
