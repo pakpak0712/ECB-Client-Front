@@ -8,9 +8,9 @@ interface PropsType extends ComponentPropsWithoutRef<'input'> {
 	placeholder?: string;
 	readOnly?: boolean;
 	siblings?: JSX.Element;
-	handleState?: (key: string, value: string | number) => void;
-	handlePattern?: (value: string) => string | number;
-	handleValid?: (value: string | number) => string;
+	handleState?: (key: string, value: string) => void;
+	handlePattern?: (value: string) => string;
+	handleValid?: (value: string) => string;
 }
 
 export default function CustomInput({
@@ -26,7 +26,7 @@ export default function CustomInput({
 	...restAttribute
 }: PropsType) {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [value, setValue] = useState<string | number>(defaultValue);
+	const [value, setValue] = useState<string>(defaultValue);
 	const [error, setError] = useState<string>();
 
 	const handleChange = (originValue: string) => {

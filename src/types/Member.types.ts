@@ -13,15 +13,13 @@ export interface MemberListType {
 	member_name: string;
 }
 
-export type MemberPageMapType = Record<string, number>;
-
 export interface MemberInfoDataType {
-	[key: string]: string | number;
+	[key: string]: string;
 	memberId: string;
 	memberPw: string;
 	memberName: string;
 	memberPhone: string;
 	memberEmail: string;
 	memberViewlist: string;
-	memberFlag: number;
+	memberFlag: string;
 }

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { compAddressDic, deviceTypeDic } from '@/constants/dictionary';
-import { initialViewList } from '@/constants/initial';
 import CustomInput from '@/features/ui/form/CustomInput';
 import CustomOptionAfterFetch from '@/features/ui/form/CustomOptionAfterFetch';
 import CustomSelect from '@/features/ui/form/CustomSelect';
@@ -12,12 +11,13 @@ import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
 import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
-import useSubwayData from '@/hooks/useViewList';
+import useViewList from '@/hooks/useViewList';
 import { deviceQueryKey, lineStationQueryKey } from '@/queries/_querykey';
 import { postMutationQueryString } from '@/queries/_utils';
 import useDuplicateCheck from '@/queries/useDuplicateCheck';
 import useInvalidateFromMutation from '@/queries/useInvalidateFromMutation';
 import { deviceIdState } from '@/state/device';
+import { DeviceInfoDataType } from '@/types/Device.types';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 import { formatOnlyMacAddress, formatOnlyPhoneNumber } from '@/utils/stringUtils';
 
@@ -38,10 +38,10 @@ export default function DeviceInfo() {
 	const id = useRecoilValue(deviceIdState);
 	const { closeContentModal } = useContentsModal();
 
-	const [deviceInfo, setDeviceInfo] = useState(initialDeviceInfo);
-	const [savedDeviceInfo, setSavedDeviceInfo] = useState(initialDeviceInfo);
-	const { viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList } =
-		useSubwayData(setDeviceInfo);
+	const [deviceInfo, setDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
+	const [savedDeviceInfo, setSavedDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
+	const { initialViewList, viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList } =
+		useViewList(setDeviceInfo);
 
 	// 상세 정보 가져오기
 	const updateMutation = useMutation({
@@ -78,7 +78,7 @@ export default function DeviceInfo() {
 	const insertQueryParams = id ? { ...deviceInfo, tcsNo: id } : deviceInfo;
 	const insertMutation = useInvalidateFromMutation(deviceQueryKey, insertQueryKey, insertQueryParams);
 
-	const handleChangeDeviceInfo = (name: string, value: string | number) => {
+	const handleChangeDeviceInfo = (name: string, value: string) => {
 		setDeviceInfo((prev) => {
 			return { ...prev, [name]: value };
 		});

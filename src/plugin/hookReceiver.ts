@@ -1,6 +1,6 @@
 import { Location, NavigateFunction } from 'react-router-dom';
 
-import { MenuPermissionType } from '@/types/User.types';
+import { MenuPermissionType } from '@/types/Role.types';
 
 export const hookReceiver: {
 	navigate: NavigateFunction | null;

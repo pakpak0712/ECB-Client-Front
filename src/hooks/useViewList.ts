@@ -1,13 +1,16 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { initialParams, initialViewList } from '@/constants/initial';
+import { initialParams } from '@/constants/initial';
+import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
 import { getLineStation } from '@/utils/common';
 
 // type handleChangeDeviceInfoType = (name: string, value: string | number) => void;
 
 export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T>>) {
 	const { id } = useParams();
+	const userInfo = useUserInfoFromSession();
+	const initialViewList = getLineStation(userInfo && userInfo.member_viewlist ? userInfo.member_viewlist : '');
 	const [viewList, setViewList] = useState(initialViewList);
 	const [propertyKey, setPropertyKey] = useState('');
 	const [stationParams, setStationParams] = useState(initialParams);
@@ -49,5 +52,5 @@ export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T
 		if (!id) setViewList(initialViewList);
 	}, [id]);
 
-	return { viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList };
+	return { initialViewList, viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList };
 }

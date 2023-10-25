@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { initialViewList } from '@/constants/initial';
 import CustomChildren from '@/features/ui/form/CustomChildren';
 import CustomInput from '@/features/ui/form/CustomInput';
 import CustomOptionAfterFetch from '@/features/ui/form/CustomOptionAfterFetch';
@@ -11,7 +10,7 @@ import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
 import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
-import useSubwayData from '@/hooks/useViewList';
+import useViewList from '@/hooks/useViewList';
 import { SecureStorage } from '@/plugin/crypto';
 import { lineStationQueryKey, memberQueryKey } from '@/queries/_querykey';
 import { postMutationQueryString } from '@/queries/_utils';
@@ -36,7 +35,7 @@ export default function MemberInfo() {
 		memberPhone: '',
 		memberEmail: '',
 		memberViewlist: '',
-		memberFlag: 0,
+		memberFlag: '',
 	};
 	const id = useRecoilValue(memberIdState);
 
@@ -49,24 +48,20 @@ export default function MemberInfo() {
 
 	const [memberInfo, setMemberInfo] = useState<MemberInfoDataType>(initialMemberInfo);
 	const [savedMemberInfo, setSavedMemberInfo] = useState<MemberInfoDataType>(initialMemberInfo);
-	const { viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList } =
-		useSubwayData(setMemberInfo);
+	const { initialViewList, viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList } =
+		useViewList(setMemberInfo);
 
 	// 비밀번호 변경
-	const initialpasswordChangeInfo = {
+	const initialPasswordChangeInfo = {
 		originalMemberPw: '',
 		confirmMemberPw: '',
 	};
-	const [passwordChangeInfo, setPasswordChangeInfo] = useState(initialpasswordChangeInfo);
+	const [passwordChangeInfo, setPasswordChangeInfo] = useState(initialPasswordChangeInfo);
 	const [isPasswordChange, setIsPasswordChange] = useState(false);
-	const handleChangePassword = (name: string, value: string | number) => {
+	const handleChangePassword = (name: string, value: string) => {
 		setPasswordChangeInfo((prev) => {
 			return { ...prev, [name]: value };
 		});
-	};
-	const handePasswordChangeCancel = () => {
-		setIsPasswordChange(false);
-		setPasswordChangeInfo(initialpasswordChangeInfo);
 	};
 
 	// 회원 수정
@@ -101,7 +96,7 @@ export default function MemberInfo() {
 	const queryParams = isModify ? { ...memberInfo, memberNo: id } : memberInfo;
 	const insertMutation = useInvalidateFromMutation(memberQueryKey, queryKey, queryParams);
 
-	const handleMemberInfoChange = (name: string, value: string | number) => {
+	const handleMemberInfoChange = (name: string, value: string) => {
 		setMemberInfo((prev) => {
 			return { ...prev, [name]: value };
 		});
