@@ -26,11 +26,9 @@ const Sidebar = () => {
 					targetItemElm.classList.contains('expand') ||
 					(targetItemElm.classList.contains('active') && !targetItemElm.classList.contains('closed'))
 				) {
-					console.log('close');
 					targetItemElm.classList.remove('expand');
 					targetItemElm.classList.add('closed');
 				} else {
-					console.log('expand');
 					targetItemElm.classList.add('expand');
 					targetItemElm.classList.remove('closed');
 				}

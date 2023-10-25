@@ -1,24 +1,26 @@
 import { useMutation } from '@tanstack/react-query';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAlert } from '@/hooks/useAlert';
 import { SecureStorage } from '@/plugin/crypto';
 import { commonQueryKey } from '@/queries/_querykey';
 import { postMutationParams } from '@/queries/_utils';
+import { requestPermission } from '@/utils/firebase';
 
 export default function Login() {
 	const { alertMessage } = useAlert();
 
-	const [id, setId] = useState('');
-	const [password, setPassword] = useState('');
+	const [memberId, setMemberId] = useState('');
+	const [memberPw, setMemberPw] = useState('');
+	const [memberToken, setMemberToken] = useState('');
 	const navigate = useNavigate();
 
 	const secureStorage = new SecureStorage(sessionStorage);
 
 	const loginMutation = useMutation(
 		() => {
-			const mutationKey = [...commonQueryKey.login(), { memberId: id, memberPw: password }];
+			const mutationKey = [...commonQueryKey.login(), { memberId, memberPw, memberToken }];
 			return postMutationParams(mutationKey);
 		},
 		{
@@ -34,10 +36,14 @@ export default function Login() {
 	);
 	const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (!id.trim()) return alertMessage('아이디를 입력해 주세요');
-		if (!password.trim()) return alertMessage('비밀번호를 입력해 주세요');
+		if (!memberId.trim()) return alertMessage('아이디를 입력해 주세요');
+		if (!memberPw.trim()) return alertMessage('비밀번호를 입력해 주세요');
 		loginMutation.mutate();
 	};
+
+	useEffect(() => {
+		requestPermission(setMemberToken);
+	}, []);
 
 	return (
 		<div className="login">
@@ -56,8 +62,8 @@ export default function Login() {
 									className="login-form-control form-control"
 									placeholder="아이디를 입력하세요"
 									aria-label="login-id-input"
-									value={id}
-									onChange={(e) => setId(e.target.value.trim())}
+									value={memberId}
+									onChange={(e) => setMemberId(e.target.value.trim())}
 								/>
 								<label htmlFor="id" className="login-label">
 									아이디
@@ -70,8 +76,8 @@ export default function Login() {
 									placeholder="비밀번호를 입력하세요"
 									aria-label="login-password-input"
 									autoComplete="off"
-									value={password}
-									onChange={(e) => setPassword(e.target.value.trim())}
+									value={memberPw}
+									onChange={(e) => setMemberPw(e.target.value.trim())}
 								/>
 								<label htmlFor="password" className="login-label">
 									비밀번호
