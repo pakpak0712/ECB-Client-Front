@@ -9,7 +9,7 @@ import LoadingFrame from '@/features/ui/common/LoadingFrame';
 import PageBody from '@/features/ui/layout/PageBody';
 import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
+import { SecureStorage } from '@/plugin/crypto';
 import { deviceQueryKey } from '@/queries/_querykey';
 import { postQueryParams } from '@/queries/_utils';
 import useDeleteData from '@/queries/useDeleteData';
@@ -17,7 +17,8 @@ import { deviceIdState } from '@/state/device';
 import { DeviceListType } from '@/types/Device.types';
 
 export default function Device() {
-	const userInfo = useUserInfoFromSession();
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialParams = {
 		searchDTO: {
 			memberFlag: userInfo && userInfo.member_flag ? userInfo.member_flag.toString() : '',

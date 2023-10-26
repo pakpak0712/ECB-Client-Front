@@ -10,8 +10,8 @@ import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
 import useViewList from '@/hooks/useViewList';
+import { SecureStorage } from '@/plugin/crypto';
 import { deviceQueryKey, lineStationQueryKey } from '@/queries/_querykey';
 import { postMutationQueryString } from '@/queries/_utils';
 import useDuplicateCheck from '@/queries/useDuplicateCheck';
@@ -22,7 +22,8 @@ import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 import { formatOnlyMacAddress, formatOnlyPhoneNumber } from '@/utils/stringUtils';
 
 export default function DeviceInfo() {
-	const userInfo = useUserInfoFromSession();
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialDeviceInfo = {
 		tcsDeviceType: deviceTypeDic[0].value,
 		tcsName: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),

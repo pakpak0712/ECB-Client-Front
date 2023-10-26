@@ -9,7 +9,7 @@ import LoadingFrame from '@/features/ui/common/LoadingFrame';
 import PageBody from '@/features/ui/layout/PageBody';
 import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
+import { SecureStorage } from '@/plugin/crypto';
 import { memberQueryKey } from '@/queries/_querykey';
 import { postQueryParams } from '@/queries/_utils';
 import useDeleteData from '@/queries/useDeleteData';
@@ -18,7 +18,8 @@ import { MemberListType } from '@/types/Member.types';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 
 export default function Member() {
-	const userInfo = useUserInfoFromSession();
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialParams = {
 		searchDTO: {
 			memberFlag: getValueOrEmptyFromObject(userInfo, 'member_flag'),

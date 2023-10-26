@@ -3,13 +3,12 @@ import { useRecoilState } from 'recoil';
 import MemberInfo from '@/features/member/MemberInfo';
 import { useConfirm } from '@/hooks/useConfirm';
 import { useContentsModal } from '@/hooks/useContentsModal';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
 import { SecureStorage } from '@/plugin/crypto';
 import { memberIdState } from '@/state/member';
 
 export default function Profile() {
-	const userInfo = useUserInfoFromSession();
 	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const [_, setId] = useRecoilState(memberIdState);
 	const { openContentModal } = useContentsModal();
 	const { confirmMessage } = useConfirm();
@@ -21,10 +20,11 @@ export default function Profile() {
 
 	const handleLogout = async () => {
 		if (await confirmMessage('정말 로그아웃하실건가요?')) {
-			secureStorage.removeItem('user');
+			secureStorage.removeItem('user-storage');
 			window.location.reload();
 		}
 	};
+
 	return (
 		<>
 			<div className="navbar-item navbar-user dropdown">
