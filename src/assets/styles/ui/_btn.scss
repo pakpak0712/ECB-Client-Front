@@ -20,29 +20,11 @@
 		$disabledBg: tint-color($value, 25%);
 		$disabledBorder: tint-color($value, 25%);
 		$disabledTextColor: $white;
-
-		@if $color == 'default' or $color == 'white' {
+		
+		@if $color == 'default' {
 			$textColor: $gray-900;
 			$hoverTextColor: $gray-900;
-			$activeTextColor: $gray-900;
-			$disabledTextColor: $gray-900;
 		}
-		@if $color == 'default' {
-			$hoverBg: $gray-400;
-			$hoverBorder: $gray-400;
-			$activeBg: $gray-400;
-			$activeBorder: $gray-400;
-		}
-		@if $color == 'white' {
-			$border: $gray-400;
-			$hoverBg: $gray-200;
-			$hoverBorder: $gray-500;
-			$activeBg: $gray-200;
-			$activeBorder: $gray-500;
-			$disabledBg: tint-color($gray-200, 25%);
-			$disabledBorder: tint-color($gray-500, 25%);
-		}
-
 		@include button-variant(
 			$bg,
 			$border,
@@ -57,5 +39,41 @@
 			$disabledBorder,
 			$disabledTextColor
 		);
+	}
+}
+
+.dark-mode {
+	@each $color, $value in $theme-colors {
+		$shadeValue: shade-color($value, 50%);
+		$textColor: $gray-200;
+		.btn-#{$color} {
+			$bg: $shadeValue;
+			$border: $shadeValue;
+			$textColor: $textColor;
+			$hoverBg: tint-color($shadeValue, 15%);
+			$hoverBorder: tint-color($shadeValue, 15%);
+			$hoverTextColor: $textColor;
+			$activeBg: tint-color($shadeValue, 15%);
+			$activeBorder: tint-color($shadeValue, 15%);
+			$activeTextColor: $textColor;
+			$disabledBg: shade-color($shadeValue, 25%);
+			$disabledBorder: shade-color($shadeValue, 25%);
+			$disabledTextColor: shade-color($textColor, 25%);
+
+			@include button-variant(
+				$bg,
+				$border,
+				$textColor,
+				$hoverBg,
+				$hoverBorder,
+				$hoverTextColor,
+				$activeBg,
+				$activeBorder,
+				$activeTextColor,
+				$disabledBg,
+				$disabledBorder,
+				$disabledTextColor
+			);
+		}
 	}
 }

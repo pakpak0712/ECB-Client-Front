@@ -9,12 +9,14 @@ export default function ButtonNavbarToggler() {
 	};
 
 	return (
-		<button type="button" className={`navbar-mobile-toggler`} onClick={handleToggle}>
-			<div className="icon-bar-box">
-				<span className="icon-bar"></span>
-				<span className="icon-bar"></span>
-				<span className="icon-bar"></span>
-			</div>
-		</button>
+		<div className="navbar-item">
+			<button type="button" className={`navbar-mobile-toggler`} onClick={handleToggle}>
+				<div className="icon-bar-box">
+					<span className="icon-bar"></span>
+					<span className="icon-bar"></span>
+					<span className="icon-bar"></span>
+				</div>
+			</button>
+		</div>
 	);
 }

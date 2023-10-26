@@ -9,7 +9,6 @@
 
 	--page-padding-x: #{$page-padding};
 	--app-contents-bg: #{$gray-300};
-	--app-contents-color: #{$black};
 
 	--app-footer-color: #{$gray-600};
 	--app-component-bg: #{$white};
@@ -23,6 +22,11 @@
 
 	--page-contents-bg: #{$gray-100};
 	--page-contents-header-bg: #{tint-color($gray-200, 30%)};
+
+	// 부트스트랩 override default
+	--bs-body-color: var(--app-component-color);
+	--bs-link-hover-color: inherit;
+	--bs-link-color: inherit;
 
 	@include media-breakpoint-down(sm) {
 		--page-padding-x: #{$page-padding / 2};
@@ -39,7 +43,6 @@
 	--app-sidebar-hover-color: #{$white};
 
 	--app-contents-bg: #{shade-color($gray-900, 15%)};
-	--app-contents-color: #{$white};
 
 	--app-component-bg: #{$gray-800};
 	--app-component-color: #{$gray-100};
@@ -53,37 +56,8 @@
 	--page-contents-bg: #{$gray-800};
 	--page-contents-header-bg: #{shade-color($gray-800, 30%)};
 
-	& .button {
-		&-default {
-			background: $gray-600;
-			border-color: $gray-600;
-			color: $white;
-
-			&:hover,
-			&:focus,
-			&.active {
-				background: $gray-700;
-				border-color: $gray-700;
-				color: $white;
-			}
-		}
-		&-gray {
-			background: #161a1d;
-			border-color: #161a1d;
-			color: $white;
-
-			&:hover,
-			&:focus,
-			&.active {
-				background: $gray-900;
-				border-color: $gray-900;
-				color: $white;
-			}
-		}
-	}
-	& .form {
-		&-select {
-			background-blend-mode: screen;
-		}
-	}
+	// 부트스트랩 override default
+	--bs-body-color: var(--app-component-color);
+	--bs-link-hover-color: inherit;
+	--bs-link-color: inherit;
 }

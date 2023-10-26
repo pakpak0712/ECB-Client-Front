@@ -41,7 +41,6 @@
 		flex: 1;
 		overflow: hidden;
 		background-color: var(--app-contents-bg);
-		color: var(--app-contents-color);
 
 		@include media-breakpoint-up(lg) {
 			margin-left: $app-sidebar-width;

@@ -1,0 +1,14 @@
+.badge {
+	// padding: 0.5rem 0.5rem;
+	border-radius: 0.2308rem;
+	background-color: var(--bs-btn-bg);
+	color: var(--bs-btn-color);
+	font-size: 0.85rem;
+	font-weight: 400;
+}
+
+@each $color, $value in $theme-colors {
+	.badge-#{$color} {
+		@extend .btn-#{$color};
+	}
+}
