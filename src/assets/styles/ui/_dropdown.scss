@@ -14,20 +14,17 @@
 		}
 	}
 	&-menu {
-<<<<<<< HEAD
-=======
 		inset: 0 0 auto auto !important;
->>>>>>> e5daeb23011673ff34897c05740198bd79e20a58
 		min-width: auto;
 		background-color: var(--app-component-modal-bg);
 		font-size: 0.9rem;
 		text-align: center;
 	}
 	&-item {
-        padding: 0.3846rem 1.1538rem;
+		padding: 0.3846rem 1.1538rem;
 		&:active,
 		&:hover {
-            background-color: var(--app-component-disabled-bg);
+			background-color: var(--app-component-disabled-bg);
 			color: var(--app-component-active-color);
 		}
 	}
