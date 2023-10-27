@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
+import { SecureStorage } from '@/plugin/crypto';
 
 interface PrivateRouteProps {
 	children?: ReactElement; // Router.tsx에서 PrivateRoute가 감싸고 있는 Componet Element
@@ -9,7 +9,8 @@ interface PrivateRouteProps {
 }
 
 export default function PrivateRoute({ authentication }: PrivateRouteProps): React.ReactElement | null {
-	const userInfo = useUserInfoFromSession();
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const isAuthenticated = userInfo ? true : false;
 
 	if (authentication) {

@@ -16,13 +16,3 @@ export interface MenuPermissionType {
 	menuName: string;
 	subMenu?: Array<MenuRoleType>;
 }
-
-export interface UserInfoType {
-	member_id: string;
-	member_no: number;
-	member_viewlist: string;
-	member_email: string;
-	member_flag: string;
-	member_name: string;
-	expiry: number;
-}

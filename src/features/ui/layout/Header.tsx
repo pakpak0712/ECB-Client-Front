@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import ButtonNavbarToggler from '@/features/ui/button/ButtonNavbarToggler';
+import ExpirationTime from '@/features/ui/common/ExpirationTime';
 import Profile from '@/features/ui/dropdown/Profile';
 
 export default function Header() {
@@ -11,6 +12,7 @@ export default function Header() {
 			</Link>
 
 			<div className="navbar-nav">
+				<ExpirationTime />
 				<Profile />
 				<ButtonNavbarToggler />
 			</div>

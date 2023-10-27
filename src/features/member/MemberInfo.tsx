@@ -9,7 +9,6 @@ import CustomSelect from '@/features/ui/form/CustomSelect';
 import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
 import useViewList from '@/hooks/useViewList';
 import { SecureStorage } from '@/plugin/crypto';
 import { lineStationQueryKey, memberQueryKey } from '@/queries/_querykey';
@@ -27,7 +26,7 @@ import {
 
 export default function MemberInfo() {
 	const secureStorage = new SecureStorage(sessionStorage);
-	const userInfo = useUserInfoFromSession();
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialMemberInfo = {
 		memberId: '',
 		memberPw: '',

@@ -16,14 +16,12 @@
 		border-color: var(--app-component-border-color);
 		background-color: var(--app-component-bg);
 		font-weight: 400;
-		color: var(--app-component-color);
 		&::placeholder {
 			font-weight: 400;
 			color: $gray-500;
 		}
 		&:focus {
 			background-color: var(--app-component-bg);
-			color: var(--app-component-color);
 		}
 		&:disabled {
 			background-color: var(--app-component-disabled-bg);
@@ -46,7 +44,6 @@
 		background-color: var(--app-component-bg);
 		background-position-x: calc(100% - 0.4375rem);
 		font-weight: 400;
-		color: var(--app-component-color);
 		&:disabled {
 			background-color: var(--app-component-disabled-bg);
 			color: var(--app-component-disabled-color);
@@ -58,6 +55,9 @@
 		@include media-breakpoint-down(sm) {
 			background-size: 0.7692rem;
 			background-position-y: 55%;
+		}
+		@at-root .dark-mode & {
+			background-blend-mode: screen;
 		}
 	}
 	&-check {

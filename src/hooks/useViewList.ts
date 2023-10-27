@@ -2,14 +2,15 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { initialParams } from '@/constants/initial';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
+import { SecureStorage } from '@/plugin/crypto';
 import { getLineStation } from '@/utils/common';
 
 // type handleChangeDeviceInfoType = (name: string, value: string | number) => void;
 
 export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T>>) {
 	const { id } = useParams();
-	const userInfo = useUserInfoFromSession();
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialViewList = getLineStation(userInfo && userInfo.member_viewlist ? userInfo.member_viewlist : '');
 	const [viewList, setViewList] = useState(initialViewList);
 	const [propertyKey, setPropertyKey] = useState('');

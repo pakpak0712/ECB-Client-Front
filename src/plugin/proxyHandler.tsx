@@ -18,8 +18,6 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	function (config: AxiosRequestConfig) {
 		hookReceiver.setLoading(true);
-		// const userInfo = JSON.parse(localStorage.getItem('user-storage') ?? '')?.state?.userInfo;
-		// if (userInfo && userInfo.tokenInfo) config.headers['access-token'] = userInfo.tokenInfo.tokenId;
 
 		config.headers['X-Transaction-ID'] = Math.random().toString(36).slice(2, 9);
 

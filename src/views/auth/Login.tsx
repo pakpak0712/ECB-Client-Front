@@ -9,12 +9,11 @@ import { postMutationParams } from '@/queries/_utils';
 import { requestPermission } from '@/utils/firebase';
 
 export default function Login() {
-	const { alertMessage } = useAlert();
-
 	const [memberId, setMemberId] = useState('');
 	const [memberPw, setMemberPw] = useState('');
 	const [memberToken, setMemberToken] = useState('');
 	const navigate = useNavigate();
+	const { alertMessage } = useAlert();
 
 	const secureStorage = new SecureStorage(sessionStorage);
 
@@ -26,7 +25,8 @@ export default function Login() {
 		{
 			onSuccess: (data) => {
 				if (data) {
-					secureStorage.setItem('user', { ...data, expiry: new Date().getTime() + 60 * 60 * 1000 }, 'data');
+					secureStorage.setItem('user-storage', data, 'user-storage');
+
 					navigate('/');
 				} else {
 					alertMessage('로그인에 실패했습니다. \n아이디 및 패스워드를 확인해주세요');

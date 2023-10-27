@@ -1,7 +1,7 @@
 import { NavLink, matchPath, useMatch, useResolvedPath } from 'react-router-dom';
 
 import menuConfig from '@/config/menu';
-import useUserInfoFromSession from '@/hooks/useUserInfoFromSession';
+import { SecureStorage } from '@/plugin/crypto';
 
 function NavItem({ menu, ...props }: { menu: any }) {
 	const resolved = useResolvedPath(menu.path);
@@ -35,7 +35,8 @@ function NavItem({ menu, ...props }: { menu: any }) {
 }
 
 const SidebarNav = () => {
-	const userInfo = useUserInfoFromSession();
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const menu = menuConfig.filter((menu) => {
 		const organizedMenu = menu.subMenu
 			? (() => {

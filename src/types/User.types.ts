@@ -20,9 +20,9 @@ export interface MenuPermissionType {
 export interface UserInfoType {
 	member_id: string;
 	member_no: number;
-	member_viewlist: string;
+	member_viewlist: string | null;
 	member_email: string;
-	member_flag: string;
+	member_flag: number;
 	member_name: string;
 	expiry: number;
 }
