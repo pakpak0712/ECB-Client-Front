@@ -20,6 +20,11 @@ if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
 	firebaseMessaging = getMessaging(firebaseApp);
 }
 
+navigator.serviceWorker.register('/firebase-messaging-sw.js').then((swReg2) => {
+	console.log('Firebase ServiceWorker Is Registered');
+	//console.log(swReg2);
+});
+
 export async function requestPermission(setState: Dispatch<SetStateAction<string>>) {
 	const AppFirebaseToken = new URLSearchParams(window.location.search).get('firebaseToken');
 	console.log('AppFirebaseToken: ' + AppFirebaseToken);
@@ -30,24 +35,32 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 		return;
 	} else {
 		console.log('22222');
-		const firebasePermission = await Notification.requestPermission();
-		if (firebasePermission === 'denied') {
-			console.log('알림 권한이 허용되지 않음');
-			return;
-		}
-		console.log('알림 권한이 허용됨');
+		await Notification.requestPermission()
+			.then(async (permission) => {
+				if (permission === 'granted') {
+					console.log('알림 권한이 허용됨');
 
-		const WebFirebaseToken = await getToken(firebaseMessaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY });
-		console.log('WebFirebaseToken: ' + WebFirebaseToken);
+					const WebFirebaseToken = await getToken(firebaseMessaging, {
+						vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY,
+					});
+					console.log('WebFirebaseToken: ' + WebFirebaseToken);
 
-		if (WebFirebaseToken) {
-			setState(WebFirebaseToken);
-		} else {
-			console.log('토큰 획득에 실패함');
-		}
+					if (WebFirebaseToken) {
+						setState(WebFirebaseToken);
+					} else {
+						console.log('토큰 획득에 실패함');
+					}
 
-		onMessage(firebaseMessaging, (payload) => {
-			console.log('메시지가 도착하였습니다.', payload);
-		});
+					onMessage(firebaseMessaging, (payload) => {
+						console.log('메시지가 도착하였습니다.', payload);
+					});
+				} else {
+					console.log('알림 권한이 허용되지 않음');
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				location.reload();
+			});
 	}
 }
