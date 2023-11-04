@@ -5,11 +5,15 @@ import { useRecoilValue } from 'recoil';
 import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
+import { SecureStorage } from '@/plugin/crypto';
 import { statisticsQueryKey } from '@/queries/_querykey';
 import { postMutationQueryString } from '@/queries/_utils';
 import { alertIdState } from '@/state/alert';
 
 export default function AlertInfo() {
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+	const { member_flag: memberFlag } = userInfo;
 	const initialAlertInfo = {
 		alertName: '',
 		alertPhone: '',
@@ -75,9 +79,11 @@ export default function AlertInfo() {
 						</div>
 					</CustomRow>
 					<CustomRow>
-						<div className="form-grid">
-							<CustomText title="MAC" text={alertInfo.alertMac} />
-						</div>
+						{memberFlag === 1 && (
+							<div className="form-grid">
+								<CustomText title="MAC" text={alertInfo.alertMac} />
+							</div>
+						)}
 						<div className="form-grid">
 							<CustomText title="전화번호" text={alertInfo.alertPhone} />
 						</div>

@@ -24,6 +24,7 @@ import { formatOnlyMacAddress, formatOnlyPhoneNumber } from '@/utils/stringUtils
 export default function DeviceInfo() {
 	const secureStorage = new SecureStorage(sessionStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+	const { member_flag: memberFlag } = userInfo;
 	const initialDeviceInfo = {
 		tcsDeviceType: deviceTypeDic[0].value,
 		tcsName: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),
@@ -140,7 +141,7 @@ export default function DeviceInfo() {
 					<CustomRow>
 						<div className="form-grid">
 							<CustomSelect
-								title="장비 종류"
+								title="장비종류"
 								name="tcsDeviceType"
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
@@ -164,7 +165,7 @@ export default function DeviceInfo() {
 								title="호선"
 								name="tcsSimpAddr-line"
 								defaultValue={viewList.line}
-								readOnly={userInfo.member_flag !== 1}
+								readOnly={memberFlag !== 1}
 								handleState={handleChangeViewList}
 								enableBlankSelect={true}
 								disabled={initialDeviceInfo.tcsSimpAddr ? true : false}
@@ -178,7 +179,7 @@ export default function DeviceInfo() {
 								title="역"
 								name="tcsSimpAddr-station"
 								defaultValue={viewList.station}
-								readOnly={userInfo.member_flag !== 1}
+								readOnly={memberFlag !== 1}
 								handleState={handleChangeViewList}
 								enableBlankSelect={true}
 								disabled={!viewList.line || (initialDeviceInfo.tcsSimpAddr ? true : false)}
@@ -197,7 +198,7 @@ export default function DeviceInfo() {
 								title="장소"
 								name="tcsCompAddr"
 								defaultValue={deviceInfo.tcsCompAddr}
-								readOnly={userInfo.member_flag !== 1}
+								readOnly={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								childrenOption={compAddressDic}
 								enableBlankSelect={true}
@@ -205,48 +206,47 @@ export default function DeviceInfo() {
 							/>
 						</div>
 						<div className="form-grid">
-							<CustomInput
-								required={true}
-								title="MAC"
-								name="tcsMac"
-								defaultValue={deviceInfo.tcsMac}
-								readOnly={userInfo.member_flag !== 1}
+							<CustomText
+								title="상세주소"
+								name=""
+								// text={`${deviceInfo.tcsSimpAddr} ${deviceInfo.tcsCompAddr}`}
+								text=""
 								handleState={handleChangeDeviceInfo}
-								handlePattern={formatOnlyMacAddress}
-								siblings={
-									<button
-										type="button"
-										className="btn btn-default"
-										onClick={() => handleDuplicateCheck(deviceInfo.tcsMac)}
-										disabled={savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac']}
-									>
-										중복 확인
-									</button>
-								}
-								minLength={17}
 							/>
 						</div>
 					</CustomRow>
 					<CustomRow>
+						{memberFlag === 1 && (
+							<div className="form-grid">
+								<CustomInput
+									required={true}
+									title="MAC"
+									name="tcsMac"
+									defaultValue={deviceInfo.tcsMac}
+									readOnly={memberFlag !== 1}
+									handleState={handleChangeDeviceInfo}
+									handlePattern={formatOnlyMacAddress}
+									siblings={
+										<button
+											type="button"
+											className="btn btn-default"
+											onClick={() => handleDuplicateCheck(deviceInfo.tcsMac)}
+											disabled={savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac']}
+										>
+											중복 확인
+										</button>
+									}
+									minLength={17}
+								/>
+							</div>
+						)}
 						<div className="form-grid">
 							<CustomInput
 								required={true}
 								title="전화번호"
 								name="tcsMatchPhone"
 								defaultValue={deviceInfo.tcsMatchPhone}
-								readOnly={userInfo.member_flag !== 1}
-								handleState={handleChangeDeviceInfo}
-								handlePattern={formatOnlyPhoneNumber}
-								minLength={11}
-							/>
-						</div>
-						<div className="form-grid">
-							<CustomInput
-								required={true}
-								title="라우터"
-								name="tcsSerial"
-								defaultValue={deviceInfo.tcsSerial}
-								readOnly={userInfo.member_flag !== 1}
+								readOnly={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								handlePattern={formatOnlyPhoneNumber}
 								minLength={11}
@@ -256,10 +256,22 @@ export default function DeviceInfo() {
 					<CustomRow>
 						<div className="form-grid">
 							<CustomInput
+								required={true}
+								title="라우터"
+								name="tcsSerial"
+								defaultValue={deviceInfo.tcsSerial}
+								readOnly={memberFlag !== 1}
+								handleState={handleChangeDeviceInfo}
+								handlePattern={formatOnlyPhoneNumber}
+								minLength={11}
+							/>
+						</div>
+						<div className="form-grid">
+							<CustomInput
 								title="메모"
 								name="tcsMemo"
 								defaultValue={deviceInfo.tcsMemo}
-								readOnly={userInfo.member_flag !== 1}
+								readOnly={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								maxLength={30}
 							/>
@@ -267,13 +279,13 @@ export default function DeviceInfo() {
 					</CustomRow>
 				</div>
 				<div className="modal-footer">
-					{userInfo.member_flag === 1 && (
+					{memberFlag === 1 && (
 						<button type="submit" className="btn btn-navy">
 							{id ? '수정' : '등록'}
 						</button>
 					)}
 					<button type="button" className="btn btn-default" onClick={handleModalClose}>
-						{userInfo.member_flag === 1 ? '취소' : '닫기'}
+						{memberFlag === 1 ? '취소' : '닫기'}
 					</button>
 				</div>
 			</form>

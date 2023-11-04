@@ -9,6 +9,7 @@ import { MenuConfigType } from '@/types/User.types';
 export const checkRolesByUrl = (url: string) => {
 	const secureStorage = new SecureStorage(sessionStorage);
 	const userInfo = secureStorage.getItem('user', 'data');
+	const { member_flag: memberFlag } = userInfo;
 	const organizedMenu = (() => {
 		const result: MenuConfigType[] = [];
 		menuConfig.forEach((menu) => {
@@ -25,7 +26,7 @@ export const checkRolesByUrl = (url: string) => {
 
 	if (!targetMenu) throw new Error('Menu Permission Not Founded');
 
-	const menu = targetMenu.memberFlag.indexOf(userInfo.member_flag) >= 0;
+	const menu = targetMenu.memberFlag.indexOf(memberFlag) >= 0;
 
 	if (!menu) location.replace('/');
 	return true;

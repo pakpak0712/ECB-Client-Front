@@ -25,10 +25,10 @@ export default function AlertList({ initialParams, params, data, pageMap, setPar
 	const columns: TableColumn<AlertListType>[] = [
 		{ name: 'NO', selector: (row) => row.no, sortable: true },
 		{ name: '알람장소', selector: (row) => row['alertName'], sortable: true },
-		{ name: '알람 유형', selector: (row) => row['alertType'], sortable: true },
+		{ name: '알람유형', selector: (row) => row['alertType'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['alertPhone'], sortable: true },
 		{ name: '라우터', selector: (row) => row['alertSerial'], sortable: true },
-		{ name: '알람 일시', selector: (row) => row['alertDate'], sortable: true },
+		{ name: '알람일시', selector: (row) => row['alertDate'], sortable: true },
 	];
 
 	const paginationProps = {

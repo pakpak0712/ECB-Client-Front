@@ -19,9 +19,10 @@ import { DeviceListType } from '@/types/Device.types';
 export default function Device() {
 	const secureStorage = new SecureStorage(sessionStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+	const { member_flag: memberFlag } = userInfo;
 	const initialParams = {
 		searchDTO: {
-			memberFlag: userInfo && userInfo.member_flag ? userInfo.member_flag.toString() : '',
+			memberFlag: userInfo && memberFlag ? memberFlag.toString() : '',
 			memberViewlist: userInfo && userInfo.member_viewlist ? userInfo.member_viewlist : '',
 			searchType: '',
 			searchWord: '',
@@ -81,7 +82,7 @@ export default function Device() {
 				<ButtonRefetch {...refetchProps} />
 			</PageHeader>
 			<PageBody title="장비 목록">
-				{userInfo.member_flag === 1 && (
+				{memberFlag === 1 && (
 					<div className="d-flex justify-content-end">
 						<button type="button" className="btn btn-navy" onClick={handleRegisterationClick}>
 							등록하기

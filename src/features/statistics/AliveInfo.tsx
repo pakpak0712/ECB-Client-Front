@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
+import { SecureStorage } from '@/plugin/crypto';
 import { statisticsQueryKey } from '@/queries/_querykey';
 import { postMutationQueryString } from '@/queries/_utils';
 import { aliveIdState } from '@/state/alive';
@@ -21,6 +22,9 @@ const initialAliveInfo = {
 };
 
 export default function AliveInfo() {
+	const secureStorage = new SecureStorage(sessionStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+	const { member_flag: memberFlag } = userInfo;
 	const id = useRecoilValue(aliveIdState);
 	const { closeContentModal } = useContentsModal();
 	const [aliveInfo, setAliveInfo] = useState(initialAliveInfo);
@@ -69,9 +73,11 @@ export default function AliveInfo() {
 						<div className="form-grid">
 							<CustomText title="고장 장소" text={aliveInfo.aliveName} />
 						</div>
-						<div className="form-grid">
-							<CustomText title="MAC" text={aliveInfo.aliveMac} />
-						</div>
+						{memberFlag === 1 && (
+							<div className="form-grid">
+								<CustomText title="MAC" text={aliveInfo.aliveMac} />
+							</div>
+						)}
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">

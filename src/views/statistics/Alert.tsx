@@ -39,7 +39,7 @@ export default function Alert() {
 	const { openContentModal } = useContentsModal();
 
 	const [params, setParams] = useState(initialParams);
-	const { data, isLoading, isFetching } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: [...statisticsQueryKey.alertList(), params],
 		queryFn: postQueryParams,
 	});

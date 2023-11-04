@@ -24,10 +24,10 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<AliveListType>[] = [
 		{ name: 'NO', selector: (row) => row.no, sortable: true },
-		{ name: '고장 장소', selector: (row) => row['aliveName'], sortable: true },
+		{ name: '고장장소', selector: (row) => row['aliveName'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['alivePhone'], sortable: true },
 		{ name: '라우터', selector: (row) => row['aliveSerial'], sortable: true },
-		{ name: '고장 일시', selector: (row) => row['aliveDate'], sortable: true },
+		{ name: '고장일시', selector: (row) => row['aliveDate'], sortable: true },
 	];
 
 	const paginationProps = {
