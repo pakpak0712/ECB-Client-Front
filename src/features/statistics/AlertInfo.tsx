@@ -75,7 +75,7 @@ export default function AlertInfo() {
 							<CustomText title="알람장소" text={alertInfo.alertName} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="알람 유형" text={alertInfo.alertType} />
+							<CustomText title="알람유형" text={alertInfo.alertType} />
 						</div>
 					</CustomRow>
 					<CustomRow>
@@ -93,7 +93,7 @@ export default function AlertInfo() {
 							<CustomText title="라우터" text={alertInfo.alertSerial} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="알람 일시" text={alertInfo.alertDate} />
+							<CustomText title="알람일시" text={alertInfo.alertDate} />
 						</div>
 					</CustomRow>
 				</div>

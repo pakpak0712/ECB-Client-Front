@@ -32,6 +32,7 @@ export default function DeviceInfo() {
 		tcsMatchPhone: '',
 		tcsSimpAddr: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),
 		tcsCompAddr: '',
+		tcsSttCompAddr: '',
 		tcsMac: '',
 		tcsSerial: '',
 		tcsMemo: '',
@@ -56,6 +57,7 @@ export default function DeviceInfo() {
 				tcsMatchPhone: data.tcs_matchPhone,
 				tcsSimpAddr: data.tcs_simpAddr,
 				tcsCompAddr: data.tcs_compAddr?.trim(),
+				tcsSttCompAddr: data.tcs_stt_compAddr,
 				tcsMac: data.tcs_mac,
 				tcsSerial: data.tcs_serial,
 				tcsMemo: data.tcs_memo,
@@ -205,15 +207,11 @@ export default function DeviceInfo() {
 								disabled={!viewList.station}
 							/>
 						</div>
-						<div className="form-grid">
-							<CustomText
-								title="상세주소"
-								name=""
-								// text={`${deviceInfo.tcsSimpAddr} ${deviceInfo.tcsCompAddr}`}
-								text=""
-								handleState={handleChangeDeviceInfo}
-							/>
-						</div>
+						{id && (
+							<div className="form-grid">
+								<CustomText title="상세주소" text={deviceInfo.tcsSttCompAddr} />
+							</div>
+						)}
 					</CustomRow>
 					<CustomRow>
 						{memberFlag === 1 && (

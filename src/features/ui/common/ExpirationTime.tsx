@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { useConfirm } from '@/hooks/useConfirm';
+import { useAlert } from '@/hooks/useAlert';
 import { geDoubleDigits } from '@/utils/numberUtils';
 
 export default function ExpirationTime() {
@@ -11,7 +11,7 @@ export default function ExpirationTime() {
 	const [remainingMinutes, setRemainingMinutes] = useState(expiredMinutes);
 	const [remainingSeconds, setRemainingSeconds] = useState(initialSeconds);
 
-	const { confirmMessage } = useConfirm();
+	const { alertMessage } = useAlert();
 
 	const timerCallback = () => {
 		setRemainingSeconds((prev) => prev - 1);
@@ -22,19 +22,14 @@ export default function ExpirationTime() {
 	};
 
 	useLayoutEffect(() => {
-		let timer = setTimeout(timerCallback, 1000);
+		const timer = setTimeout(timerCallback, 1000);
 
 		if (remainingMinutes <= initialSeconds && remainingSeconds <= initialSeconds) {
 			clearTimeout(timer);
-			(async () => {
-				if (await confirmMessage('로그인을 연장하실건가요?')) {
-					setRemainingMinutes(expiredMinutes);
-					setRemainingSeconds(initialSeconds);
-					timer = setTimeout(timerCallback, 1000);
-				} else {
-					sessionStorage.removeItem('user-storage');
-					location.reload();
-				}
+			(() => {
+				alertMessage('로그아웃되었습니다. 다시 로그인해주세요.');
+				sessionStorage.removeItem('user-storage');
+				location.reload();
 			})();
 		}
 	}, [remainingSeconds]);

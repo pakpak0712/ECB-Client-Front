@@ -26,7 +26,6 @@ export default function Login() {
 			onSuccess: (data) => {
 				if (data) {
 					secureStorage.setItem('user-storage', data, 'user-storage');
-
 					navigate('/');
 				} else {
 					alertMessage('로그인에 실패했습니다. \n아이디 및 패스워드를 확인해주세요');
@@ -38,6 +37,7 @@ export default function Login() {
 		event.preventDefault();
 		if (!memberId.trim()) return alertMessage('아이디를 입력해 주세요');
 		if (!memberPw.trim()) return alertMessage('비밀번호를 입력해 주세요');
+		if (!memberToken) return alertMessage('잠시 이후에 다시 시도해 주세요.');
 		loginMutation.mutate();
 	};
 

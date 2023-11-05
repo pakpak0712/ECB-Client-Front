@@ -71,7 +71,7 @@ export default function AliveInfo() {
 				<div className="modal-body">
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="고장 장소" text={aliveInfo.aliveName} />
+							<CustomText title="고장장소" text={aliveInfo.aliveName} />
 						</div>
 						{memberFlag === 1 && (
 							<div className="form-grid">
@@ -89,7 +89,7 @@ export default function AliveInfo() {
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="고장 일시" text={aliveInfo.aliveDate} />
+							<CustomText title="고장일시" text={aliveInfo.aliveDate} />
 						</div>
 					</CustomRow>
 				</div>

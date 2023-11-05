@@ -8,7 +8,7 @@ import { MenuConfigType } from '@/types/User.types';
  */
 export const checkRolesByUrl = (url: string) => {
 	const secureStorage = new SecureStorage(sessionStorage);
-	const userInfo = secureStorage.getItem('user', 'data');
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
 	const organizedMenu = (() => {
 		const result: MenuConfigType[] = [];
