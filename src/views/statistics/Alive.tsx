@@ -11,7 +11,7 @@ import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { statisticsQueryKey } from '@/queries/_querykey';
-import { postQueryParams } from '@/queries/_utils';
+import { postQuery } from '@/queries/_utils';
 import { aliveIdState } from '@/state/alive';
 import { AliveListType } from '@/types/Statistics.types';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
@@ -42,7 +42,7 @@ export default function Alive() {
 	const [params, setParams] = useState(initialParams);
 	const { data, isLoading, isFetching } = useQuery({
 		queryKey: [...statisticsQueryKey.aliveList(), params],
-		queryFn: postQueryParams,
+		queryFn: postQuery,
 	});
 
 	const handleAliveClick = (alive: AliveListType) => {

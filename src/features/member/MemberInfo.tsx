@@ -12,7 +12,7 @@ import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
 import useViewList from '@/hooks/useViewList';
 import { SecureStorage } from '@/plugin/crypto';
 import { lineStationQueryKey, memberQueryKey } from '@/queries/_querykey';
-import { postMutationQueryString } from '@/queries/_utils';
+import { postMutation } from '@/queries/_utils';
 import useDuplicateCheck from '@/queries/useDuplicateCheck';
 import useInvalidateFromMutation from '@/queries/useInvalidateFromMutation';
 import { memberIdState } from '@/state/member';
@@ -66,7 +66,7 @@ export default function MemberInfo() {
 
 	// 회원 수정
 	const updateMutation = useMutation({
-		mutationFn: () => postMutationQueryString([...memberQueryKey.detail(), { memberNo: id }]),
+		mutationFn: () => postMutation([...memberQueryKey.detail(), null, { memberNo: id }]),
 		onSuccess: (data) => {
 			const memberInfo = {
 				...initialMemberInfo,

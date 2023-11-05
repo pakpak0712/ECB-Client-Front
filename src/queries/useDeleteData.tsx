@@ -8,6 +8,7 @@ import { QueryKeyFunctionType } from '@/types/Queries.types';
 import { dictionary } from '@/utils/common';
 
 export default function useDeleteData<T>(
+	hmId: string,
 	code: string,
 	queryKeyFunction: QueryKeyFunctionType,
 	selectData: T[],
@@ -21,7 +22,7 @@ export default function useDeleteData<T>(
 		if (data && typeof data === 'object' && codeNo in data) return data[codeNo];
 	});
 
-	const deleteMutation = useInvalidateFromMutation(queryKeyFunction, 'delete', deleteNo);
+	const deleteMutation = useInvalidateFromMutation(queryKeyFunction, 'delete', deleteNo, { hmId });
 	const handleDataDelete = async () => {
 		if (deleteNo.length === 0) {
 			alertMessage(`${title}을(를) 선택해주세요`);

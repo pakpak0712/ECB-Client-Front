@@ -11,7 +11,7 @@ import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { memberQueryKey } from '@/queries/_querykey';
-import { postQueryParams } from '@/queries/_utils';
+import { postQuery } from '@/queries/_utils';
 import useDeleteData from '@/queries/useDeleteData';
 import { memberIdState } from '@/state/member';
 import { MemberListType } from '@/types/Member.types';
@@ -42,11 +42,11 @@ export default function Member() {
 	const [params, setParams] = useState(initialParams);
 	const { data, isLoading, isFetching } = useQuery({
 		queryKey: [...memberQueryKey.list(), params],
-		queryFn: postQueryParams,
+		queryFn: postQuery,
 	});
 	const [selectData, setSelectData] = useState<MemberListType[]>([]);
 
-	const getDeleteButton = useDeleteData('member', memberQueryKey, selectData, setSelectData);
+	const getDeleteButton = useDeleteData(userInfo.member_id, 'member', memberQueryKey, selectData, setSelectData);
 
 	const handleRegisterationClick = () => {
 		setId(null);

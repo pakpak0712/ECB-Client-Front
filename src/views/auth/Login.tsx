@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAlert } from '@/hooks/useAlert';
 import { SecureStorage } from '@/plugin/crypto';
 import { commonQueryKey } from '@/queries/_querykey';
-import { postMutationParams } from '@/queries/_utils';
+import { postMutation } from '@/queries/_utils';
 import { requestPermission } from '@/utils/firebase';
 
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
 	const loginMutation = useMutation(
 		() => {
 			const mutationKey = [...commonQueryKey.login(), { memberId, memberPw, memberToken }];
-			return postMutationParams(mutationKey);
+			return postMutation(mutationKey);
 		},
 		{
 			onSuccess: (data) => {

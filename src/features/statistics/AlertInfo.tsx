@@ -7,7 +7,7 @@ import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { statisticsQueryKey } from '@/queries/_querykey';
-import { postMutationQueryString } from '@/queries/_utils';
+import { postMutation } from '@/queries/_utils';
 import { alertIdState } from '@/state/alert';
 
 export default function AlertInfo() {
@@ -31,7 +31,7 @@ export default function AlertInfo() {
 	const [alertInfo, setAlertInfo] = useState(initialAlertInfo);
 
 	const updateMutation = useMutation({
-		mutationFn: () => postMutationQueryString([...statisticsQueryKey.alertDetail(), { alertNo: id }]),
+		mutationFn: () => postMutation([...statisticsQueryKey.alertDetail(), null, { alertNo: id }]),
 		onSuccess: (data) => {
 			const alertInfo = {
 				alertName: data.alertName,

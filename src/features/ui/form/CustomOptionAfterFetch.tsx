@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { memo } from 'react';
 
 import { Option } from '@/class/common';
-import { postQueryParams } from '@/queries/_utils';
+import { postQuery } from '@/queries/_utils';
 
 interface PropsType {
 	queryKey: (string | object | unknown)[];
@@ -21,7 +21,7 @@ interface DataResponseType {
 function CustomOptionAfterFetch({ queryKey, dataKey, enableBlankSelect }: PropsType) {
 	const { data, isLoading, isFetching } = useQuery<DataResponseType>({
 		queryKey: queryKey,
-		queryFn: postQueryParams,
+		queryFn: postQuery,
 	});
 
 	const convertTextToObject = (text: string) => [new Option(text, '')];

@@ -11,7 +11,7 @@ import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { statisticsQueryKey } from '@/queries/_querykey';
-import { postQueryParams } from '@/queries/_utils';
+import { postQuery } from '@/queries/_utils';
 import { alertIdState } from '@/state/alert';
 import { AlertListType } from '@/types/Statistics.types';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
@@ -41,7 +41,7 @@ export default function Alert() {
 	const [params, setParams] = useState(initialParams);
 	const { data, isLoading } = useQuery({
 		queryKey: [...statisticsQueryKey.alertList(), params],
-		queryFn: postQueryParams,
+		queryFn: postQuery,
 	});
 
 	const handleAlertClick = (alert: AlertListType) => {

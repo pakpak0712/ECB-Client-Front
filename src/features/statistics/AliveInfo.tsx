@@ -7,7 +7,7 @@ import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { statisticsQueryKey } from '@/queries/_querykey';
-import { postMutationQueryString } from '@/queries/_utils';
+import { postMutation } from '@/queries/_utils';
 import { aliveIdState } from '@/state/alive';
 
 const initialAliveInfo = {
@@ -30,7 +30,7 @@ export default function AliveInfo() {
 	const [aliveInfo, setAliveInfo] = useState(initialAliveInfo);
 
 	const updateMutation = useMutation({
-		mutationFn: () => postMutationQueryString([...statisticsQueryKey.aliveDetail(), { aliveNo: id }]),
+		mutationFn: () => postMutation([...statisticsQueryKey.aliveDetail(), null, { aliveNo: id }]),
 		onSuccess: (data) => {
 			const aliveInfo = {
 				aliveName: data.aliveName,

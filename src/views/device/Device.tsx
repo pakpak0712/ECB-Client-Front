@@ -11,7 +11,7 @@ import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { deviceQueryKey } from '@/queries/_querykey';
-import { postQueryParams } from '@/queries/_utils';
+import { postQuery } from '@/queries/_utils';
 import useDeleteData from '@/queries/useDeleteData';
 import { deviceIdState } from '@/state/device';
 import { DeviceListType } from '@/types/Device.types';
@@ -43,12 +43,12 @@ export default function Device() {
 	const [params, setParams] = useState(initialParams);
 	const { data, isLoading, isFetching } = useQuery({
 		queryKey: [...deviceQueryKey.list(), params],
-		queryFn: postQueryParams,
+		queryFn: postQuery,
 	});
 
 	const [selectData, setSelectData] = useState<DeviceListType[]>([]);
 
-	const getDeleteButton = useDeleteData('tcs', deviceQueryKey, selectData, setSelectData);
+	const getDeleteButton = useDeleteData(userInfo.member_id, 'tcs', deviceQueryKey, selectData, setSelectData);
 
 	const handleRegisterationClick = () => {
 		setId(null);

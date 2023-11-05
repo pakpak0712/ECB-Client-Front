@@ -13,7 +13,7 @@ import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
 import useViewList from '@/hooks/useViewList';
 import { SecureStorage } from '@/plugin/crypto';
 import { deviceQueryKey, lineStationQueryKey } from '@/queries/_querykey';
-import { postMutationQueryString } from '@/queries/_utils';
+import { postMutation } from '@/queries/_utils';
 import useDuplicateCheck from '@/queries/useDuplicateCheck';
 import useInvalidateFromMutation from '@/queries/useInvalidateFromMutation';
 import { deviceIdState } from '@/state/device';
@@ -49,7 +49,7 @@ export default function DeviceInfo() {
 
 	// 상세 정보 가져오기
 	const updateMutation = useMutation({
-		mutationFn: () => postMutationQueryString([...deviceQueryKey.detail(), { tcsNo: id }]),
+		mutationFn: () => postMutation([...deviceQueryKey.detail(), null, { tcsNo: id }]),
 		onSuccess: (data) => {
 			const deviceInfo = {
 				...initialDeviceInfo,

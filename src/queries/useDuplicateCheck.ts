@@ -2,11 +2,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 import { useAlert } from '@/hooks/useAlert';
-import { postMutationQueryString } from '@/queries/_utils';
+import { postMutation } from '@/queries/_utils';
 
 export default function useDuplicateCheck<T>(
 	queryKey: T[],
-	params: Record<string, string>,
+	queryString: Record<string, string>,
 	title: string,
 	duplicateDataKey: string,
 	isSameValue: boolean,
@@ -16,8 +16,8 @@ export default function useDuplicateCheck<T>(
 	const { alertMessage } = useAlert();
 	const duplicateMutation = useMutation(
 		() => {
-			const mutationKey = [...queryKey, params];
-			return postMutationQueryString(mutationKey);
+			const mutationKey = [...queryKey, null, queryString];
+			return postMutation(mutationKey);
 		},
 		{
 			onSuccess: (data) => {
