@@ -8,7 +8,7 @@ export default function useRequiredValueCheck(
 	const requiredValueCheck = (isDuplicateChecked?: boolean) => {
 		for (const key in requiredObject) {
 			if (key.indexOf('iewlist') >= 0 || key.indexOf('Addr') >= 0) {
-				if (dataObject[key]) {
+				if (dataObject[key] || dataObject[key] === '') {
 					const splitViewList = dataObject[key].toString().split(' ');
 					const emptyIndex = splitViewList.findIndex((viewList) => !viewList);
 					if (emptyIndex >= 0) {

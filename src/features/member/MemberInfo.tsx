@@ -68,10 +68,11 @@ export default function MemberInfo() {
 	const updateMutation = useMutation({
 		mutationFn: () => postMutation([...memberQueryKey.detail(), null, { memberNo: id }]),
 		onSuccess: (data) => {
+			console.log('data: ', data);
 			const memberInfo = {
 				...initialMemberInfo,
 				memberId: data.member_id,
-				memberPw: data.member_pw,
+				memberPw: data.member_pw || '',
 				memberName: data.member_name,
 				memberPhone: data.member_phone,
 				memberEmail: data.member_email,
@@ -106,13 +107,13 @@ export default function MemberInfo() {
 	// 필수값 체크
 	const requiredMemberInfo: Record<string, string | string[]> = {
 		memberId: '아이디',
+		memberName: '이름',
 		originalMemberPw: '기존 비밀번호',
 		memberPw: '비밀번호',
-		memberName: '이름',
+		confirmMemberPw: '입력하신 비밀번호',
 		memberPhone: '전화번호',
 		memberEmail: '이메일',
 		memberViewlist: ['호선', '역'],
-		confirmMemberPw: '입력하신 비밀번호',
 	};
 	const requiredValueCheck = useRequiredValueCheck(
 		{ ...memberInfo, ...passwordChangeInfo },

@@ -31,7 +31,7 @@ export default function DeviceInfo() {
 		tcsDate: '',
 		tcsMatchPhone: '',
 		tcsSimpAddr: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),
-		tcsCompAddr: '',
+		tcsCompAddr: ' ',
 		tcsSttCompAddr: '',
 		tcsMac: '',
 		tcsSerial: '',
