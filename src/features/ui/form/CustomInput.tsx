@@ -69,7 +69,7 @@ export default function CustomInput({
 							<>
 								<input
 									ref={inputRef}
-									type="text"
+									type={restAttribute.type || 'text'}
 									name={name}
 									className={`form-control ${!siblings || 'me-2'}`}
 									value={value}

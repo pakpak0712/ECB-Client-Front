@@ -36,6 +36,7 @@ export default function DeviceInfo() {
 		tcsMac: '',
 		tcsSerial: '',
 		tcsMemo: '',
+		hmId: userInfo.member_id,
 	};
 
 	const id = useRecoilValue(deviceIdState);
@@ -51,7 +52,7 @@ export default function DeviceInfo() {
 		mutationFn: () => postMutationQueryString([...deviceQueryKey.detail(), { tcsNo: id }]),
 		onSuccess: (data) => {
 			const deviceInfo = {
-				tcsDeviceType: deviceTypeDic[0].value,
+				...initialDeviceInfo,
 				tcsName: data.tcs_name,
 				tcsDate: data.tcs_ALdate,
 				tcsMatchPhone: data.tcs_matchPhone,

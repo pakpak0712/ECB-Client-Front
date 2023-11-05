@@ -35,6 +35,7 @@ export default function MemberInfo() {
 		memberEmail: '',
 		memberViewlist: '',
 		memberFlag: '',
+		hmId: userInfo.member_id,
 	};
 	const id = useRecoilValue(memberIdState);
 
@@ -68,6 +69,7 @@ export default function MemberInfo() {
 		mutationFn: () => postMutationQueryString([...memberQueryKey.detail(), { memberNo: id }]),
 		onSuccess: (data) => {
 			const memberInfo = {
+				...initialMemberInfo,
 				memberId: data.member_id,
 				memberPw: data.member_pw,
 				memberName: data.member_name,
@@ -242,6 +244,7 @@ export default function MemberInfo() {
 										handleValid={validatePasswordMatch('12341234')}
 										minLength={8}
 										maxLength={20}
+										type="password"
 									/>
 								</div>
 							)}
@@ -259,6 +262,7 @@ export default function MemberInfo() {
 									handlePattern={formatOnlyNumberEnglish}
 									minLength={8}
 									maxLength={20}
+									type="password"
 								/>
 							</div>
 							<div className="form-grid">
@@ -272,6 +276,7 @@ export default function MemberInfo() {
 									handleValid={validatePasswordMatch(memberInfo.memberPw)}
 									minLength={8}
 									maxLength={20}
+									type="password"
 								/>
 							</div>
 						</CustomRow>
@@ -298,7 +303,7 @@ export default function MemberInfo() {
 							/>
 						</div>
 					</CustomRow>
-					{isModifyMember && (
+					{id !== userInfo.member_no && (
 						<>
 							<div className="info-title">관리역 정보</div>
 							<CustomRow>

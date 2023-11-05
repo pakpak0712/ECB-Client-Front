@@ -27,7 +27,6 @@ export default function ExpirationTime() {
 		if (remainingMinutes <= initialSeconds && remainingSeconds <= initialSeconds) {
 			clearTimeout(timer);
 			(() => {
-				alertMessage('로그아웃되었습니다. 다시 로그인해주세요.');
 				sessionStorage.removeItem('user-storage');
 				location.reload();
 			})();
