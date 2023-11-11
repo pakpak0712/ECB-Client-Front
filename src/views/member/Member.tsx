@@ -58,12 +58,6 @@ export default function Member() {
 		openContentModal(<MemberInfo />);
 	};
 
-	const handleRefetch = () => {
-		setParams(initialParams);
-	};
-
-	const refetchProps = { handleRefetch };
-
 	const listProps = {
 		initialParams,
 		params,
@@ -77,7 +71,7 @@ export default function Member() {
 	return (
 		<div className="page">
 			<PageHeader title="회원 관리">
-				<ButtonRefetch {...refetchProps} />
+				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="회원 목록">
 				<div className="d-flex justify-content-end">

@@ -50,12 +50,6 @@ export default function Alive() {
 		openContentModal(<AliveInfo />);
 	};
 
-	const handleRefetch = () => {
-		setParams(initialParams);
-	};
-
-	const refetchProps = { handleRefetch };
-
 	const listProps = {
 		initialParams,
 		params,
@@ -68,7 +62,7 @@ export default function Alive() {
 	return (
 		<div className="page">
 			<PageHeader title="고장 통계">
-				<ButtonRefetch {...refetchProps} />
+				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="고장 목록">
 				<AliveList {...listProps} />

@@ -49,12 +49,6 @@ export default function Alert() {
 		openContentModal(<AlertInfo />);
 	};
 
-	const handleRefetch = () => {
-		setParams(initialParams);
-	};
-
-	const refetchProps = { handleRefetch };
-
 	const listProps = {
 		initialParams,
 		params,
@@ -67,7 +61,7 @@ export default function Alert() {
 	return (
 		<div className="page">
 			<PageHeader title="알람 관리">
-				<ButtonRefetch {...refetchProps} />
+				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="알람 목록">
 				<AlertList {...listProps} />

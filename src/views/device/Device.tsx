@@ -60,12 +60,6 @@ export default function Device() {
 		openContentModal(<DeviceInfo />);
 	};
 
-	const handleRefetch = () => {
-		setParams(initialParams);
-	};
-
-	const refetchProps = { handleRefetch };
-
 	const listProps = {
 		initialParams,
 		params,
@@ -79,7 +73,7 @@ export default function Device() {
 	return (
 		<div className="page">
 			<PageHeader title="장비 관리">
-				<ButtonRefetch {...refetchProps} />
+				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="장비 목록">
 				{memberFlag === 1 && (
