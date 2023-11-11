@@ -2,7 +2,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface CustomDatePicker {
-	required?: boolean;
+	isRequired?: boolean;
 	title?: string;
 	name: string;
 	defaultValue?: string | Date;
@@ -10,7 +10,7 @@ interface CustomDatePicker {
 }
 
 export default function CustomDatePicker(props: CustomDatePicker) {
-	const { required = false, title, name, defaultValue, handleState, ...rest } = props;
+	const { isRequired = false, title, name, defaultValue, handleState, ...rest } = props;
 
 	const handleSelectChange = (date: Date | null) => {
 		return (name: string) => {
@@ -26,7 +26,7 @@ export default function CustomDatePicker(props: CustomDatePicker) {
 				{title && (
 					<div className="col-form-label">
 						{title}
-						{required && <span className="required">&nbsp;*</span>}
+						{isRequired && <span className="required">&nbsp;*</span>}
 					</div>
 				)}
 

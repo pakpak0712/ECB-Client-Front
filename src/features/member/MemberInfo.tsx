@@ -91,7 +91,7 @@ export default function MemberInfo() {
 		{ memberId: memberInfo.memberId },
 		'아이디',
 		'memberId',
-		savedMemberInfo['memberId'] === memberInfo['memberId'],
+		!!memberInfo['memberId'].trim() && savedMemberInfo['memberId'] === memberInfo['memberId'],
 	);
 
 	const queryKey = isModify ? 'update' : 'insert';
@@ -203,9 +203,10 @@ export default function MemberInfo() {
 										중복 확인
 									</button>
 								}
-								readOnly={id ? true : false}
+								isOnlyText={id ? true : false}
 								minLength={5}
 								maxLength={20}
+								readOnly={isDuplicateChecked}
 							/>
 						</div>
 						<div className="form-grid">
@@ -223,7 +224,7 @@ export default function MemberInfo() {
 					{(isModifyMember || isModifyUser) && (
 						<CustomRow>
 							<div className="form-grid">
-								<CustomChildren required={true} title="비밀번호">
+								<CustomChildren isRequired={true} title="비밀번호">
 									<button
 										type="button"
 										className="btn btn-default"
@@ -245,7 +246,7 @@ export default function MemberInfo() {
 										handleValid={validatePasswordMatch('12341234')}
 										minLength={8}
 										maxLength={20}
-										type="password"
+										{...(!isModifyUser ? { type: 'password' } : {})}
 									/>
 								</div>
 							)}
@@ -304,7 +305,7 @@ export default function MemberInfo() {
 							/>
 						</div>
 					</CustomRow>
-					{id !== userInfo.member_no && (
+					{userInfo.member_flag === 1 && (isRegister || isModifyMember) && (
 						<>
 							<div className="info-title">관리역 정보</div>
 							<CustomRow>

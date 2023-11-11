@@ -1,12 +1,12 @@
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react';
 
 interface PropsType extends ComponentPropsWithoutRef<'input'> {
-	required?: boolean;
+	isisRequired?: boolean;
 	title?: string;
 	name: string;
 	defaultValue?: string;
 	placeholder?: string;
-	readOnly?: boolean;
+	isOnlyText?: boolean;
 	siblings?: JSX.Element;
 	handleState?: (key: string, value: string) => void;
 	handlePattern?: (value: string) => string;
@@ -14,11 +14,11 @@ interface PropsType extends ComponentPropsWithoutRef<'input'> {
 }
 
 export default function CustomInput({
-	required = false,
+	isisRequired = false,
 	title,
 	name,
 	defaultValue = '\u00A0',
-	readOnly,
+	isOnlyText,
 	siblings,
 	handleState,
 	handlePattern,
@@ -58,12 +58,12 @@ export default function CustomInput({
 				{title && (
 					<div className="col-form-label">
 						{title}
-						{required && <span className="required">&nbsp;*</span>}
+						{isisRequired && <span className="isRequired">&nbsp;*</span>}
 					</div>
 				)}
 				<div className="col-form-box">
 					<div className="col-form-tag">
-						{readOnly ? (
+						{isOnlyText ? (
 							<p className="form-text">{defaultValue}</p>
 						) : (
 							<>

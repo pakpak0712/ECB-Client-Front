@@ -75,7 +75,7 @@ export default function DeviceInfo() {
 		{ tcsMac: deviceInfo.tcsMac },
 		'MAC 주소',
 		'deviceMac',
-		savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac'],
+		!!deviceInfo['tcsMac'].trim() && savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac'],
 	);
 
 	// 등록/수정
@@ -149,7 +149,7 @@ export default function DeviceInfo() {
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
 								childrenOption={deviceTypeDic}
-								readOnly={true}
+								isOnlyText={true}
 							/>
 						</div>
 						<div className="form-grid">
@@ -168,7 +168,7 @@ export default function DeviceInfo() {
 								title="호선"
 								name="tcsSimpAddr-line"
 								defaultValue={viewList.line}
-								readOnly={memberFlag !== 1}
+								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeViewList}
 								enableBlankSelect={true}
 								disabled={initialDeviceInfo.tcsSimpAddr ? true : false}
@@ -182,7 +182,7 @@ export default function DeviceInfo() {
 								title="역"
 								name="tcsSimpAddr-station"
 								defaultValue={viewList.station}
-								readOnly={memberFlag !== 1}
+								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeViewList}
 								enableBlankSelect={true}
 								disabled={!viewList.line || (initialDeviceInfo.tcsSimpAddr ? true : false)}
@@ -201,7 +201,7 @@ export default function DeviceInfo() {
 								title="장소"
 								name="tcsCompAddr"
 								defaultValue={deviceInfo.tcsCompAddr}
-								readOnly={memberFlag !== 1}
+								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								childrenOption={compAddressDic}
 								enableBlankSelect={true}
@@ -222,7 +222,7 @@ export default function DeviceInfo() {
 									title="MAC"
 									name="tcsMac"
 									defaultValue={deviceInfo.tcsMac}
-									readOnly={memberFlag !== 1}
+									isOnlyText={memberFlag !== 1}
 									handleState={handleChangeDeviceInfo}
 									handlePattern={formatOnlyMacAddress}
 									siblings={
@@ -236,6 +236,7 @@ export default function DeviceInfo() {
 										</button>
 									}
 									minLength={17}
+									// readOnly={isDuplicateChecked}
 								/>
 							</div>
 						)}
@@ -245,7 +246,7 @@ export default function DeviceInfo() {
 								title="전화번호"
 								name="tcsMatchPhone"
 								defaultValue={deviceInfo.tcsMatchPhone}
-								readOnly={memberFlag !== 1}
+								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								handlePattern={formatOnlyPhoneNumber}
 								minLength={11}
@@ -259,7 +260,7 @@ export default function DeviceInfo() {
 								title="라우터"
 								name="tcsSerial"
 								defaultValue={deviceInfo.tcsSerial}
-								readOnly={memberFlag !== 1}
+								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								handlePattern={formatOnlyPhoneNumber}
 								minLength={11}
@@ -270,7 +271,7 @@ export default function DeviceInfo() {
 								title="메모"
 								name="tcsMemo"
 								defaultValue={deviceInfo.tcsMemo}
-								readOnly={memberFlag !== 1}
+								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								maxLength={30}
 							/>

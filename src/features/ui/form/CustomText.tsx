@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, useEffect } from 'react';
 
 interface PropsType extends ComponentPropsWithoutRef<'input'> {
-	required?: boolean;
+	isRequired?: boolean;
 	title?: string;
 	name?: string;
 	text?: string;
@@ -9,7 +9,7 @@ interface PropsType extends ComponentPropsWithoutRef<'input'> {
 	handleState?: (...args: any[]) => void;
 }
 
-export default function CustomText({ required = false, title, name, text, siblings, handleState }: PropsType) {
+export default function CustomText({ isRequired = false, title, name, text, siblings, handleState }: PropsType) {
 	useEffect(() => {
 		if (name && handleState) handleState(name, text);
 	}, [text]);
@@ -19,7 +19,7 @@ export default function CustomText({ required = false, title, name, text, siblin
 			<div className="form-content">
 				<div className="col-form-label">
 					{title}
-					{required && <span className="required">&nbsp;*</span>}
+					{isRequired && <span className="required">&nbsp;*</span>}
 				</div>
 				<div className="col-form-box">
 					<p className="form-text">{text}</p>

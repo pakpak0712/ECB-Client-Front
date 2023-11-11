@@ -3,27 +3,27 @@ import { ComponentPropsWithoutRef, ReactNode, useEffect, useState } from 'react'
 import { Option } from '@/class/common';
 
 interface PropsType extends ComponentPropsWithoutRef<'select'> {
-	required?: boolean;
+	isRequired?: boolean;
 	title?: string;
 	name?: string;
 	defaultValue?: string | number | undefined;
 	children?: ReactNode;
 	childrenOption?: Option[];
 	enableBlankSelect?: boolean;
-	readOnly?: boolean;
+	isOnlyText?: boolean;
 	siblings?: JSX.Element;
 	handleState?: (...args: any[]) => void;
 }
 
 export default function CustomSelect({
-	required,
+	isRequired,
 	title,
 	name,
 	defaultValue,
 	children,
 	childrenOption,
 	enableBlankSelect,
-	readOnly,
+	isOnlyText,
 	siblings,
 	handleState,
 	...restAttribute
@@ -47,11 +47,11 @@ export default function CustomSelect({
 				{title && (
 					<div className="col-form-label">
 						{title}
-						{required && <span className="required">&nbsp;*</span>}
+						{isRequired && <span className="required">&nbsp;*</span>}
 					</div>
 				)}
 				<div className="col-form-box">
-					{readOnly ? (
+					{isOnlyText ? (
 						<p className="form-text">{defaultValue}</p>
 					) : (
 						<div className="col-form-tag">
