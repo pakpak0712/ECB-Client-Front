@@ -25,8 +25,8 @@ export default function useDeleteData<T>(
 	const deleteMutation = useInvalidateFromMutation(queryKeyFunction, 'delete', deleteNo, { hmId });
 	const handleDataDelete = async () => {
 		if (deleteNo.length === 0) {
-			alertMessage(`${title}을(를) 선택해주세요`);
-		} else if (await confirmMessage(`선택하신 ${title}을(를) 삭제하실건가요?`)) {
+			alertMessage(`${title}을(를) 선택해주세요.`);
+		} else if (await confirmMessage(`선택하신 ${title}을(를) 정말로 삭제하시겠습니까?`)) {
 			deleteMutation.mutate();
 		}
 	};

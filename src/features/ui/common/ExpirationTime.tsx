@@ -3,6 +3,13 @@ import { useLayoutEffect, useState } from 'react';
 import { useAlert } from '@/hooks/useAlert';
 import { geDoubleDigits } from '@/utils/numberUtils';
 
+interface WebAppInterface {
+	closeApp(toast: string): never;
+}
+declare let android: WebAppInterface;
+
+const isMobile = /Mobi/i.test(window.navigator.userAgent);
+
 export default function ExpirationTime() {
 	const expiredMinutes = 60; // 만료 시간 (분)
 	const initialMinutes = 60;
@@ -28,7 +35,12 @@ export default function ExpirationTime() {
 			clearTimeout(timer);
 			(() => {
 				sessionStorage.removeItem('user-storage');
-				location.reload();
+
+				if (!isMobile) {
+					location.reload();
+				} else {
+					android.closeApp('앱을 다시 시작해주세요.');
+				}
 			})();
 		}
 	}, [remainingSeconds]);

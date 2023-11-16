@@ -24,20 +24,22 @@ export default function Login() {
 		},
 		{
 			onSuccess: (data) => {
+				// ToDo:   data 안에 memberToken 이 들어가 있도록 처리할 수는 없나..?
 				if (data) {
+					if (memberToken) data.memberToken = memberToken;
 					secureStorage.setItem('user-storage', data, 'user-storage');
 					navigate('/');
 				} else {
-					alertMessage('로그인에 실패했습니다. \n아이디 및 패스워드를 확인해주세요');
+					alertMessage('로그인에 실패하였습니다.\n아이디와 비밀번호를 다시한번 확인해주세요.');
 				}
 			},
 		},
 	);
 	const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (!memberId.trim()) return alertMessage('아이디를 입력해 주세요');
-		if (!memberPw.trim()) return alertMessage('비밀번호를 입력해 주세요');
-		if (!memberToken) return alertMessage('잠시 후 다시 시도해 주세요.');
+		if (!memberId.trim()) return alertMessage('아이디를 입력해주세요.');
+		if (!memberPw.trim()) return alertMessage('비밀번호를 입력해주세요.');
+		if (!memberToken) return alertMessage('잠시 후 다시 시도해주세요.');
 		loginMutation.mutate();
 	};
 
@@ -60,7 +62,7 @@ export default function Login() {
 								<input
 									type="text"
 									className="login-form-control form-control"
-									placeholder="아이디를 입력하세요"
+									placeholder="아이디를 입력해주세요."
 									aria-label="login-id-input"
 									value={memberId}
 									onChange={(e) => setMemberId(e.target.value.trim())}
@@ -73,7 +75,7 @@ export default function Login() {
 								<input
 									type="password"
 									className="login-form-control form-control"
-									placeholder="비밀번호를 입력하세요"
+									placeholder="비밀번호를 입력해주세요."
 									aria-label="login-password-input"
 									autoComplete="off"
 									value={memberPw}
