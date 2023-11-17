@@ -14,7 +14,7 @@ self.addEventListener('push', function (e) {
 	const resultData = e.data.json().notification;
 	const notificationTitle = resultData.title;
 	const notificationOptions = { body: resultData.body };
-	console.log('Push: ', { resultData, notificationTitle, notificationOptions });
+	console.log('Push 123: ', { resultData, notificationTitle, notificationOptions });
 
 	self.registration.showNotification(notificationTitle, notificationOptions);
 });

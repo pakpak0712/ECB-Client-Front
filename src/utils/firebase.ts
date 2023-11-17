@@ -32,18 +32,16 @@ const isMobile = /Mobi/i.test(window.navigator.userAgent);
 export async function requestPermission(setState: Dispatch<SetStateAction<string>>) {
 	const userStorage = new SecureStorage(sessionStorage).getItem('user-storage', 'user-storage');
 	const memberToken = getValueOrEmptyFromObject(userStorage, 'member_token');
-	console.log('memberToken: ' + memberToken);
+
 	const firebaseToken = new URLSearchParams(window.location.search).get('firebaseToken');
 
 	const AppFirebaseToken = memberToken ? memberToken : firebaseToken;
 	console.log('AppFirebaseToken: ' + AppFirebaseToken);
 
 	if (AppFirebaseToken) {
-		console.log('11111');
 		setState(AppFirebaseToken);
 		return;
 	} else {
-		console.log('22222');
 		// WEB
 		if (!isMobile) {
 			firebaseMessaging = getMessaging(firebaseApp);
@@ -75,7 +73,8 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 					location.reload();
 				});
 		} else {
-			android.closeApp('앱을 다시 시작해주세요.');
+			//android.closeApp('앱을 다시 시작해주세요.');
+			location.href = '/login?firebaseToken=' + memberToken;
 		}
 	}
 }
