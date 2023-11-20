@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { memo } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
 import { Option } from '@/class/common';
 import { postQuery } from '@/queries/_utils';
@@ -8,6 +8,7 @@ interface PropsType {
 	queryKey: (string | object | unknown)[];
 	dataKey: string;
 	enableBlankSelect?: boolean;
+	setIsOptionFetched: Dispatch<SetStateAction<boolean>>;
 }
 interface CustomOptionResponse {
 	text: string;
@@ -18,8 +19,8 @@ interface DataResponseType {
 	[key: string]: Record<string, string>[];
 }
 
-function CustomOptionAfterFetch({ queryKey, dataKey, enableBlankSelect }: PropsType) {
-	const { data, isLoading, isFetching } = useQuery<DataResponseType>({
+function CustomOptionAfterFetch({ queryKey, dataKey, enableBlankSelect, setIsOptionFetched }: PropsType) {
+	const { data, isFetched } = useQuery<DataResponseType>({
 		queryKey: queryKey,
 		queryFn: postQuery,
 	});
@@ -48,6 +49,10 @@ function CustomOptionAfterFetch({ queryKey, dataKey, enableBlankSelect }: PropsT
 	const dataList = data ? data[dataKey] : undefined;
 	const optionData = dataList ? getOrganizeData(dataList) : convertTextToObject('선택 목록이 존재하지 않습니다');
 
+	useEffect(() => {
+		setIsOptionFetched(isFetched);
+	}, [isFetched]);
+
 	return (
 		<>
 			{enableBlankSelect && <option>선택</option>}
@@ -62,4 +67,4 @@ function CustomOptionAfterFetch({ queryKey, dataKey, enableBlankSelect }: PropsT
 	);
 }
 
-export default memo(CustomOptionAfterFetch);
+export default CustomOptionAfterFetch;

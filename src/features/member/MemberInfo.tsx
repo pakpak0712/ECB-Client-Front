@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil';
 
 import CustomChildren from '@/features/ui/form/CustomChildren';
 import CustomInput from '@/features/ui/form/CustomInput';
-import CustomOptionAfterFetch from '@/features/ui/form/CustomOptionAfterFetch';
 import CustomSelect from '@/features/ui/form/CustomSelect';
+import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
@@ -17,6 +17,7 @@ import useDuplicateCheck from '@/queries/useDuplicateCheck';
 import useInvalidateFromMutation from '@/queries/useInvalidateFromMutation';
 import { memberIdState } from '@/state/member';
 import { MemberInfoDataType } from '@/types/Member.types';
+import { getLineStation } from '@/utils/common';
 import {
 	formatOnlyNumberEnglish,
 	formatOnlyPhoneNumber,
@@ -48,8 +49,7 @@ export default function MemberInfo() {
 
 	const [memberInfo, setMemberInfo] = useState<MemberInfoDataType>(initialMemberInfo);
 	const [savedMemberInfo, setSavedMemberInfo] = useState<MemberInfoDataType>(initialMemberInfo);
-	const { initialViewList, viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList } =
-		useViewList(setMemberInfo);
+	const { initialViewList, viewList, setViewList, stationParams, handleChangeViewList } = useViewList(setMemberInfo);
 
 	// 비밀번호 변경
 	const initialPasswordChangeInfo = {
@@ -68,18 +68,17 @@ export default function MemberInfo() {
 	const updateMutation = useMutation({
 		mutationFn: () => postMutation([...memberQueryKey.detail(), null, { memberNo: id }]),
 		onSuccess: (data) => {
-			console.log('data: ', data);
 			const memberInfo = {
 				...initialMemberInfo,
 				memberId: data.member_id,
-				memberPw: data.member_pw || '',
+				memberPw: data.member_eg,
 				memberName: data.member_name,
 				memberPhone: data.member_phone,
 				memberEmail: data.member_email,
 				memberViewlist: data.member_viewList,
 				memberFlag: data.member_flag,
 			};
-			setViewListFromData(data.member_viewlist);
+			setViewList(getLineStation(data.member_viewlist));
 			setMemberInfo(memberInfo);
 			setSavedMemberInfo(memberInfo);
 		},
@@ -243,9 +242,12 @@ export default function MemberInfo() {
 										handleState={handleChangePassword}
 										handlePattern={formatOnlyNumberEnglish}
 										// handleValid={validatePasswordMatch(savedMemberInfo.memberPw)}
-										handleValid={validatePasswordMatch('12341234')}
+										handleValid={validatePasswordMatch(memberInfo.memberPw)}
 										minLength={8}
 										maxLength={20}
+										readOnly={
+											validatePasswordMatch(memberInfo.memberPw)(passwordChangeInfo.originalMemberPw) ? false : true
+										}
 										{...(!isModifyUser ? { type: 'password' } : {})}
 									/>
 								</div>
@@ -259,7 +261,7 @@ export default function MemberInfo() {
 									required={true}
 									title={`${isModify ? '신규' : ''} 비밀번호`}
 									name="memberPw"
-									defaultValue={memberInfo.memberPw}
+									defaultValue=""
 									handleState={handleMemberInfoChange}
 									handlePattern={formatOnlyNumberEnglish}
 									minLength={8}
@@ -308,36 +310,46 @@ export default function MemberInfo() {
 					{userInfo.member_flag === 1 && (isRegister || isModifyMember) && (
 						<>
 							<div className="info-title">관리역 정보</div>
-							<CustomRow>
-								<div className="form-grid">
-									<CustomSelect
-										required={true}
-										title="호선"
-										name="memberViewlist-line"
-										defaultValue={viewList.line}
-										handleState={handleChangeViewList}
-										enableBlankSelect={true}
-									>
-										<CustomOptionAfterFetch queryKey={[...lineStationQueryKey.lineList()]} dataKey="lineList" />
-									</CustomSelect>
-								</div>
-								<div className="form-grid">
-									<CustomSelect
-										required={true}
-										title="역"
-										name="memberViewlist-station"
-										defaultValue={viewList.station}
-										handleState={handleChangeViewList}
-										enableBlankSelect={true}
-										disabled={!viewList.line}
-									>
-										<CustomOptionAfterFetch
-											queryKey={[...lineStationQueryKey.sttList(), stationParams]}
-											dataKey="sttList"
+
+							{viewList.line === '전체' ? (
+								<CustomRow>
+									<div className="form-grid">
+										<CustomText title="호선/역" text="전체" />
+									</div>
+								</CustomRow>
+							) : (
+								<CustomRow>
+									<div className="form-grid">
+										<CustomSelect
+											required={true}
+											title="호선"
+											name="memberViewlist-line"
+											defaultValue={viewList.line}
+											handleState={handleChangeViewList}
+											enableBlankSelect={true}
+											optionFetch={{
+												queryKey: [...lineStationQueryKey.lineList()],
+												dataKey: 'lineList',
+											}}
 										/>
-									</CustomSelect>
-								</div>
-							</CustomRow>
+									</div>
+									<div className="form-grid">
+										<CustomSelect
+											required={true}
+											title="역"
+											name="memberViewlist-station"
+											defaultValue={viewList.station}
+											handleState={handleChangeViewList}
+											enableBlankSelect={true}
+											disabled={!viewList.line}
+											optionFetch={{
+												queryKey: [...lineStationQueryKey.sttList(), stationParams],
+												dataKey: 'sttList',
+											}}
+										/>
+									</div>
+								</CustomRow>
+							)}
 						</>
 					)}
 				</div>

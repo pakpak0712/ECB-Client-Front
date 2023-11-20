@@ -40,7 +40,7 @@ export default function SearchCondition({ initialParams, params, setParams, type
 					defaultValue={searchCondition.searchDTO.searchType}
 					handleState={handleSearchConditionChange}
 					enableBlankSelect={true}
-					childrenOption={typeChildren}
+					optionDictionary={typeChildren}
 				/>
 				<CustomInput
 					name="searchWord"

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useMemo } from 'react';
 import { TableColumn } from 'react-data-table-component';
 
 import { aliveSearchTypeDic } from '@/constants/dictionary';
@@ -18,12 +18,18 @@ interface PropsType {
 }
 
 export default function AliveList({ initialParams, params, data, pageMap, setParams, handleAliveClick }: PropsType) {
-	const tableData = data?.reverse().map((item, itemIndex) => {
-		return { ...item, no: pageMap?.startRow + itemIndex };
-	});
+	const tableData = useMemo(
+		() =>
+			data?.reverse().map((item, itemIndex) => {
+				return { ...item, no: pageMap?.startRow + itemIndex };
+			}),
+		[data],
+	);
+
+	console.log('tableData: ', tableData);
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<AliveListType>[] = [
-		{ name: 'NO', selector: (row) => row.no, sortable: true },
+		{ name: 'NO', selector: (row) => row.no },
 		{ name: '고장장소', selector: (row) => row['aliveName'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['alivePhone'], sortable: true },
 		{ name: '라우터', selector: (row) => row['aliveSerial'], sortable: true },

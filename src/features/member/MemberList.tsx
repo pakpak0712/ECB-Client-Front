@@ -29,15 +29,15 @@ export default function MemberList({
 }: PropsType) {
 	const tableData = useMemo(
 		() =>
-			data?.map((item, itemIndex) => {
+			data?.reverse().map((item, itemIndex) => {
 				return { ...item, no: pageMap?.startRow + itemIndex };
 			}),
-		[data],
+		[data, params],
 	);
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<MemberListType>[] = [
-		{ name: 'NO', selector: (row) => row['no'], sortable: true },
+		{ name: 'NO', selector: (row) => row['no'] },
 		{ name: '아이디', selector: (row) => row['member_id'], sortable: true },
 		{ name: '이름', selector: (row) => row['member_name'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['member_phone'], sortable: true },

@@ -20,9 +20,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 2.3846rem;
+		min-width: 2.3846rem;
 		height: 2.3846rem;
-		padding: 0;
+		padding: 0 0.3rem;
 		border-color: var(--app-component-border-color);
 		border-radius: 0.3077rem;
 		background-color: var(--app-component-bg);

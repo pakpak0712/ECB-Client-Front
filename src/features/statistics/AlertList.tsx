@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useMemo } from 'react';
 import { TableColumn } from 'react-data-table-component';
 
 import { alertSearchTypeDic } from '@/constants/dictionary';
@@ -18,12 +18,16 @@ interface PropsType {
 }
 
 export default function AlertList({ initialParams, params, data, pageMap, setParams, handleAlertClick }: PropsType) {
-	const tableData = data?.reverse().map((item, itemIndex) => {
-		return { ...item, no: pageMap?.startRow + itemIndex };
-	});
+	const tableData = useMemo(
+		() =>
+			data?.reverse().map((item, itemIndex) => {
+				return { ...item, no: pageMap?.startRow + itemIndex };
+			}),
+		[data],
+	);
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<AlertListType>[] = [
-		{ name: 'NO', selector: (row) => row.no, sortable: true },
+		{ name: 'NO', selector: (row) => row.no },
 		{ name: '알람장소', selector: (row) => row['alertName'], sortable: true },
 		{ name: '알람유형', selector: (row) => row['alertType'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['alertPhone'], sortable: true },

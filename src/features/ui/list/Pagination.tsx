@@ -45,11 +45,7 @@ export default function Pagination<T extends SearchParamsType>({ pageMap, setPar
 			</div>
 			<nav className="pagination">
 				<div className={`page-item ${pageNo <= 1 && 'disabled'}`}>
-					<button
-						type="button"
-						className="page-link page-link-arrow"
-						onClick={() => handlePageNumberChange(startPage - 1)}
-					>
+					<button type="button" className="page-link page-link-arrow" onClick={() => handlePageNumberChange(1)}>
 						&laquo;
 					</button>
 				</div>
@@ -57,7 +53,7 @@ export default function Pagination<T extends SearchParamsType>({ pageMap, setPar
 					<button
 						type="button"
 						className="page-link page-link-arrow"
-						onClick={() => handlePageNumberChange(pageNo - 1)}
+						onClick={() => handlePageNumberChange(pageNo - buttonPerPage)}
 					>
 						&lsaquo;
 					</button>
@@ -77,17 +73,13 @@ export default function Pagination<T extends SearchParamsType>({ pageMap, setPar
 					<button
 						type="button"
 						className="page-link page-link-arrow"
-						onClick={() => handlePageNumberChange(pageNo + 1)}
+						onClick={() => handlePageNumberChange(pageNo + buttonPerPage)}
 					>
 						&rsaquo;
 					</button>
 				</div>
 				<div className={`page-item ${!hasNext && 'disabled'}`}>
-					<button
-						type="button"
-						className="page-link page-link-arrow"
-						onClick={() => handlePageNumberChange(endPage + 1)}
-					>
+					<button type="button" className="page-link page-link-arrow" onClick={() => handlePageNumberChange(totalPage)}>
 						&raquo;
 					</button>
 				</div>

@@ -4,7 +4,6 @@ import { useRecoilValue } from 'recoil';
 
 import { compAddressDic, deviceTypeDic } from '@/constants/dictionary';
 import CustomInput from '@/features/ui/form/CustomInput';
-import CustomOptionAfterFetch from '@/features/ui/form/CustomOptionAfterFetch';
 import CustomSelect from '@/features/ui/form/CustomSelect';
 import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
@@ -18,6 +17,7 @@ import useDuplicateCheck from '@/queries/useDuplicateCheck';
 import useInvalidateFromMutation from '@/queries/useInvalidateFromMutation';
 import { deviceIdState } from '@/state/device';
 import { DeviceInfoDataType } from '@/types/Device.types';
+import { getLineStation } from '@/utils/common';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 import { formatOnlyMacAddress, formatOnlyPhoneNumber } from '@/utils/stringUtils';
 
@@ -44,8 +44,7 @@ export default function DeviceInfo() {
 
 	const [deviceInfo, setDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
 	const [savedDeviceInfo, setSavedDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
-	const { initialViewList, viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList } =
-		useViewList(setDeviceInfo);
+	const { initialViewList, viewList, setViewList, stationParams, handleChangeViewList } = useViewList(setDeviceInfo);
 
 	// 상세 정보 가져오기
 	const updateMutation = useMutation({
@@ -63,7 +62,7 @@ export default function DeviceInfo() {
 				tcsSerial: data.tcs_serial,
 				tcsMemo: data.tcs_memo,
 			};
-			setViewListFromData(data.tcs_simpAddr);
+			setViewList(getLineStation(data.tcs_simpAddr));
 			setDeviceInfo(deviceInfo);
 			setSavedDeviceInfo(deviceInfo);
 		},
@@ -148,7 +147,7 @@ export default function DeviceInfo() {
 								name="tcsDeviceType"
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
-								childrenOption={deviceTypeDic}
+								optionDictionary={deviceTypeDic}
 								isOnlyText={true}
 							/>
 						</div>
@@ -171,10 +170,12 @@ export default function DeviceInfo() {
 								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeViewList}
 								enableBlankSelect={true}
+								optionFetch={{
+									queryKey: [...lineStationQueryKey.lineList()],
+									dataKey: 'lineList',
+								}}
 								disabled={initialDeviceInfo.tcsSimpAddr ? true : false}
-							>
-								<CustomOptionAfterFetch queryKey={[...lineStationQueryKey.lineList()]} dataKey="lineList" />
-							</CustomSelect>
+							/>
 						</div>
 						<div className="form-grid">
 							<CustomSelect
@@ -185,13 +186,12 @@ export default function DeviceInfo() {
 								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeViewList}
 								enableBlankSelect={true}
+								optionFetch={{
+									queryKey: [...lineStationQueryKey.sttList(), stationParams],
+									dataKey: 'sttList',
+								}}
 								disabled={!viewList.line || (initialDeviceInfo.tcsSimpAddr ? true : false)}
-							>
-								<CustomOptionAfterFetch
-									queryKey={[...lineStationQueryKey.sttList(), stationParams]}
-									dataKey="sttList"
-								/>
-							</CustomSelect>
+							/>
 						</div>
 					</CustomRow>
 					<CustomRow>
@@ -203,7 +203,7 @@ export default function DeviceInfo() {
 								defaultValue={deviceInfo.tcsCompAddr}
 								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
-								childrenOption={compAddressDic}
+								optionDictionary={compAddressDic}
 								enableBlankSelect={true}
 								disabled={!viewList.station}
 							/>

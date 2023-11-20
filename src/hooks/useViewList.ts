@@ -16,13 +16,6 @@ export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T
 	const [propertyKey, setPropertyKey] = useState('');
 	const [stationParams, setStationParams] = useState(initialParams);
 
-	const setViewListFromData = (data: string) => {
-		if (data) {
-			const viewList = getLineStation(data);
-			setViewList(viewList);
-		}
-	};
-
 	const handleChangeViewList = (name: string, value: string) => {
 		const splitedName = name.split('-');
 		const viewListName = splitedName[0];
@@ -53,5 +46,5 @@ export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T
 		if (!id) setViewList(initialViewList);
 	}, [id]);
 
-	return { initialViewList, viewList, setViewList, stationParams, setViewListFromData, handleChangeViewList };
+	return { initialViewList, viewList, setViewList, stationParams, handleChangeViewList };
 }

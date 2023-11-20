@@ -1,14 +1,19 @@
-import { ComponentPropsWithoutRef, ReactNode, useEffect, useState } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 
 import { Option } from '@/class/common';
+import CustomOptionAfterFetch from '@/features/ui/form/CustomOptionAfterFetch';
 
 interface PropsType extends ComponentPropsWithoutRef<'select'> {
 	isRequired?: boolean;
 	title?: string;
 	name?: string;
 	defaultValue?: string | number | undefined;
-	children?: ReactNode;
-	childrenOption?: Option[];
+	optionFetch?: {
+		queryKey: (string | object | unknown)[];
+		dataKey: string;
+		enableBlankSelect?: boolean;
+	};
+	optionDictionary?: Option[];
 	enableBlankSelect?: boolean;
 	isOnlyText?: boolean;
 	siblings?: JSX.Element;
@@ -20,8 +25,8 @@ export default function CustomSelect({
 	title,
 	name,
 	defaultValue,
-	children,
-	childrenOption,
+	optionFetch,
+	optionDictionary,
 	enableBlankSelect,
 	isOnlyText,
 	siblings,
@@ -29,6 +34,7 @@ export default function CustomSelect({
 	...restAttribute
 }: PropsType) {
 	const [value, setValue] = useState(defaultValue);
+	const [_, setIsOptionFetched] = useState(false);
 
 	const handleChange = (value: string) => {
 		setValue(value);
@@ -67,13 +73,13 @@ export default function CustomSelect({
 										선택
 									</option>
 								)}
-								{childrenOption
-									? childrenOption.map((column, index) => (
-											<option key={index} value={column.value}>
-												{column.text}
-											</option>
-									  ))
-									: children}
+								{optionDictionary &&
+									optionDictionary.map((column, index) => (
+										<option key={index} value={column.value}>
+											{column.text}
+										</option>
+									))}
+								{optionFetch && <CustomOptionAfterFetch {...optionFetch} setIsOptionFetched={setIsOptionFetched} />}
 							</select>
 							{siblings && siblings}
 						</div>
@@ -82,4 +88,5 @@ export default function CustomSelect({
 			</div>
 		</>
 	);
+	// }
 }

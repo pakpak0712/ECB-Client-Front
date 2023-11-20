@@ -29,7 +29,7 @@ export default function DeviceList({
 }: PropsType) {
 	const tableData = useMemo(
 		() =>
-			data?.map((item, itemIndex) => {
+			data?.reverse().map((item, itemIndex) => {
 				return { ...item, no: pageMap?.startRow + itemIndex };
 			}),
 		[data],
@@ -37,7 +37,7 @@ export default function DeviceList({
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<DeviceListType>[] = [
-		{ name: 'NO', selector: (row) => row.no, sortable: true },
+		{ name: 'NO', selector: (row) => row.no },
 		{ name: '설치장소', selector: (row) => row['tcs_name'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['tcs_matchPhone'], sortable: true },
 		{ name: '라우터', selector: (row) => row['tcs_serial'], sortable: true },
