@@ -8,12 +8,12 @@ self.addEventListener('activate', function () {
 });
 
 self.addEventListener('push', function (e) {
-	//console.log('Push: ', e.data.json());
+	console.log('Push: ', e.data.json());
 	if (!e.data.json()) return;
 
-	const resultData = e.data.json().notification;
+	const resultData = e.data.json().data;
 	const notificationTitle = resultData.title;
-	const notificationOptions = { body: resultData.body };
+	const notificationOptions = { body: resultData.content };
 	console.log('Push 123: ', { resultData, notificationTitle, notificationOptions });
 
 	self.registration.showNotification(notificationTitle, notificationOptions);
