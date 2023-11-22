@@ -25,7 +25,9 @@ navigator.serviceWorker.register('/firebase-messaging-sw.js').then((swReg2) => {
 
 interface WebAppInterface {
 	closeApp(toast: string): never;
+	call(tel: string): never;
 }
+
 declare let android: WebAppInterface;
 
 const isMobile = /Mobi/i.test(window.navigator.userAgent);
@@ -74,6 +76,7 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 				});
 		} else {
 			//android.closeApp('앱을 다시 시작해주세요.');
+			//android.call('032-612-7227');
 			location.href = '/login?firebaseToken=' + memberToken;
 		}
 	}
