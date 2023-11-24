@@ -8,20 +8,21 @@ self.addEventListener('activate', function () {
 });
 
 self.addEventListener('push', function (e) {
-	console.log('Push: ', e.data.json());
 	if (!e.data.json()) return;
 
 	const resultData = e.data.json().data;
+	console.log('Message 1: ', resultData);
+	const channel = new BroadcastChannel('sw-message');
+	channel.postMessage(resultData);
+
 	const notificationTitle = resultData.title;
 	const notificationOptions = { body: resultData.content };
-	console.log('Push 123: ', { resultData, notificationTitle, notificationOptions });
-
 	self.registration.showNotification(notificationTitle, notificationOptions);
 });
 
 self.addEventListener('notificationclick', function (e) {
 	console.log('Notification Click');
 
-	e.notification.close();
 	//e.waitUntil(clients.openWindow('/'));
+	e.notification.close();
 });

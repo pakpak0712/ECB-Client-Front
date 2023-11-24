@@ -38,7 +38,8 @@
     "react-select": "^5.4.0",
     "react-tag-autocomplete": "^6.3.0",
     "recoil": "^0.7.7",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.10",
+    "worker-loader": "^3.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

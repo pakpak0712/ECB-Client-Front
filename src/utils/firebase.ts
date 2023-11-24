@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { Messaging, getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { getMessaging, getToken } from 'firebase/messaging';
 import { Dispatch, SetStateAction } from 'react';
 
 import { SecureStorage } from '@/plugin/crypto';
@@ -16,7 +16,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-let firebaseMessaging: Messaging;
+const firebaseMessaging = getMessaging(firebaseApp);
 
 navigator.serviceWorker.register('/firebase-messaging-sw.js').then((swReg2) => {
 	console.log('Firebase ServiceWorker Is Registered');
@@ -46,7 +46,6 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 	} else {
 		// WEB
 		if (!isMobile) {
-			firebaseMessaging = getMessaging(firebaseApp);
 			await Notification.requestPermission()
 				.then(async (permission) => {
 					if (permission === 'granted') {
@@ -62,10 +61,6 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 						} else {
 							console.log('토큰 획득에 실패함');
 						}
-
-						onMessage(firebaseMessaging, (payload) => {
-							console.log('메시지가 도착하였습니다.', payload);
-						});
 					} else {
 						console.log('알림 권한이 허용되지 않음');
 					}
