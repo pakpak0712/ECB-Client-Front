@@ -24,9 +24,7 @@ export default function Login() {
 		},
 		{
 			onSuccess: (data) => {
-				// ToDo:   data 안에 memberToken 이 들어가 있도록 처리할 수는 없나..?
 				if (data) {
-					if (memberToken) data.member_token = memberToken;
 					secureStorage.setItem('user-storage', data, 'user-storage');
 					navigate('/');
 				} else {
