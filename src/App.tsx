@@ -5,10 +5,14 @@ import { useRecoilState } from 'recoil';
 import Footer from '@/features/ui/layout/Footer';
 import Header from '@/features/ui/layout/Header';
 import Sidebar from '@/features/ui/sidebar/Sidebar';
+import { usePushAlarm } from '@/hooks/usePushAlarm';
 import { hookReceiver } from '@/plugin/hookReceiver';
 import { navbarToggleState } from '@/state/common';
 
 function App() {
+	const { fcm } = usePushAlarm();
+	fcm();
+
 	hookReceiver.navigate = useNavigate();
 	hookReceiver.location = useLocation();
 
@@ -17,6 +21,10 @@ function App() {
 	useEffect(() => {
 		setNavbarToggle('');
 	}, [hookReceiver.location]);
+
+	useEffect(() => {
+		fcm();
+	}, []);
 
 	return (
 		<div className={`app ${navbarToggle}`}>
