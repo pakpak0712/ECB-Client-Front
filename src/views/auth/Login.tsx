@@ -51,7 +51,7 @@ export default function Login() {
 
 			<div className="login-container" style={{ maxWidth: '400px' }}>
 				<div className="login-header">
-					<h1 className="login-title text-center">서울교통공사 비상벨통합관제시스템</h1>
+					<h1 className="login-title text-center">(주)세이프티랩 비상벨통합관제시스템</h1>
 				</div>
 				<div className="login-content">
 					<form onSubmit={handleLogin} className="login-form row">

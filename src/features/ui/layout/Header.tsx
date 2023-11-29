@@ -8,7 +8,7 @@ export default function Header() {
 	return (
 		<header id="header" className="app-header">
 			<Link to="/" className="app-header-title">
-				서울교통공사 비상벨통합관제시스템
+				(주)세이프티랩 비상벨통합관제시스템
 			</Link>
 
 			<div className="navbar-nav">
