@@ -6,21 +6,21 @@ export const menuConfig = [
 		title: '회원 관리',
 	},
 	{
-		memberFlag: '1,3',
+		memberFlag: '0,1,3',
 		path: '/device',
 		icon: 'fa-solid fa-pen-to-square',
-		title: '장비 관리',
+		title: '비상벨 관리',
 	},
 	{
-		memberFlag: '1,3',
+		memberFlag: '0,1,3',
 		path: '/statistics',
 		icon: 'fa-solid fa-chart-simple',
 		title: '통계',
 		subMenu: [
 			{
-				memberFlag: '1,3',
+				memberFlag: '0,1,3',
 				path: '/statistics/alert',
-				title: '알람 통계',
+				title: '알림 통계',
 			},
 			{
 				memberFlag: '1',

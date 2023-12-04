@@ -66,16 +66,16 @@ export default function AlertInfo() {
 	return (
 		<>
 			<div className="modal-header">
-				<h4 className="modal-title">알람 정보</h4>
+				<h4 className="modal-title">알림 정보</h4>
 			</div>
 			<div className="form-info form-info-vertical px-2" style={{ maxWidth: '900px', width: '90vw' }}>
 				<div className="modal-body">
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="알람장소" text={alertInfo.alertName} />
+							<CustomText title="알림장소" text={alertInfo.alertName} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="알람유형" text={alertInfo.alertType} />
+							<CustomText title="알림유형" text={alertInfo.alertType} />
 						</div>
 					</CustomRow>
 					<CustomRow>
@@ -93,7 +93,7 @@ export default function AlertInfo() {
 							<CustomText title="라우터" text={alertInfo.alertSerial} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="알람일시" text={alertInfo.alertDate} />
+							<CustomText title="알림일시" text={alertInfo.alertDate} />
 						</div>
 					</CustomRow>
 				</div>

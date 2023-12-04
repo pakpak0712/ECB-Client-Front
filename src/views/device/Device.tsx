@@ -72,10 +72,10 @@ export default function Device() {
 
 	return (
 		<div className="page">
-			<PageHeader title="장비 관리">
+			<PageHeader title="비상벨 관리">
 				<ButtonRefetch />
 			</PageHeader>
-			<PageBody title="장비 목록">
+			<PageBody title="비상벨 목록">
 				{memberFlag === 1 && (
 					<div className="d-flex justify-content-end">
 						<button type="button" className="btn btn-navy" onClick={handleRegisterationClick}>

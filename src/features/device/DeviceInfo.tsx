@@ -132,7 +132,7 @@ export default function DeviceInfo() {
 	return (
 		<>
 			<div className="modal-header">
-				<h4 className="modal-title">{`장비 ${id ? '정보 수정' : '신규 등록'}`}</h4>
+				<h4 className="modal-title">{`비상벨 ${id ? '정보 수정' : '신규 등록'}`}</h4>
 			</div>
 			<form
 				className="form-info form-info-vertical px-2"
@@ -143,7 +143,7 @@ export default function DeviceInfo() {
 					<CustomRow>
 						<div className="form-grid">
 							<CustomSelect
-								title="장비종류"
+								title="비상벨종류"
 								name="tcsDeviceType"
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
@@ -164,41 +164,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomSelect
 								required={true}
-								title="호선"
-								name="tcsSimpAddr-line"
-								defaultValue={viewList.line}
-								isOnlyText={memberFlag !== 1}
-								handleState={handleChangeViewList}
-								enableBlankSelect={true}
-								optionFetch={{
-									queryKey: [...lineStationQueryKey.lineList()],
-									dataKey: 'lineList',
-								}}
-								disabled={initialDeviceInfo.tcsSimpAddr ? true : false}
-							/>
-						</div>
-						<div className="form-grid">
-							<CustomSelect
-								required={true}
-								title="역"
-								name="tcsSimpAddr-station"
-								defaultValue={viewList.station}
-								isOnlyText={memberFlag !== 1}
-								handleState={handleChangeViewList}
-								enableBlankSelect={true}
-								optionFetch={{
-									queryKey: [...lineStationQueryKey.sttList(), stationParams],
-									dataKey: 'sttList',
-								}}
-								disabled={!viewList.line || (initialDeviceInfo.tcsSimpAddr ? true : false)}
-							/>
-						</div>
-					</CustomRow>
-					<CustomRow>
-						<div className="form-grid">
-							<CustomSelect
-								required={true}
-								title="장소"
+								title="설치주소"
 								name="tcsCompAddr"
 								defaultValue={deviceInfo.tcsCompAddr}
 								isOnlyText={memberFlag !== 1}
@@ -208,11 +174,18 @@ export default function DeviceInfo() {
 								disabled={!viewList.station}
 							/>
 						</div>
-						{id && (
-							<div className="form-grid">
-								<CustomText title="상세주소" text={deviceInfo.tcsSttCompAddr} />
-							</div>
-						)}
+						<div className="form-grid">
+							<CustomInput
+								required={true}
+								title="전화번호"
+								name="tcsMatchPhone"
+								defaultValue={deviceInfo.tcsMatchPhone}
+								isOnlyText={memberFlag !== 1}
+								handleState={handleChangeDeviceInfo}
+								handlePattern={formatOnlyPhoneNumber}
+								minLength={11}
+							/>
+						</div>
 					</CustomRow>
 					<CustomRow>
 						{memberFlag === 1 && (
@@ -240,18 +213,6 @@ export default function DeviceInfo() {
 								/>
 							</div>
 						)}
-						<div className="form-grid">
-							<CustomInput
-								required={true}
-								title="전화번호"
-								name="tcsMatchPhone"
-								defaultValue={deviceInfo.tcsMatchPhone}
-								isOnlyText={memberFlag !== 1}
-								handleState={handleChangeDeviceInfo}
-								handlePattern={formatOnlyPhoneNumber}
-								minLength={11}
-							/>
-						</div>
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">

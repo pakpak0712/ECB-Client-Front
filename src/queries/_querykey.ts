@@ -18,16 +18,16 @@ export const memberQueryKey = (() => {
 	};
 })();
 
-// 장비 쿼리키
+// 비상벨 쿼리키
 export const deviceQueryKey = (() => {
 	const endpoint = 'device';
 	return {
-		list: () => [endpoint, 'list'], // 장비 목록
-		detail: () => [endpoint, 'detail'], // 장비 상세
+		list: () => [endpoint, 'list'], // 비상벨 목록
+		detail: () => [endpoint, 'detail'], // 비상벨 상세
 		chkDup: () => [endpoint, 'chkMacDup'], // MAC 중복 확인
-		delete: () => [endpoint, 'delete'], // 장비 삭제
-		update: () => [endpoint, 'update'], // 장비 수정
-		insert: () => [endpoint, 'insert'], // 장비 등록
+		delete: () => [endpoint, 'delete'], // 비상벨 삭제
+		update: () => [endpoint, 'update'], // 비상벨 수정
+		insert: () => [endpoint, 'insert'], // 비상벨 등록
 	};
 })();
 
@@ -37,8 +37,8 @@ export const statisticsQueryKey = (() => {
 	const alert = 'alert';
 	const alive = 'alive';
 	return {
-		alertList: () => [endpoint, alert, 'list'], // 알람 목록
-		alertDetail: () => [endpoint, alert, 'detail'], // 알람 상세
+		alertList: () => [endpoint, alert, 'list'], // 알림 목록
+		alertDetail: () => [endpoint, alert, 'detail'], // 알림 상세
 		aliveList: () => [endpoint, alive, 'list'], // 고장 목록
 		aliveDetail: () => [endpoint, alive, 'detail'], // 고장 상세
 	};

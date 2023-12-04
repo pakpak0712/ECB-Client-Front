@@ -60,10 +60,10 @@ export default function Alert() {
 
 	return (
 		<div className="page">
-			<PageHeader title="알람 관리">
+			<PageHeader title="알림 관리">
 				<ButtonRefetch />
 			</PageHeader>
-			<PageBody title="알람 목록">
+			<PageBody title="알림 목록">
 				<AlertList {...listProps} />
 			</PageBody>
 			{isLoading && <LoadingFrame />}

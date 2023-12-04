@@ -1,4 +1,4 @@
-export const titleDic = [new Option('회원', 'member'), new Option('장비', 'tcs')];
+export const titleDic = [new Option('회원', 'member'), new Option('비상벨', 'tcs')];
 
 export const memberSearchTypeDic = [
 	new Option('아이디', 'member_id'),
@@ -20,8 +20,8 @@ export const compAddressDic = [
 ];
 
 export const alertSearchTypeDic = [
-	new Option('알람장소', 'alert_name'),
-	new Option('알람유형', 'alert_type'),
+	new Option('알림장소', 'alert_name'),
+	new Option('알림유형', 'alert_type'),
 	new Option('전화번호', 'alert_phone'),
 	new Option('라우터', 'alert_serial'),
 ];
