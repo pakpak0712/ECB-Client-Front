@@ -28,11 +28,15 @@
 			display: table-cell;
 			width: auto;
 			min-width: auto;
-			padding: 0.7692rem;
+			padding: 0;
 			text-align: center;
 			cursor: pointer;
 			&.sc-jJTsDX {
 				width: 2.6154rem;
+				padding: 0.7692rem;
+			}
+			> div {
+				padding: 0.7692rem;
 			}
 		}
 		.rdt_TableCol_Sortable {

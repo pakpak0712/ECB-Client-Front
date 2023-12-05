@@ -9,7 +9,7 @@ interface PrivateRouteProps {
 }
 
 export default function PrivateRoute({ authentication }: PrivateRouteProps): React.ReactElement | null {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const isAuthenticated = userInfo ? true : false;
 

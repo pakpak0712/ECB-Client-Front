@@ -12,7 +12,7 @@ declare let android: WebAppInterface;
 const isMobile = /Mobi/i.test(window.navigator.userAgent);
 
 export default function ExpirationTime() {
-	const userStorage = new SecureStorage(sessionStorage).getItem('user-storage', 'user-storage');
+	const userStorage = new SecureStorage(localStorage).getItem('user-storage', 'user-storage');
 	const { member_token: memberToken } = userStorage;
 
 	const expiredMinutes = 60; // 만료 시간 (분)
@@ -38,7 +38,7 @@ export default function ExpirationTime() {
 		if (remainingMinutes <= initialSeconds && remainingSeconds <= initialSeconds) {
 			clearTimeout(timer);
 			(() => {
-				sessionStorage.removeItem('user-storage');
+				localStorage.removeItem('user-storage');
 
 				if (!isMobile) {
 					location.reload();

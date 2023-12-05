@@ -7,7 +7,7 @@ import { SecureStorage } from '@/plugin/crypto';
 import { memberIdState } from '@/state/member';
 
 export default function Profile() {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const [_, setId] = useRecoilState(memberIdState);
 	const { openContentModal } = useContentsModal();

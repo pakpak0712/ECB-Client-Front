@@ -9,7 +9,7 @@ import { getLineStation } from '@/utils/common';
 
 export default function useViewList<T>(setStateAction: Dispatch<SetStateAction<T>>) {
 	const { id } = useParams();
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialViewList = getLineStation(userInfo && userInfo.member_viewlist ? userInfo.member_viewlist : '');
 	const [viewList, setViewList] = useState(initialViewList);

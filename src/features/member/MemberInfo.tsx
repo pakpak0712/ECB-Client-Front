@@ -26,7 +26,7 @@ import {
 } from '@/utils/stringUtils';
 
 export default function MemberInfo() {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialMemberInfo = {
 		memberId: '',

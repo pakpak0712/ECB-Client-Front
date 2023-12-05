@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
 
 		if (error?.response?.status === 401) {
 			if (hookReceiver.navigate) {
-				sessionStorage.removeItem('loginInfo');
+				localStorage.removeItem('loginInfo');
 				return hookReceiver?.navigate('/login');
 			}
 		}

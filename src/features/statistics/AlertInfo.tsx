@@ -11,7 +11,7 @@ import { postMutation } from '@/queries/_utils';
 import { alertIdState } from '@/state/alert';
 
 export default function AlertInfo() {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
 	const initialAlertInfo = {

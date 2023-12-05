@@ -5,6 +5,7 @@ import { deviceSearchTypeDic } from '@/constants/dictionary';
 import ListDataTable from '@/features/ui/list/ListDataTable';
 import Pagination from '@/features/ui/list/Pagination';
 import SearchCondition from '@/features/ui/list/SearchCondition';
+import useCall from '@/hooks/useCall';
 import { PageMapType, SearchParamsType } from '@/types/Common.types';
 import { DeviceListType } from '@/types/Device.types';
 
@@ -35,11 +36,26 @@ export default function DeviceList({
 		[data],
 	);
 
+	const { call, isMobile } = useCall();
+
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<DeviceListType>[] = [
 		{ name: 'NO', selector: (row) => row.no },
 		{ name: '설치장소', selector: (row) => row['tcs_name'], sortable: true },
-		{ name: '전화번호', selector: (row) => row['tcs_matchPhone'], sortable: true },
+		{
+			name: '전화번호',
+			cell: (row) => {
+				const phoneNumber = row['tcs_matchPhone'];
+				return isMobile ? (
+					<div onClick={() => call(phoneNumber)} style={{ cursor: 'pointer' }}>
+						{phoneNumber}
+					</div>
+				) : (
+					<>{phoneNumber}</>
+				);
+			},
+			sortable: true,
+		},
 		{ name: '라우터', selector: (row) => row['tcs_serial'], sortable: true },
 		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true },
 		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true },

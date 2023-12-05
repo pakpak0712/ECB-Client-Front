@@ -35,7 +35,7 @@ function NavItem({ menu, ...props }: { menu: any }) {
 }
 
 const SidebarNav = () => {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const menu = menuConfig.filter((menu) => {
 		const organizedMenu = menu.subMenu

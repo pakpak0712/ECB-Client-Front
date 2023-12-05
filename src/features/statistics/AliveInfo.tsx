@@ -22,7 +22,7 @@ const initialAliveInfo = {
 };
 
 export default function AliveInfo() {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
 	const id = useRecoilValue(aliveIdState);

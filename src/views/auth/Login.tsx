@@ -15,7 +15,7 @@ export default function Login() {
 	const navigate = useNavigate();
 	const { alertMessage } = useAlert();
 
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 
 	const loginMutation = useMutation(
 		() => {

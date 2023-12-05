@@ -18,7 +18,7 @@ import { MemberListType } from '@/types/Member.types';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 
 export default function Member() {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const initialParams = {
 		searchDTO: {

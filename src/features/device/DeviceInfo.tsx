@@ -22,7 +22,7 @@ import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 import { formatOnlyMacAddress, formatOnlyPhoneNumber } from '@/utils/stringUtils';
 
 export default function DeviceInfo() {
-	const secureStorage = new SecureStorage(sessionStorage);
+	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
 	const initialDeviceInfo = {

@@ -32,7 +32,7 @@ declare let android: WebAppInterface;
 
 const isMobile = /Mobi/i.test(window.navigator.userAgent);
 export async function requestPermission(setState: Dispatch<SetStateAction<string>>) {
-	const userStorage = new SecureStorage(sessionStorage).getItem('user-storage', 'user-storage');
+	const userStorage = new SecureStorage(localStorage).getItem('user-storage', 'user-storage');
 	const memberToken = getValueOrEmptyFromObject(userStorage, 'member_token');
 
 	const firebaseToken = new URLSearchParams(window.location.search).get('firebaseToken');
