@@ -2,7 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import PushModal from '@/features/push/PushModal';
 import { useAlert } from '@/hooks/useAlert';
+import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { commonQueryKey } from '@/queries/_querykey';
 import { postMutation } from '@/queries/_utils';
@@ -44,6 +46,14 @@ export default function Login() {
 	useEffect(() => {
 		requestPermission(setMemberToken);
 	}, []);
+
+	// 푸시 알림 모달 띄우기
+	const { openContentModal } = useContentsModal();
+	const bc = new BroadcastChannel('fcm');
+
+	bc.onmessage = function (e) {
+		openContentModal(<PushModal data={e} />);
+	};
 
 	return (
 		<div className="login">

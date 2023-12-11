@@ -23,7 +23,7 @@ export default function PushModal({ data }: Props) {
 			<div
 				className="form-info form-info-vertical px-2"
 				style={{ maxWidth: '600px', width: '90vw' }}
-				onClick={() => goAlertLink()}
+				//onClick={() => goAlertLink()}
 			>
 				<div className="modal-body">
 					<CustomRow>
