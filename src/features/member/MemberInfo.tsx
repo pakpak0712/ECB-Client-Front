@@ -203,8 +203,8 @@ export default function MemberInfo() {
 									</button>
 								}
 								isOnlyText={id ? true : false}
-								minLength={5}
-								maxLength={20}
+								pattern=".{5,20}"
+								title="5자 이상, 20자 이하를 입력해주세요"
 								readOnly={isDuplicateChecked}
 							/>
 						</div>
@@ -215,8 +215,8 @@ export default function MemberInfo() {
 								name="memberName"
 								defaultValue={memberInfo.memberName}
 								handleState={handleMemberInfoChange}
-								minLength={5}
-								maxLength={20}
+								pattern=".{5,20}"
+								title="5자 이상, 20자 이하를 입력해주세요"
 							/>
 						</div>
 					</CustomRow>
@@ -243,8 +243,8 @@ export default function MemberInfo() {
 										handlePattern={formatOnlyNumberEnglish}
 										// handleValid={validatePasswordMatch(savedMemberInfo.memberPw)}
 										handleValid={validatePasswordMatch(memberInfo.memberPw)}
-										minLength={8}
-										maxLength={20}
+										pattern=".{8,20}"
+										title="8자 이상, 20자 이하를 입력해주세요"
 										readOnly={
 											validatePasswordMatch(memberInfo.memberPw)(passwordChangeInfo.originalMemberPw) ? false : true
 										}
@@ -264,8 +264,8 @@ export default function MemberInfo() {
 									defaultValue=""
 									handleState={handleMemberInfoChange}
 									handlePattern={formatOnlyNumberEnglish}
-									minLength={8}
-									maxLength={20}
+									pattern=".{8,20}"
+									title="8자 이상, 20자 이하를 입력해주세요"
 									type="password"
 								/>
 							</div>
@@ -278,8 +278,8 @@ export default function MemberInfo() {
 									handleState={handleChangePassword}
 									handlePattern={formatOnlyNumberEnglish}
 									handleValid={validatePasswordMatch(memberInfo.memberPw)}
-									minLength={8}
-									maxLength={20}
+									pattern=".{8,20}"
+									title="8자 이상, 20자 이하를 입력해주세요"
 									type="password"
 								/>
 							</div>

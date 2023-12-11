@@ -208,7 +208,8 @@ export default function DeviceInfo() {
 											중복 확인
 										</button>
 									}
-									minLength={17}
+									pattern=".{17,17}"
+									title="12자리를 입력해주세요"
 									// readOnly={isDuplicateChecked}
 								/>
 							</div>
@@ -224,7 +225,8 @@ export default function DeviceInfo() {
 								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
 								handlePattern={formatOnlyPhoneNumber}
-								minLength={11}
+								pattern=".{11,}"
+								title="9자 이상을 입력해주세요"
 							/>
 						</div>
 						<div className="form-grid">
@@ -234,7 +236,8 @@ export default function DeviceInfo() {
 								defaultValue={deviceInfo.tcsMemo}
 								isOnlyText={memberFlag !== 1}
 								handleState={handleChangeDeviceInfo}
-								maxLength={30}
+								pattern=".{0,30}"
+								title="30자 이하를 입력해주세요"
 							/>
 						</div>
 					</CustomRow>
