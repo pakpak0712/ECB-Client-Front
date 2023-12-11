@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react';
 
 interface PropsType extends ComponentPropsWithoutRef<'input'> {
 	isisRequired?: boolean;
-	title?: string;
+	labelTitle?: string;
 	name: string;
 	defaultValue?: string;
 	placeholder?: string;
@@ -15,7 +15,7 @@ interface PropsType extends ComponentPropsWithoutRef<'input'> {
 
 export default function CustomInput({
 	isisRequired = false,
-	title,
+	labelTitle,
 	name,
 	defaultValue = '\u00A0',
 	isOnlyText,
@@ -55,9 +55,9 @@ export default function CustomInput({
 	return (
 		<>
 			<div className="form-content">
-				{title && (
+				{labelTitle && (
 					<div className="col-form-label">
-						{title}
+						{labelTitle}
 						{isisRequired && <span className="isRequired">&nbsp;*</span>}
 					</div>
 				)}

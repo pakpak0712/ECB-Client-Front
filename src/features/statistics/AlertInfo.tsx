@@ -72,28 +72,28 @@ export default function AlertInfo() {
 				<div className="modal-body">
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="알림장소" text={alertInfo.alertName} />
+							<CustomText labelTitle="알림장소" text={alertInfo.alertName} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="알림유형" text={alertInfo.alertType} />
+							<CustomText labelTitle="알림유형" text={alertInfo.alertType} />
 						</div>
 					</CustomRow>
 					<CustomRow>
 						{memberFlag === 1 && (
 							<div className="form-grid">
-								<CustomText title="MAC" text={alertInfo.alertMac} />
+								<CustomText labelTitle="MAC" text={alertInfo.alertMac} />
 							</div>
 						)}
 						<div className="form-grid">
-							<CustomText title="전화번호" text={alertInfo.alertPhone} />
+							<CustomText labelTitle="전화번호" text={alertInfo.alertPhone} />
 						</div>
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="라우터" text={alertInfo.alertSerial} />
+							<CustomText labelTitle="라우터" text={alertInfo.alertSerial} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="알림일시" text={alertInfo.alertDate} />
+							<CustomText labelTitle="알림일시" text={alertInfo.alertDate} />
 						</div>
 					</CustomRow>
 				</div>

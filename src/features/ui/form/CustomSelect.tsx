@@ -5,7 +5,7 @@ import CustomOptionAfterFetch from '@/features/ui/form/CustomOptionAfterFetch';
 
 interface PropsType extends ComponentPropsWithoutRef<'select'> {
 	isRequired?: boolean;
-	title?: string;
+	labelTitle?: string;
 	name?: string;
 	defaultValue?: string | number | undefined;
 	optionFetch?: {
@@ -22,7 +22,7 @@ interface PropsType extends ComponentPropsWithoutRef<'select'> {
 
 export default function CustomSelect({
 	isRequired,
-	title,
+	labelTitle,
 	name,
 	defaultValue,
 	optionFetch,
@@ -50,9 +50,9 @@ export default function CustomSelect({
 	return (
 		<>
 			<div className="form-content">
-				{title && (
+				{labelTitle && (
 					<div className="col-form-label">
-						{title}
+						{labelTitle}
 						{isRequired && <span className="required">&nbsp;*</span>}
 					</div>
 				)}

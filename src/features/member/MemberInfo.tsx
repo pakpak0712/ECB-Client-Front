@@ -187,7 +187,7 @@ export default function MemberInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								title="아이디"
+								labelTitle="아이디"
 								name="memberId"
 								defaultValue={memberInfo.memberId}
 								handlePattern={formatOnlyNumberEnglish}
@@ -211,7 +211,7 @@ export default function MemberInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								title="이름"
+								labelTitle="이름"
 								name="memberName"
 								defaultValue={memberInfo.memberName}
 								handleState={handleMemberInfoChange}
@@ -223,7 +223,7 @@ export default function MemberInfo() {
 					{(isModifyMember || isModifyUser) && (
 						<CustomRow>
 							<div className="form-grid">
-								<CustomChildren isRequired={true} title="비밀번호">
+								<CustomChildren isRequired={true} labelTitle="비밀번호">
 									<button
 										type="button"
 										className="btn btn-default"
@@ -237,7 +237,7 @@ export default function MemberInfo() {
 								<div className="form-grid">
 									<CustomInput
 										required={true}
-										title={`${isModifyUser ? '기존' : ''} 비밀번호`}
+										labelTitle={`${isModifyUser ? '기존' : ''} 비밀번호`}
 										name="originalMemberPw"
 										handleState={handleChangePassword}
 										handlePattern={formatOnlyNumberEnglish}
@@ -259,7 +259,7 @@ export default function MemberInfo() {
 							<div className="form-grid">
 								<CustomInput
 									required={true}
-									title={`${isModify ? '신규' : ''} 비밀번호`}
+									labelTitle={`${isModify ? '신규' : ''} 비밀번호`}
 									name="memberPw"
 									defaultValue=""
 									handleState={handleMemberInfoChange}
@@ -272,7 +272,7 @@ export default function MemberInfo() {
 							<div className="form-grid">
 								<CustomInput
 									required={true}
-									title={`${isModify ? '신규' : ''} 비밀번호 확인`}
+									labelTitle={`${isModify ? '신규' : ''} 비밀번호 확인`}
 									name="confirmMemberPw"
 									defaultValue={passwordChangeInfo.confirmMemberPw}
 									handleState={handleChangePassword}
@@ -289,7 +289,7 @@ export default function MemberInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								title="전화번호"
+								labelTitle="전화번호"
 								name="memberPhone"
 								defaultValue={memberInfo.memberPhone}
 								handleState={handleMemberInfoChange}
@@ -299,7 +299,7 @@ export default function MemberInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								title="이메일"
+								labelTitle="이메일"
 								name="memberEmail"
 								defaultValue={memberInfo.memberEmail}
 								handleState={handleMemberInfoChange}
@@ -314,7 +314,7 @@ export default function MemberInfo() {
 							{viewList.line === '전체' ? (
 								<CustomRow>
 									<div className="form-grid">
-										<CustomText title="호선/역" text="전체" />
+										<CustomText labelTitle="호선/역" text="전체" />
 									</div>
 								</CustomRow>
 							) : (
@@ -322,7 +322,7 @@ export default function MemberInfo() {
 									<div className="form-grid">
 										<CustomSelect
 											required={true}
-											title="호선"
+											labelTitle="호선"
 											name="memberViewlist-line"
 											defaultValue={viewList.line}
 											handleState={handleChangeViewList}
@@ -336,7 +336,7 @@ export default function MemberInfo() {
 									<div className="form-grid">
 										<CustomSelect
 											required={true}
-											title="역"
+											labelTitle="역"
 											name="memberViewlist-station"
 											defaultValue={viewList.station}
 											handleState={handleChangeViewList}

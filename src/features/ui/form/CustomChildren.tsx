@@ -2,18 +2,18 @@ import { ReactNode } from 'react';
 
 interface PropsType {
 	isRequired?: boolean;
-	title: string;
+	labelTitle: string;
 	siblings?: JSX.Element;
 	children?: ReactNode;
 }
 
-export default function CustomChildren({ isRequired = false, title, children, siblings }: PropsType) {
+export default function CustomChildren({ isRequired = false, labelTitle, children, siblings }: PropsType) {
 	return (
 		<>
 			<div className="form-content">
-				{title && (
+				{labelTitle && (
 					<div className="col-form-label">
-						{title}
+						{labelTitle}
 						{isRequired && <span className="required">&nbsp;*</span>}
 					</div>
 				)}

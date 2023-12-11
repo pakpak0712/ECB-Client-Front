@@ -35,7 +35,7 @@ export const formatOnlyMacAddress = (originValue: string | number): string => {
 	const replacedCharacter = replaceCharacterRegEx(originValue, /[^0-9a-zA-z]/g).toUpperCase();
 	const slicedString = replacedCharacter.substr(0, 12);
 	// eslint-disable-next-line
-	return slicedString.replace(/(\w{2})(?=\w)/g, '$1:')
+	return slicedString.replace(/(\w{2})(?=\w)/g, '$1:');
 };
 
 /**

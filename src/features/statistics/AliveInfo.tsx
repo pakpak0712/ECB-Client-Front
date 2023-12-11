@@ -71,25 +71,25 @@ export default function AliveInfo() {
 				<div className="modal-body">
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="고장장소" text={aliveInfo.aliveName} />
+							<CustomText labelTitle="고장장소" text={aliveInfo.aliveName} />
 						</div>
 						{memberFlag === 1 && (
 							<div className="form-grid">
-								<CustomText title="MAC" text={aliveInfo.aliveMac} />
+								<CustomText labelTitle="MAC" text={aliveInfo.aliveMac} />
 							</div>
 						)}
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="전화번호" text={aliveInfo.alivePhone} />
+							<CustomText labelTitle="전화번호" text={aliveInfo.alivePhone} />
 						</div>
 						<div className="form-grid">
-							<CustomText title="라우터" text={aliveInfo.aliveSerial} />
+							<CustomText labelTitle="라우터" text={aliveInfo.aliveSerial} />
 						</div>
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText title="고장일시" text={aliveInfo.aliveDate} />
+							<CustomText labelTitle="고장일시" text={aliveInfo.aliveDate} />
 						</div>
 					</CustomRow>
 				</div>

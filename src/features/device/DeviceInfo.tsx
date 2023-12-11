@@ -143,7 +143,7 @@ export default function DeviceInfo() {
 					<CustomRow>
 						<div className="form-grid">
 							<CustomSelect
-								title="비상벨종류"
+								labelTitle="비상벨종류"
 								name="tcsDeviceType"
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
@@ -153,7 +153,7 @@ export default function DeviceInfo() {
 						</div>
 						<div className="form-grid">
 							<CustomText
-								title="설치장소"
+								labelTitle="설치장소"
 								name="tcsName"
 								text={`${deviceInfo.tcsSimpAddr} ${deviceInfo.tcsCompAddr}`}
 								handleState={handleChangeDeviceInfo}
@@ -164,7 +164,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomSelect
 								required={true}
-								title="설치주소"
+								labelTitle="설치주소"
 								name="tcsCompAddr"
 								defaultValue={deviceInfo.tcsCompAddr}
 								isOnlyText={memberFlag !== 1}
@@ -177,7 +177,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								title="전화번호"
+								labelTitle="전화번호"
 								name="tcsMatchPhone"
 								defaultValue={deviceInfo.tcsMatchPhone}
 								isOnlyText={memberFlag !== 1}
@@ -192,7 +192,7 @@ export default function DeviceInfo() {
 							<div className="form-grid">
 								<CustomInput
 									required={true}
-									title="MAC"
+									labelTitle="MAC"
 									name="tcsMac"
 									defaultValue={deviceInfo.tcsMac}
 									isOnlyText={memberFlag !== 1}
@@ -218,7 +218,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								title="라우터"
+								labelTitle="라우터"
 								name="tcsSerial"
 								defaultValue={deviceInfo.tcsSerial}
 								isOnlyText={memberFlag !== 1}
@@ -229,7 +229,7 @@ export default function DeviceInfo() {
 						</div>
 						<div className="form-grid">
 							<CustomInput
-								title="메모"
+								labelTitle="메모"
 								name="tcsMemo"
 								defaultValue={deviceInfo.tcsMemo}
 								isOnlyText={memberFlag !== 1}
