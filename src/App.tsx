@@ -2,17 +2,15 @@ import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
+import PushModal from '@/features/push/PushModal';
 import Footer from '@/features/ui/layout/Footer';
 import Header from '@/features/ui/layout/Header';
 import Sidebar from '@/features/ui/sidebar/Sidebar';
-import { usePushAlarm } from '@/hooks/usePushAlarm';
+import { useContentsModal } from '@/hooks/useContentsModal';
 import { hookReceiver } from '@/plugin/hookReceiver';
 import { navbarToggleState } from '@/state/common';
 
 function App() {
-	const { fcm } = usePushAlarm();
-	fcm();
-
 	hookReceiver.navigate = useNavigate();
 	hookReceiver.location = useLocation();
 
@@ -22,9 +20,13 @@ function App() {
 		setNavbarToggle('');
 	}, [hookReceiver.location]);
 
-	useEffect(() => {
-		fcm();
-	}, []);
+	// 푸시 알림 모달 띄우기
+	const { openContentModal } = useContentsModal();
+	const bc = new BroadcastChannel('fcm');
+
+	bc.onmessage = function (e) {
+		openContentModal(<PushModal data={e} />);
+	};
 
 	return (
 		<div className={`app ${navbarToggle}`}>

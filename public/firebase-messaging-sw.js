@@ -14,11 +14,11 @@ self.addEventListener('push', function (e) {
 	const bc = new BroadcastChannel('fcm');
 
 	const resultData = e.data.json().data;
-	console.log('Message 1: ', resultData);
+	//console.log('Message 1: ', resultData);
 
 	const notificationTitle = resultData.title;
 	const notificationOptions = { body: resultData.content };
-	e.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions));
+	//e.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions));
 
 	bc.postMessage(resultData);
 	bc.close();

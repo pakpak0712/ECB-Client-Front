@@ -23,5 +23,9 @@ export const useContentsModal = () => {
 		});
 	};
 
-	return { modalDataState, openContentModal, closeContentModal };
+	const goAlertLink = () => {
+		location.href = '/statistics/alert';
+	};
+
+	return { modalDataState, openContentModal, closeContentModal, goAlertLink };
 };
