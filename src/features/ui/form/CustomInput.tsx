@@ -1,6 +1,7 @@
-import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react';
+import { ComponentPropsWithoutRef, MutableRefObject, RefObject, useEffect, useRef, useState } from 'react';
 
 interface PropsType extends ComponentPropsWithoutRef<'input'> {
+	_ref?: RefObject<HTMLInputElement>;
 	isisRequired?: boolean;
 	labelTitle?: string;
 	name: string;
@@ -14,6 +15,7 @@ interface PropsType extends ComponentPropsWithoutRef<'input'> {
 }
 
 export default function CustomInput({
+	_ref,
 	isisRequired = false,
 	labelTitle,
 	name,
@@ -25,7 +27,8 @@ export default function CustomInput({
 	handleValid,
 	...restAttribute
 }: PropsType) {
-	const inputRef = useRef<HTMLInputElement>(null);
+	const ref = useRef<HTMLInputElement>(null);
+	const inputRef = _ref || ref;
 	const [value, setValue] = useState<string>(defaultValue);
 	const [error, setError] = useState<string>();
 

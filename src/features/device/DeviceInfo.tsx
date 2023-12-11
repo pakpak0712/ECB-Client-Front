@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { compAddressDic, deviceTypeDic } from '@/constants/dictionary';
@@ -40,6 +40,7 @@ export default function DeviceInfo() {
 	};
 
 	const id = useRecoilValue(deviceIdState);
+
 	const { closeContentModal } = useContentsModal();
 
 	const [deviceInfo, setDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
@@ -69,12 +70,14 @@ export default function DeviceInfo() {
 	});
 
 	// 중복 체크
+	const inputMacRef = useRef<HTMLInputElement>(null);
+	const isSameTcsMac = !!deviceInfo['tcsMac'].trim() && savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac'];
 	const { isDuplicateChecked, handleDuplicateCheck } = useDuplicateCheck(
 		deviceQueryKey.chkDup(),
 		{ tcsMac: deviceInfo.tcsMac },
 		'MAC 주소',
 		'deviceMac',
-		!!deviceInfo['tcsMac'].trim() && savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac'],
+		isSameTcsMac,
 	);
 
 	// 등록/수정
@@ -191,6 +194,7 @@ export default function DeviceInfo() {
 						{memberFlag === 1 && (
 							<div className="form-grid">
 								<CustomInput
+									_ref={inputMacRef}
 									required={true}
 									labelTitle="MAC"
 									name="tcsMac"
@@ -202,15 +206,18 @@ export default function DeviceInfo() {
 										<button
 											type="button"
 											className="btn btn-default"
-											onClick={() => handleDuplicateCheck(deviceInfo.tcsMac)}
-											disabled={savedDeviceInfo['tcsMac'] === deviceInfo['tcsMac']}
+											onClick={() => {
+												if (inputMacRef.current?.checkValidity()) handleDuplicateCheck(deviceInfo.tcsMac);
+												else inputMacRef.current?.reportValidity();
+											}}
+											disabled={isSameTcsMac}
 										>
 											중복 확인
 										</button>
 									}
 									pattern=".{17,17}"
 									title="12자리를 입력해주세요"
-									// readOnly={isDuplicateChecked}
+									readOnly={!isSameTcsMac && isDuplicateChecked}
 								/>
 							</div>
 						)}

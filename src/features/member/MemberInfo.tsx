@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import CustomChildren from '@/features/ui/form/CustomChildren';
@@ -85,12 +85,14 @@ export default function MemberInfo() {
 	});
 
 	// 중복 체크
+	const inputMemberIdRef = useRef<HTMLInputElement>(null);
+	const isSameMemberId = !!memberInfo['memberId'].trim() && savedMemberInfo['memberId'] === memberInfo['memberId'];
 	const { isDuplicateChecked, handleDuplicateCheck } = useDuplicateCheck(
 		memberQueryKey.chkDup(),
 		{ memberId: memberInfo.memberId },
 		'아이디',
 		'memberId',
-		!!memberInfo['memberId'].trim() && savedMemberInfo['memberId'] === memberInfo['memberId'],
+		isSameMemberId,
 	);
 
 	const queryKey = isModify ? 'update' : 'insert';
@@ -186,6 +188,7 @@ export default function MemberInfo() {
 					<CustomRow>
 						<div className="form-grid">
 							<CustomInput
+								_ref={inputMemberIdRef}
 								required={true}
 								labelTitle="아이디"
 								name="memberId"
@@ -196,8 +199,12 @@ export default function MemberInfo() {
 									<button
 										type="button"
 										className="btn btn-default"
-										onClick={() => handleDuplicateCheck(memberInfo.memberId)}
-										disabled={savedMemberInfo['memberId'] === memberInfo['memberId']}
+										onClick={() => {
+											console.log(inputMemberIdRef.current?.checkValidity());
+											if (inputMemberIdRef.current?.checkValidity()) handleDuplicateCheck(memberInfo.memberId);
+											else inputMemberIdRef.current?.reportValidity();
+										}}
+										disabled={isSameMemberId}
 									>
 										중복 확인
 									</button>
