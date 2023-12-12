@@ -8,9 +8,9 @@ export const memberSearchTypeDic = [
 ];
 
 export const deviceSearchTypeDic = [
-	new Option('설치장소', 'tcs_name'),
-	new Option('전화번호', 'tcs_matchPhone'),
+	new Option('발주처(거래처)', 'tcs_name'),
 	new Option('라우터', 'tcs_serial'),
+	new Option('전화번호', 'tcs_matchPhone'),
 ];
 export const deviceTypeDic = [new Option('ECB-ST20VK', 'ECB-ST20VK'), new Option('ECB-ST20T', 'ECB-ST20T')];
 export const compAddressDic = [
@@ -22,11 +22,11 @@ export const compAddressDic = [
 export const alertSearchTypeDic = [
 	new Option('알림장소', 'alert_name'),
 	new Option('알림유형', 'alert_type'),
-	new Option('전화번호', 'alert_phone'),
 	new Option('라우터', 'alert_serial'),
+	new Option('전화번호', 'alert_phone'),
 ];
 export const aliveSearchTypeDic = [
 	new Option('고장장소', 'alive_name'),
-	new Option('전화번호', 'alive_phone'),
 	new Option('라우터', 'alive_serial'),
+	new Option('전화번호', 'alive_phone'),
 ];

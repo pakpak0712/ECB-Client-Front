@@ -85,12 +85,12 @@ export default function AlertInfo() {
 							</div>
 						)}
 						<div className="form-grid">
-							<CustomText labelTitle="전화번호" text={alertInfo.alertPhone} />
+							<CustomText labelTitle="라우터" text={alertInfo.alertSerial} />
 						</div>
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText labelTitle="라우터" text={alertInfo.alertSerial} />
+							<CustomText labelTitle="전화번호" text={alertInfo.alertPhone} />
 						</div>
 						<div className="form-grid">
 							<CustomText labelTitle="알림일시" text={alertInfo.alertDate} />

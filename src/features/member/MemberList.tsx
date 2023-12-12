@@ -29,7 +29,7 @@ export default function MemberList({
 }: PropsType) {
 	const tableData = useMemo(
 		() =>
-			data?.reverse().map((item, itemIndex) => {
+			data?.map((item, itemIndex) => {
 				return { ...item, no: pageMap?.startRow + itemIndex };
 			}),
 		[data, params],
@@ -37,12 +37,12 @@ export default function MemberList({
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<MemberListType>[] = [
-		{ name: 'NO', selector: (row) => row['no'] },
+		{ name: '순번', selector: (row) => row['no'] },
 		{ name: '아이디', selector: (row) => row['member_id'], sortable: true },
 		{ name: '이름', selector: (row) => row['member_name'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['member_phone'], sortable: true },
 		{ name: '이메일', selector: (row) => row['member_email'], sortable: true },
-		{ name: '관리역', selector: (row) => row['member_viewlist'], sortable: true },
+		{ name: '관리장소', selector: (row) => row['member_viewlist'], sortable: true },
 	];
 
 	const paginationProps = {

@@ -75,7 +75,7 @@ export default function MemberInfo() {
 				memberName: data.member_name,
 				memberPhone: data.member_phone,
 				memberEmail: data.member_email,
-				memberViewlist: data.member_viewList,
+				memberViewlist: data.member_viewlist,
 				memberFlag: data.member_flag,
 			};
 			setViewList(getLineStation(data.member_viewlist));
@@ -114,7 +114,7 @@ export default function MemberInfo() {
 		confirmMemberPw: '입력하신 비밀번호',
 		memberPhone: '전화번호',
 		memberEmail: '이메일',
-		memberViewlist: ['호선', '역'],
+		memberViewlist: '관리장소',
 	};
 	const requiredValueCheck = useRequiredValueCheck(
 		{ ...memberInfo, ...passwordChangeInfo },
@@ -316,47 +316,18 @@ export default function MemberInfo() {
 					</CustomRow>
 					{userInfo.member_flag === 1 && (isRegister || isModifyMember) && (
 						<>
-							<div className="info-title">관리역 정보</div>
-
-							{viewList.line === '전체' ? (
-								<CustomRow>
-									<div className="form-grid">
-										<CustomText labelTitle="호선/역" text="전체" />
-									</div>
-								</CustomRow>
-							) : (
-								<CustomRow>
-									<div className="form-grid">
-										<CustomSelect
-											required={true}
-											labelTitle="호선"
-											name="memberViewlist-line"
-											defaultValue={viewList.line}
-											handleState={handleChangeViewList}
-											enableBlankSelect={true}
-											optionFetch={{
-												queryKey: [...lineStationQueryKey.lineList()],
-												dataKey: 'lineList',
-											}}
-										/>
-									</div>
-									<div className="form-grid">
-										<CustomSelect
-											required={true}
-											labelTitle="역"
-											name="memberViewlist-station"
-											defaultValue={viewList.station}
-											handleState={handleChangeViewList}
-											enableBlankSelect={true}
-											disabled={!viewList.line}
-											optionFetch={{
-												queryKey: [...lineStationQueryKey.sttList(), stationParams],
-												dataKey: 'sttList',
-											}}
-										/>
-									</div>
-								</CustomRow>
-							)}
+							<div className="info-title">중요 정보</div>
+							<CustomRow>
+								<div className="form-grid">
+									<CustomInput
+										required={true}
+										labelTitle="관리장소"
+										name="memberViewlist"
+										defaultValue={memberInfo.memberViewlist}
+										handleState={handleMemberInfoChange}
+									/>
+								</div>
+							</CustomRow>
 						</>
 					)}
 				</div>

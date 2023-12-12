@@ -30,7 +30,7 @@ export default function DeviceList({
 }: PropsType) {
 	const tableData = useMemo(
 		() =>
-			data?.reverse().map((item, itemIndex) => {
+			data?.map((item, itemIndex) => {
 				return { ...item, no: pageMap?.startRow + itemIndex };
 			}),
 		[data],
@@ -38,10 +38,16 @@ export default function DeviceList({
 
 	const { call, isMobile } = useCall();
 
-	/** 목록 테이블의 열을 구성하기 위한 데이터 */
+	/** 목록 테이블의 열을 구성하기 위한 데이터  **/
 	const columns: TableColumn<DeviceListType>[] = [
-		{ name: 'NO', selector: (row) => row.no },
-		{ name: '설치장소', selector: (row) => row['tcs_name'], sortable: true },
+		{ name: '순번', selector: (row) => row.no },
+		{ name: '모델', selector: (row) => row['tcs_deviceType'], sortable: true },
+		{ name: '발주처(거래처)', selector: (row) => row['tcs_name'], sortable: true },
+		{ name: '설치장소', selector: (row) => row['tcs_simpAddr'], sortable: true },
+		{ name: '설치주소', selector: (row) => row['tcs_compAddr'], sortable: true },
+		{ name: '세부설치위치', selector: (row) => row['tcs_moreAddr'], sortable: true },
+		{ name: '설치수량(S)', selector: (row) => row['tcs_num'], sortable: true },
+		{ name: '라우터번호', selector: (row) => row['tcs_serial'], sortable: true },
 		{
 			name: '전화번호',
 			cell: (row) => {
@@ -56,10 +62,9 @@ export default function DeviceList({
 			},
 			sortable: true,
 		},
-		{ name: '라우터', selector: (row) => row['tcs_serial'], sortable: true },
 		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true },
 		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true },
-		{ name: '메모', selector: (row) => row['tcs_memo'], sortable: true },
+		{ name: '비고', selector: (row) => row['tcs_memo'], sortable: true },
 	];
 
 	const decodingFlag = (flag: string | number): string => {

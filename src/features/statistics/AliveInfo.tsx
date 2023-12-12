@@ -81,10 +81,10 @@ export default function AliveInfo() {
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText labelTitle="전화번호" text={aliveInfo.alivePhone} />
+							<CustomText labelTitle="라우터" text={aliveInfo.aliveSerial} />
 						</div>
 						<div className="form-grid">
-							<CustomText labelTitle="라우터" text={aliveInfo.aliveSerial} />
+							<CustomText labelTitle="전화번호" text={aliveInfo.alivePhone} />
 						</div>
 					</CustomRow>
 					<CustomRow>
