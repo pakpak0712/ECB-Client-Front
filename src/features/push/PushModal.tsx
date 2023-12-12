@@ -28,10 +28,10 @@ export default function PushModal({ data }: Props) {
 				<div className="modal-body">
 					<CustomRow>
 						<div className="form-grid">
-							<CustomText labelTitle="장소" text={data.data.alertName} />
+							<CustomText labelTitle="알림장소" text={data.data.alertName} />
 						</div>
 						<div className="form-grid">
-							<CustomText labelTitle="알람" text={data.data.alertType} />
+							<CustomText labelTitle="알림유형" text={data.data.alertType} />
 						</div>
 					</CustomRow>
 					<CustomRow>
@@ -39,7 +39,7 @@ export default function PushModal({ data }: Props) {
 							<CustomText labelTitle="전화번호" text={data.data.alertPhone} />
 						</div>
 						<div className="form-grid">
-							<CustomText labelTitle="일시" text={data.data.alertDate} />
+							<CustomText labelTitle="알림일시" text={data.data.alertDate} />
 						</div>
 					</CustomRow>
 				</div>
