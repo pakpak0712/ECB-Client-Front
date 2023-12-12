@@ -19,7 +19,7 @@ export default function Profile() {
 	};
 
 	const handleLogout = async () => {
-		if (await confirmMessage('정말 로그아웃하실건가요?')) {
+		if (await confirmMessage('정말로 로그아웃을 하시겠습니까?')) {
 			secureStorage.removeItem('user-storage');
 			window.location.reload();
 		}

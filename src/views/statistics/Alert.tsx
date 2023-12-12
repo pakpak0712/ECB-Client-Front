@@ -60,7 +60,7 @@ export default function Alert() {
 
 	return (
 		<div className="page">
-			<PageHeader title="알림 관리">
+			<PageHeader title="알림 통계">
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="알림 목록">

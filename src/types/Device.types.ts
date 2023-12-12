@@ -23,7 +23,8 @@ export interface DeviceInfoDataType {
 	tcsMatchPhone: string;
 	tcsSimpAddr: string;
 	tcsCompAddr: string;
-	tcsSttCompAddr: string;
+	tcsMoreAddr: string;
+	tcsNum: string;
 	tcsMac: string;
 	tcsSerial: string;
 	tcsMemo: string;

@@ -32,7 +32,8 @@ export default function DeviceInfo() {
 		tcsMatchPhone: '',
 		tcsSimpAddr: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),
 		tcsCompAddr: ' ',
-		tcsSttCompAddr: '',
+		tcsMoreAddr: '',
+		tcsNum: '',
 		tcsMac: '',
 		tcsSerial: '',
 		tcsMemo: '',
@@ -58,7 +59,8 @@ export default function DeviceInfo() {
 				tcsMatchPhone: data.tcs_matchPhone,
 				tcsSimpAddr: data.tcs_simpAddr,
 				tcsCompAddr: data.tcs_compAddr?.trim(),
-				tcsSttCompAddr: data.tcs_stt_compAddr,
+				tcsMoreAddr: data.tcs_moreAddr,
+				tcsNum: data.tcs_num,
 				tcsMac: data.tcs_mac,
 				tcsSerial: data.tcs_serial,
 				tcsMemo: data.tcs_memo,
@@ -97,7 +99,7 @@ export default function DeviceInfo() {
 		tcsCompAddr: ['장소'],
 		tcsMac: 'MAC',
 		tcsMatchPhone: '전화번호',
-		tcsSerial: '라우트',
+		tcsSerial: '라우터',
 	};
 	const requiredValueCheck = useRequiredValueCheck(deviceInfo, requiredDeviceInfo);
 	const handleSubmit = (event: any) => {
@@ -151,42 +153,50 @@ export default function DeviceInfo() {
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
 								optionDictionary={deviceTypeDic}
-								isOnlyText={true}
 							/>
 						</div>
 						<div className="form-grid">
-							<CustomText
-								labelTitle="설치장소"
+							<CustomInput
+								labelTitle="발주처(거래처)"
 								name="tcsName"
-								text={`${deviceInfo.tcsSimpAddr} ${deviceInfo.tcsCompAddr}`}
+								defaultValue={`${deviceInfo.tcsName}`}
 								handleState={handleChangeDeviceInfo}
 							/>
 						</div>
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
-							<CustomSelect
-								required={true}
-								labelTitle="설치주소"
-								name="tcsCompAddr"
-								defaultValue={deviceInfo.tcsCompAddr}
-								isOnlyText={memberFlag !== 1}
+							<CustomInput
+								labelTitle="설치장소"
+								name="tcsName"
+								defaultValue={`${deviceInfo.tcsSimpAddr}`}
 								handleState={handleChangeDeviceInfo}
-								optionDictionary={compAddressDic}
-								enableBlankSelect={true}
-								disabled={!viewList.station}
 							/>
 						</div>
 						<div className="form-grid">
 							<CustomInput
-								required={true}
-								labelTitle="전화번호"
-								name="tcsMatchPhone"
-								defaultValue={deviceInfo.tcsMatchPhone}
-								isOnlyText={memberFlag !== 1}
+								labelTitle="설치주소"
+								name="tcsCompAddr"
+								defaultValue={`${deviceInfo.tcsCompAddr}`}
 								handleState={handleChangeDeviceInfo}
-								handlePattern={formatOnlyPhoneNumber}
-								minLength={11}
+							/>
+						</div>
+					</CustomRow>
+					<CustomRow>
+						<div className="form-grid">
+							<CustomInput
+								labelTitle="세부설치위치"
+								name="tcs_moreAddr"
+								defaultValue={`${deviceInfo.tcsMoreAddr}`}
+								handleState={handleChangeDeviceInfo}
+							/>
+						</div>
+						<div className="form-grid">
+							<CustomInput
+								labelTitle="설치수량(S)"
+								name="tcs_num"
+								defaultValue={`${deviceInfo.tcsNum}`}
+								handleState={handleChangeDeviceInfo}
 							/>
 						</div>
 					</CustomRow>
@@ -236,6 +246,20 @@ export default function DeviceInfo() {
 								title="9자 이상을 입력해주세요"
 							/>
 						</div>
+						<div className="form-grid">
+							<CustomInput
+								required={true}
+								labelTitle="전화번호"
+								name="tcsMatchPhone"
+								defaultValue={deviceInfo.tcsMatchPhone}
+								isOnlyText={memberFlag !== 1}
+								handleState={handleChangeDeviceInfo}
+								handlePattern={formatOnlyPhoneNumber}
+								minLength={11}
+							/>
+						</div>
+					</CustomRow>
+					<CustomRow>
 						<div className="form-grid">
 							<CustomInput
 								labelTitle="메모"
