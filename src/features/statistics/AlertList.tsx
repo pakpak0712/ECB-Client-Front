@@ -21,7 +21,7 @@ interface PropsType {
 export default function AlertList({ initialParams, params, data, pageMap, setParams, handleAlertClick }: PropsType) {
 	const tableData = useMemo(
 		() =>
-			data?.map((item, itemIndex) => {
+			data?.reverse().map((item, itemIndex) => {
 				return { ...item, no: pageMap?.startRow + itemIndex };
 			}),
 		[data],
