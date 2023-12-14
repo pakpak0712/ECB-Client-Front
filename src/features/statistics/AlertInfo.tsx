@@ -85,7 +85,7 @@ export default function AlertInfo() {
 							</div>
 						)}
 						<div className="form-grid">
-							<CustomText labelTitle="라우터" text={alertInfo.alertSerial} />
+							<CustomText labelTitle="라우터번호" text={alertInfo.alertSerial} />
 						</div>
 					</CustomRow>
 					<CustomRow>

@@ -9,7 +9,7 @@ export default function ButtonRefetch() {
 			</button>
 			<p className="mt-1 mb-0">
 				<small>
-					최근 업데이트 시간: <span className="">{getTodayTime()}</span>
+					마지막 업데이트 일시: <span className="">{getTodayTime()}</span>
 				</small>
 			</p>
 		</>

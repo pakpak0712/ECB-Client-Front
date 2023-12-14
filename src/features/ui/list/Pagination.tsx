@@ -9,6 +9,8 @@ interface PaginationProps<T> {
 export default function Pagination<T extends SearchParamsType>({ pageMap, setParams }: PaginationProps<T>) {
 	const buttonPerPage = 5;
 	const totalCount = pageMap?.totRow;
+	const aliveCount = pageMap?.aliveRow;
+	const deadCount = pageMap?.deadRow;
 	const dataPerPage = pageMap?.pagePerRow;
 	const pageNo = pageMap?.curPage;
 	const totalPage = pageMap?.totPage;
@@ -41,7 +43,17 @@ export default function Pagination<T extends SearchParamsType>({ pageMap, setPar
 	return (
 		<div className="pagination-wrapper">
 			<div className="form-content">
-				<div className="">전체 결과 수 : {totalCount}</div>
+				<div className="">
+					{aliveCount > 0 && deadCount > 0 ? (
+						<>
+							전체: {totalCount}&nbsp;&nbsp;&nbsp;&nbsp;(<span style={{ color: '#00FF00' }}>정상: {aliveCount}</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
+							<span style={{ color: '#FF0000' }}>고장: {deadCount}</span>)
+						</>
+					) : (
+						<>전체: {totalCount}</>
+					)}
+				</div>
 			</div>
 			<nav className="pagination">
 				<div className={`page-item ${pageNo <= 1 && 'disabled'}`}>

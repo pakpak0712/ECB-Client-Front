@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { compAddressDic, deviceTypeDic } from '@/constants/dictionary';
+import { deviceTypeDic } from '@/constants/dictionary';
 import CustomInput from '@/features/ui/form/CustomInput';
 import CustomSelect from '@/features/ui/form/CustomSelect';
 import CustomText from '@/features/ui/form/CustomText';
@@ -26,11 +26,11 @@ export default function DeviceInfo() {
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
 	const initialDeviceInfo = {
-		tcsDeviceType: deviceTypeDic[0].value,
-		tcsName: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),
+		tcsDeviceType: '',
+		tcsName: '',
 		tcsDate: '',
 		tcsMatchPhone: '',
-		tcsSimpAddr: getValueOrEmptyFromObject(userInfo, 'member_viewlist'),
+		tcsSimpAddr: '',
 		tcsCompAddr: ' ',
 		tcsMoreAddr: '',
 		tcsNum: '',
@@ -46,7 +46,6 @@ export default function DeviceInfo() {
 
 	const [deviceInfo, setDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
 	const [savedDeviceInfo, setSavedDeviceInfo] = useState<DeviceInfoDataType>(initialDeviceInfo);
-	const { initialViewList, viewList, setViewList, stationParams, handleChangeViewList } = useViewList(setDeviceInfo);
 
 	// 상세 정보 가져오기
 	const updateMutation = useMutation({
@@ -65,7 +64,6 @@ export default function DeviceInfo() {
 				tcsSerial: data.tcs_serial,
 				tcsMemo: data.tcs_memo,
 			};
-			setViewList(getLineStation(data.tcs_simpAddr));
 			setDeviceInfo(deviceInfo);
 			setSavedDeviceInfo(deviceInfo);
 		},
@@ -95,11 +93,7 @@ export default function DeviceInfo() {
 
 	// 필수값 체크
 	const requiredDeviceInfo: Record<string, string | string[]> = {
-		tcsSimpAddr: ['호선', '역'],
-		tcsCompAddr: ['장소'],
 		tcsMac: 'MAC',
-		tcsMatchPhone: '전화번호',
-		tcsSerial: '라우터',
 	};
 	const requiredValueCheck = useRequiredValueCheck(deviceInfo, requiredDeviceInfo);
 	const handleSubmit = (event: any) => {
@@ -110,7 +104,6 @@ export default function DeviceInfo() {
 	};
 
 	const handleModalClose = () => {
-		setViewList(initialViewList);
 		setDeviceInfo(initialDeviceInfo);
 		closeContentModal();
 	};
@@ -126,14 +119,6 @@ export default function DeviceInfo() {
 		else setDeviceInfo(initialDeviceInfo);
 	}, [id]);
 
-	useEffect(() => {
-		if (!viewList.station) {
-			setDeviceInfo((prev) => {
-				return { ...prev, tcsCompAddr: '' };
-			});
-		}
-	}, [viewList]);
-
 	return (
 		<>
 			<div className="modal-header">
@@ -148,7 +133,7 @@ export default function DeviceInfo() {
 					<CustomRow>
 						<div className="form-grid">
 							<CustomSelect
-								labelTitle="비상벨종류"
+								labelTitle="모델"
 								name="tcsDeviceType"
 								defaultValue={deviceInfo.tcsDeviceType}
 								handleState={handleChangeDeviceInfo}
@@ -157,7 +142,7 @@ export default function DeviceInfo() {
 						</div>
 						<div className="form-grid">
 							<CustomInput
-								labelTitle="발주처(거래처)"
+								labelTitle="구매자"
 								name="tcsName"
 								defaultValue={`${deviceInfo.tcsName}`}
 								handleState={handleChangeDeviceInfo}
@@ -168,7 +153,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomInput
 								labelTitle="설치장소"
-								name="tcsName"
+								name="tcsSimpAddr"
 								defaultValue={`${deviceInfo.tcsSimpAddr}`}
 								handleState={handleChangeDeviceInfo}
 							/>
@@ -186,7 +171,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomInput
 								labelTitle="세부설치위치"
-								name="tcs_moreAddr"
+								name="tcsMoreAddr"
 								defaultValue={`${deviceInfo.tcsMoreAddr}`}
 								handleState={handleChangeDeviceInfo}
 							/>
@@ -194,7 +179,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomInput
 								labelTitle="설치수량(S)"
-								name="tcs_num"
+								name="tcsNum"
 								defaultValue={`${deviceInfo.tcsNum}`}
 								handleState={handleChangeDeviceInfo}
 							/>
@@ -236,7 +221,7 @@ export default function DeviceInfo() {
 						<div className="form-grid">
 							<CustomInput
 								required={true}
-								labelTitle="라우터"
+								labelTitle="라우터번호"
 								name="tcsSerial"
 								defaultValue={deviceInfo.tcsSerial}
 								isOnlyText={memberFlag !== 1}

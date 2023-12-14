@@ -114,7 +114,6 @@ export default function MemberInfo() {
 		confirmMemberPw: '입력하신 비밀번호',
 		memberPhone: '전화번호',
 		memberEmail: '이메일',
-		memberViewlist: '관리장소',
 	};
 	const requiredValueCheck = useRequiredValueCheck(
 		{ ...memberInfo, ...passwordChangeInfo },
@@ -176,7 +175,7 @@ export default function MemberInfo() {
 	return (
 		<>
 			<div className="modal-header">
-				<h4 className="modal-title">{`발주처(거래처) ${id ? '정보 수정' : '신규 등록'}`}</h4>
+				<h4 className="modal-title">{`구매자 ${id ? '정보 수정' : '신규 등록'}`}</h4>
 			</div>
 			<form
 				className="form-info form-info-vertical px-2"
@@ -222,6 +221,7 @@ export default function MemberInfo() {
 								name="memberName"
 								defaultValue={memberInfo.memberName}
 								handleState={handleMemberInfoChange}
+								isOnlyText={userInfo.member_flag != '1'}
 								pattern=".{5,20}"
 								title="5자 이상, 20자 이하를 입력해주세요"
 							/>

@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useMemo } from 'react';
 import { TableColumn } from 'react-data-table-component';
 
-import { aliveSearchTypeDic } from '@/constants/dictionary';
+import { aliveSearchTypeDic, aliveSearchTypeDic2 } from '@/constants/dictionary';
 import ListDataTable from '@/features/ui/list/ListDataTable';
 import Pagination from '@/features/ui/list/Pagination';
 import SearchCondition from '@/features/ui/list/SearchCondition';
 import useCall from '@/hooks/useCall';
+import { SecureStorage } from '@/plugin/crypto';
 import { PageMapType, SearchParamsType } from '@/types/Common.types';
 import { AliveListType } from '@/types/Statistics.types';
 
@@ -21,7 +22,7 @@ interface PropsType {
 export default function AliveList({ initialParams, params, data, pageMap, setParams, handleAliveClick }: PropsType) {
 	const tableData = useMemo(
 		() =>
-			data?.reverse().map((item, itemIndex) => {
+			data?.map((item, itemIndex) => {
 				return { ...item, no: pageMap?.startRow + itemIndex };
 			}),
 		[data],
@@ -34,7 +35,7 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 	const columns: TableColumn<AliveListType>[] = [
 		{ name: '순번', selector: (row) => row.no },
 		{ name: '고장장소', selector: (row) => row['aliveName'], sortable: true },
-		{ name: '라우터', selector: (row) => row['aliveSerial'], sortable: true },
+		{ name: '라우터번호', selector: (row) => row['aliveSerial'], sortable: true },
 		{
 			name: '전화번호',
 			cell: (row) => {
@@ -57,12 +58,25 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 		setParams,
 	};
 
-	const searchConditionProps = {
-		initialParams,
-		params,
-		setParams,
-		typeChildren: aliveSearchTypeDic,
-	};
+	const secureStorage = new SecureStorage(localStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+
+	let searchConditionProps;
+	if (userInfo.member_flag === 1) {
+		searchConditionProps = {
+			initialParams,
+			params,
+			setParams,
+			typeChildren: aliveSearchTypeDic,
+		};
+	} else {
+		searchConditionProps = {
+			initialParams,
+			params,
+			setParams,
+			typeChildren: aliveSearchTypeDic2,
+		};
+	}
 
 	return (
 		<>

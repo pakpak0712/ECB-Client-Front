@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useMemo } from 'react';
 import { TableColumn } from 'react-data-table-component';
 
-import { deviceSearchTypeDic } from '@/constants/dictionary';
+import { deviceSearchTypeDic, deviceSearchTypeDic2 } from '@/constants/dictionary';
 import ListDataTable from '@/features/ui/list/ListDataTable';
 import Pagination from '@/features/ui/list/Pagination';
 import SearchCondition from '@/features/ui/list/SearchCondition';
 import useCall from '@/hooks/useCall';
+import { SecureStorage } from '@/plugin/crypto';
 import { PageMapType, SearchParamsType } from '@/types/Common.types';
 import { DeviceListType } from '@/types/Device.types';
 
@@ -40,9 +41,9 @@ export default function DeviceList({
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터  **/
 	const columns: TableColumn<DeviceListType>[] = [
-		{ name: '순번', selector: (row) => row.no },
+		//{ name: '순번', selector: (row) => row.no },
 		{ name: '모델', selector: (row) => row['tcs_deviceType'], sortable: true },
-		{ name: '발주처(거래처)', selector: (row) => row['tcs_name'], sortable: true },
+		{ name: '구매자', selector: (row) => row['tcs_name'], sortable: true },
 		{ name: '설치장소', selector: (row) => row['tcs_simpAddr'], sortable: true },
 		{ name: '설치주소', selector: (row) => row['tcs_compAddr'], sortable: true },
 		{ name: '세부설치위치', selector: (row) => row['tcs_moreAddr'], sortable: true },
@@ -62,6 +63,7 @@ export default function DeviceList({
 			},
 			sortable: true,
 		},
+		{ name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true },
 		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true },
 		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true },
 		{ name: '비고', selector: (row) => row['tcs_memo'], sortable: true },
@@ -76,12 +78,25 @@ export default function DeviceList({
 		setParams,
 	};
 
-	const searchConditionProps = {
-		initialParams,
-		params,
-		setParams,
-		typeChildren: deviceSearchTypeDic,
-	};
+	const secureStorage = new SecureStorage(localStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+
+	let searchConditionProps;
+	if (userInfo.member_flag === 1) {
+		searchConditionProps = {
+			initialParams,
+			params,
+			setParams,
+			typeChildren: deviceSearchTypeDic,
+		};
+	} else {
+		searchConditionProps = {
+			initialParams,
+			params,
+			setParams,
+			typeChildren: deviceSearchTypeDic2,
+		};
+	}
 
 	return (
 		<>

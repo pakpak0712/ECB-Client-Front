@@ -5,9 +5,13 @@
 export const getTodayTime = (separate = '-'): string => {
 	const now = new Date();
 	return `
-		${now.getFullYear()}${separate}
-		${(now.getMonth() + 1).toString().padStart(2, '0')}${separate}
-		${now.getDate().toString().padStart(2, '0')} 
-		${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}
+		${now.getFullYear()}${separate}${(now.getMonth() + 1).toString().padStart(2, '0')}${separate}${now
+			.getDate()
+			.toString()
+			.padStart(2, '0')}
+		${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now
+			.getSeconds()
+			.toString()
+			.padStart(2, '0')}
 	`;
 };

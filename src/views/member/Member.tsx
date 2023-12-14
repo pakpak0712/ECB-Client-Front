@@ -70,10 +70,10 @@ export default function Member() {
 
 	return (
 		<div className="page">
-			<PageHeader title="발주처(거래처) 관리">
+			<PageHeader title="구매자 관리">
 				<ButtonRefetch />
 			</PageHeader>
-			<PageBody title="발주처(거래처) 목록">
+			<PageBody title="구매자 목록">
 				<div className="d-flex justify-content-end">
 					<button type="button" className="btn btn-navy" onClick={handleRegisterationClick}>
 						등록하기

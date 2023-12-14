@@ -3,7 +3,7 @@ export const menuConfig = [
 		memberFlag: '1',
 		path: '/member',
 		icon: 'fa-solid fa-user',
-		title: '발주처(거래처) 관리',
+		title: '구매자 관리',
 	},
 	{
 		memberFlag: '0,1,3',

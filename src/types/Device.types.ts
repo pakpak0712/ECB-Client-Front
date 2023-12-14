@@ -9,6 +9,7 @@ export interface DeviceListType {
 	tcs_compAddr: string;
 	tcs_moreAddr: string;
 	tcs_num: string;
+	tcs_date: string;
 	tcs_ALdate: string;
 	tcs_memo: string;
 	tcs_serial: string;

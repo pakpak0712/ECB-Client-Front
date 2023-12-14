@@ -28,6 +28,8 @@ export interface PageMapType {
 	curPage: number;
 	startRow: number;
 	totRow: number;
+	aliveRow: number;
+	deadRow: number;
 	endRow: number;
 	pagePerRow: number;
 	endPage: number;
