@@ -33,7 +33,7 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 	console.log('tableData: ', tableData);
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<AliveListType>[] = [
-		{ name: '순번', selector: (row) => row.no },
+		//{ name: '순번', selector: (row) => row.no },
 		{ name: '고장장소', selector: (row) => row['aliveName'], sortable: true },
 		{ name: '라우터번호', selector: (row) => row['aliveSerial'], sortable: true },
 		{

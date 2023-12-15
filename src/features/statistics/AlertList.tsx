@@ -32,7 +32,7 @@ export default function AlertList({ initialParams, params, data, pageMap, setPar
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<AlertListType>[] = [
-		{ name: '순번', selector: (row) => row.no },
+		//{ name: '순번', selector: (row) => row.no },
 		{ name: '알림장소', selector: (row) => row['alertName'], sortable: true },
 		{ name: '알림유형', selector: (row) => row['alertType'], sortable: true },
 		{ name: '라우터번호', selector: (row) => row['alertSerial'], sortable: true },

@@ -1,4 +1,4 @@
-export const titleDic = [new Option('회원', 'member'), new Option('비상벨', 'tcs')];
+export const titleDic = [new Option('구매자', 'member'), new Option('비상벨', 'tcs')];
 
 export const memberSearchTypeDic = [
 	new Option('아이디', 'member_id'),

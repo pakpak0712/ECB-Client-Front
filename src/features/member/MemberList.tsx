@@ -37,7 +37,7 @@ export default function MemberList({
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<MemberListType>[] = [
-		{ name: '순번', selector: (row) => row['no'] },
+		//{ name: '순번', selector: (row) => row['no'] },
 		{ name: '아이디', selector: (row) => row['member_id'], sortable: true },
 		{ name: '이름', selector: (row) => row['member_name'], sortable: true },
 		{ name: '전화번호', selector: (row) => row['member_phone'], sortable: true },
