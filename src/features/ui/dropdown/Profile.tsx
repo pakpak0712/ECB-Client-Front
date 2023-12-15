@@ -5,10 +5,12 @@ import { useConfirm } from '@/hooks/useConfirm';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
 import { memberIdState } from '@/state/member';
+import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 
 export default function Profile() {
 	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+	const userToken = getValueOrEmptyFromObject(userInfo, 'member_token');
 	const [_, setId] = useRecoilState(memberIdState);
 	const { openContentModal } = useContentsModal();
 	const { confirmMessage } = useConfirm();
@@ -20,8 +22,9 @@ export default function Profile() {
 
 	const handleLogout = async () => {
 		if (await confirmMessage('정말로 로그아웃을 하시겠습니까?')) {
+			const memberToken = userToken;
 			secureStorage.removeItem('user-storage');
-			window.location.reload();
+			location.href = '/login?firebaseToken=' + memberToken;
 		}
 	};
 

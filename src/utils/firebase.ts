@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken } from 'firebase/messaging';
+import { Messaging, getMessaging, getToken } from 'firebase/messaging';
 import { Dispatch, SetStateAction } from 'react';
 
 import { SecureStorage } from '@/plugin/crypto';
@@ -16,7 +16,10 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const firebaseMessaging = getMessaging(firebaseApp);
+let firebaseMessaging: Messaging;
+if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
+	firebaseMessaging = getMessaging(firebaseApp);
+}
 
 navigator.serviceWorker.register('/firebase-messaging-sw.js').then((swReg2) => {
 	console.log('Firebase ServiceWorker Is Registered');
