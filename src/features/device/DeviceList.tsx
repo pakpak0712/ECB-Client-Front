@@ -29,6 +29,11 @@ export default function DeviceList({
 	setParams,
 	handleDeviceClick,
 }: PropsType) {
+	const secureStorage = new SecureStorage(localStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+
+	const isAdmin = userInfo.member_flag === 1;
+
 	const tableData = useMemo(
 		() =>
 			data?.map((item, itemIndex) => {
@@ -66,7 +71,7 @@ export default function DeviceList({
 		{ name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true },
 		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true },
 		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true },
-		{ name: '비고', selector: (row) => row['tcs_memo'], sortable: true },
+		isAdmin ? { name: '비고', selector: (row) => row['tcs_memo'], sortable: true } : {},
 	];
 
 	const decodingFlag = (flag: string | number): string => {
@@ -77,9 +82,6 @@ export default function DeviceList({
 		pageMap,
 		setParams,
 	};
-
-	const secureStorage = new SecureStorage(localStorage);
-	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 
 	let searchConditionProps;
 	if (userInfo.member_flag === 1) {
@@ -104,7 +106,7 @@ export default function DeviceList({
 			<ListDataTable
 				tableConfiguration={{ columns, tableData }}
 				selectRowsState={{
-					selectableRows: true,
+					selectableRows: isAdmin,
 					clearSelectedRows: true,
 					selectedRows: tableData,
 					setSelectedRows: setSelectData,

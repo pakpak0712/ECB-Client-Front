@@ -15,6 +15,7 @@ export const deviceTypeDic = [
 	new Option('ECB-ST-20VK', 'ECB-ST20BK'),
 	new Option('ECB-ST-30S', 'ECB-ST20VT'),
 	new Option('ECB-ST-30T', 'ECB-ST30T'),
+	new Option('ECB-ST-T', 'ECB-ST-T'),
 ];
 export const deviceSearchTypeDic = [
 	new Option('구매자', 'tcs_name'),

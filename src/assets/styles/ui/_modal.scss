@@ -107,4 +107,7 @@
 			}
 		}
 	}
+	.btn-close {
+		filter: var(--app-close-button-fillter);
+	}
 }

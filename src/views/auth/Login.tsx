@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import PushModal from '@/features/push/PushModal';
+import Footer from '@/features/ui/layout/Footer';
 import { useAlert } from '@/hooks/useAlert';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
@@ -102,6 +103,7 @@ export default function Login() {
 					</form>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }

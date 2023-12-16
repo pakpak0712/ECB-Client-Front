@@ -25,6 +25,8 @@ export default function AliveInfo() {
 	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
+	const isAdmin = memberFlag === 1;
+
 	const id = useRecoilValue(aliveIdState);
 	const { closeContentModal } = useContentsModal();
 	const [aliveInfo, setAliveInfo] = useState(initialAliveInfo);
@@ -73,7 +75,7 @@ export default function AliveInfo() {
 						<div className="form-grid">
 							<CustomText labelTitle="고장장소" text={aliveInfo.aliveName} />
 						</div>
-						{memberFlag === 1 && (
+						{isAdmin && (
 							<div className="form-grid">
 								<CustomText labelTitle="MAC" text={aliveInfo.aliveMac} />
 							</div>

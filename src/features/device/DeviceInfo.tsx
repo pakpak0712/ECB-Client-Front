@@ -5,26 +5,24 @@ import { useRecoilValue } from 'recoil';
 import { deviceTypeDic } from '@/constants/dictionary';
 import CustomInput from '@/features/ui/form/CustomInput';
 import CustomSelect from '@/features/ui/form/CustomSelect';
-import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import useRequiredValueCheck from '@/hooks/useRequiredValueCheck';
-import useViewList from '@/hooks/useViewList';
 import { SecureStorage } from '@/plugin/crypto';
-import { deviceQueryKey, lineStationQueryKey } from '@/queries/_querykey';
+import { deviceQueryKey } from '@/queries/_querykey';
 import { postMutation } from '@/queries/_utils';
 import useDuplicateCheck from '@/queries/useDuplicateCheck';
 import useInvalidateFromMutation from '@/queries/useInvalidateFromMutation';
 import { deviceIdState } from '@/state/device';
 import { DeviceInfoDataType } from '@/types/Device.types';
-import { getLineStation } from '@/utils/common';
-import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 import { formatOnlyMacAddress, formatOnlyPhoneNumber } from '@/utils/stringUtils';
 
 export default function DeviceInfo() {
 	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
+	const isAdmin = memberFlag === 1;
+
 	const initialDeviceInfo = {
 		tcsDeviceType: '',
 		tcsName: '',
@@ -53,6 +51,7 @@ export default function DeviceInfo() {
 		onSuccess: (data) => {
 			const deviceInfo = {
 				...initialDeviceInfo,
+				tcsDeviceType: data.tcs_deviceType,
 				tcsName: data.tcs_name,
 				tcsDate: data.tcs_ALdate,
 				tcsMatchPhone: data.tcs_matchPhone,
@@ -186,7 +185,7 @@ export default function DeviceInfo() {
 						</div>
 					</CustomRow>
 					<CustomRow>
-						{memberFlag === 1 && (
+						{isAdmin && (
 							<div className="form-grid">
 								<CustomInput
 									_ref={inputMacRef}
@@ -244,28 +243,30 @@ export default function DeviceInfo() {
 							/>
 						</div>
 					</CustomRow>
-					<CustomRow>
-						<div className="form-grid">
-							<CustomInput
-								labelTitle="메모"
-								name="tcsMemo"
-								defaultValue={deviceInfo.tcsMemo}
-								isOnlyText={memberFlag !== 1}
-								handleState={handleChangeDeviceInfo}
-								pattern=".{0,30}"
-								title="30자 이하를 입력해주세요"
-							/>
-						</div>
-					</CustomRow>
+					{isAdmin && (
+						<CustomRow>
+							<div className="form-grid">
+								<CustomInput
+									labelTitle="메모"
+									name="tcsMemo"
+									defaultValue={deviceInfo.tcsMemo}
+									isOnlyText={memberFlag !== 1}
+									handleState={handleChangeDeviceInfo}
+									pattern=".{0,30}"
+									title="30자 이하를 입력해주세요"
+								/>
+							</div>
+						</CustomRow>
+					)}
 				</div>
 				<div className="modal-footer">
-					{memberFlag === 1 && (
+					{isAdmin && (
 						<button type="submit" className="btn btn-navy">
 							{id ? '수정' : '등록'}
 						</button>
 					)}
 					<button type="button" className="btn btn-default" onClick={handleModalClose}>
-						{memberFlag === 1 ? '취소' : '닫기'}
+						{isAdmin ? '취소' : '닫기'}
 					</button>
 				</div>
 			</form>

@@ -19,6 +19,7 @@
 	--app-component-disabled-color: #{$gray-400};
 
 	--app-component-modal-bg: #{$white};
+	--app-close-button-fillter: invert(0);
 
 	--page-contents-bg: #{$gray-100};
 	--page-contents-header-bg: #{tint-color($gray-200, 30%)};
@@ -52,6 +53,7 @@
 	--app-component-disabled-color: #{$gray-600};
 
 	--app-component-modal-bg: #{$gray-800};
+	--app-close-button-fillter: invert(1) grayscale(100%) brightness(200%);
 
 	--page-contents-bg: #{$gray-800};
 	--page-contents-header-bg: #{shade-color($gray-800, 30%)};

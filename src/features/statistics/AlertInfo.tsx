@@ -14,6 +14,8 @@ export default function AlertInfo() {
 	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
+	const isAdmin = memberFlag === 1;
+
 	const initialAlertInfo = {
 		alertName: '',
 		alertPhone: '',
@@ -79,7 +81,7 @@ export default function AlertInfo() {
 						</div>
 					</CustomRow>
 					<CustomRow>
-						{memberFlag === 1 && (
+						{isAdmin && (
 							<div className="form-grid">
 								<CustomText labelTitle="MAC" text={alertInfo.alertMac} />
 							</div>
