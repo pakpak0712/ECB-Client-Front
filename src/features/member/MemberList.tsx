@@ -38,11 +38,11 @@ export default function MemberList({
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<MemberListType>[] = [
 		//{ name: '순번', selector: (row) => row['no'] },
-		{ name: '아이디', selector: (row) => row['member_id'], sortable: true },
-		{ name: '이름', selector: (row) => row['member_name'], sortable: true },
-		{ name: '전화번호', selector: (row) => row['member_phone'], sortable: true },
-		{ name: '이메일', selector: (row) => row['member_email'], sortable: true },
-		{ name: '관리장소', selector: (row) => row['member_viewlist'], sortable: true },
+		{ name: '아이디', selector: (row) => row['member_id'], sortable: true, sortField: 'member_id' },
+		{ name: '이름', selector: (row) => row['member_name'], sortable: true, sortField: 'member_name' },
+		{ name: '전화번호', selector: (row) => row['member_phone'], sortable: true, sortField: 'member_phone' },
+		{ name: '이메일', selector: (row) => row['member_email'], sortable: true, sortField: 'member_email' },
+		{ name: '관리장소', selector: (row) => row['member_viewlist'], sortable: true, sortField: 'member_viewlist' },
 	];
 
 	const paginationProps = {
@@ -72,6 +72,10 @@ export default function MemberList({
 				pagination={{
 					defaultPagination: false,
 					customPagination: <Pagination {...paginationProps} />,
+				}}
+				onSortParams={{
+					params,
+					setParams,
 				}}
 			/>
 		</>

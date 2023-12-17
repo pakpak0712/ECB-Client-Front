@@ -61,6 +61,8 @@ export default function Alert() {
 		handleAlertClick,
 	};
 
+	console.log('알림 통계 params: ', params);
+
 	return (
 		<div className="page">
 			<PageHeader title={pageTitle}>

@@ -1,10 +1,14 @@
 import { jsx } from '@emotion/react';
 import React, { Dispatch, SetStateAction } from 'react';
 import DataTable from 'react-data-table-component';
-import { TableColumn } from 'react-data-table-component/dist/src/DataTable/types';
+import { SortOrder, TableColumn } from 'react-data-table-component/dist/src/DataTable/types';
+
+import { SearchParamsType } from '@/types/Common.types';
 
 export interface ListTableInfo<T> {
 	tableConfiguration: { columns: TableColumn<T>[]; tableData: T[] };
+	pagination: { defaultPagination: boolean; customPagination?: jsx.JSX.Element };
+	onSortParams: { params: SearchParamsType; setParams: Dispatch<SetStateAction<SearchParamsType>> };
 	selectRowsState: {
 		selectableRows: boolean;
 		clearSelectedRows?: boolean;
@@ -12,16 +16,14 @@ export interface ListTableInfo<T> {
 		setSelectedRows?: Dispatch<SetStateAction<T[]>>;
 	};
 	onRowClicked?: (data: T) => void;
-	buttons?: { title: string; disabled?: boolean; active: (...args: any) => any }[];
-	pagination: { defaultPagination: boolean; customPagination?: jsx.JSX.Element };
-	noPanel?: boolean;
 }
 
 const ListDataTable = <T extends object>({
 	tableConfiguration,
+	pagination,
+	onSortParams,
 	selectRowsState,
 	onRowClicked,
-	pagination,
 }: ListTableInfo<T>) => {
 	interface handleSelectChangeProps {
 		allSelected: boolean;
@@ -34,6 +36,17 @@ const ListDataTable = <T extends object>({
 
 	const onSelectedRowsChange = ({ selectedRows }: handleSelectChangeProps) => {
 		(selectRowsState as Required<typeof selectRowsState>).setSelectedRows(selectedRows);
+	};
+
+	const customSort = async <T,>(selectedColumn: TableColumn<T>, sortDirection: SortOrder) => {
+		const paramsWithOrderDTO = {
+			...onSortParams.params,
+			orderDTO: {
+				orderType: selectedColumn.sortField || '',
+				orderWord: sortDirection,
+			},
+		};
+		onSortParams.setParams(paramsWithOrderDTO);
 	};
 
 	if (tableData?.length === 0) {
@@ -50,6 +63,8 @@ const ListDataTable = <T extends object>({
 					{...(selectableRows ? { onSelectedRowsChange } : {})}
 					onRowClicked={onRowClicked}
 					{...(defaultPagination ? { pagination: true } : {})}
+					onSort={customSort}
+					sortServer
 				/>
 				{!defaultPagination && customPagination}
 			</>

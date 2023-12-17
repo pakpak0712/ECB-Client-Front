@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useMemo } from 'react';
+import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { TableColumn } from 'react-data-table-component';
 
 import { deviceSearchTypeDic, deviceSearchTypeDic2 } from '@/constants/dictionary';
@@ -47,13 +47,13 @@ export default function DeviceList({
 	/** 목록 테이블의 열을 구성하기 위한 데이터  **/
 	const columns: TableColumn<DeviceListType>[] = [
 		//{ name: '순번', selector: (row) => row.no },
-		{ name: '모델', selector: (row) => row['tcs_deviceType'], sortable: true },
-		{ name: '구매자', selector: (row) => row['tcs_name'], sortable: true },
-		{ name: '설치장소', selector: (row) => row['tcs_simpAddr'], sortable: true },
-		{ name: '설치주소', selector: (row) => row['tcs_compAddr'], sortable: true },
-		{ name: '세부설치위치', selector: (row) => row['tcs_moreAddr'], sortable: true },
-		{ name: '설치수량(S)', selector: (row) => row['tcs_num'], sortable: true },
-		{ name: '라우터번호', selector: (row) => row['tcs_serial'], sortable: true },
+		{ name: '모델', selector: (row) => row['tcs_deviceType'], sortable: true, sortField: 'tcs_deviceType' },
+		{ name: '구매자', selector: (row) => row['tcs_name'], sortable: true, sortField: 'tcs_name' },
+		{ name: '설치장소', selector: (row) => row['tcs_simpAddr'], sortable: true, sortField: 'tcs_simpAddr' },
+		{ name: '설치주소', selector: (row) => row['tcs_compAddr'], sortable: true, sortField: 'tcs_compAddr' },
+		{ name: '세부설치위치', selector: (row) => row['tcs_moreAddr'], sortable: true, sortField: 'tcs_moreAddr' },
+		{ name: '설치수량(S)', selector: (row) => row['tcs_num'], sortable: true, sortField: 'tcs_num' },
+		{ name: '라우터번호', selector: (row) => row['tcs_serial'], sortable: true, sortField: 'tcs_serial' },
 		{
 			name: '전화번호',
 			cell: (row) => {
@@ -67,11 +67,12 @@ export default function DeviceList({
 				);
 			},
 			sortable: true,
+			sortField: 'tcs_matchPhone',
 		},
-		{ name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true },
-		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true },
-		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true },
-		isAdmin ? { name: '비고', selector: (row) => row['tcs_memo'], sortable: true } : {},
+		{ name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true, sortField: 'tcs_date' },
+		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true, sortField: 'tcs_ALdate' },
+		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true, sortField: 'tcs_flag' },
+		isAdmin ? { name: '비고', selector: (row) => row['tcs_memo'], sortable: true, sortField: 'tcs_memo' } : {},
 	];
 
 	const decodingFlag = (flag: string | number): string => {
@@ -100,6 +101,11 @@ export default function DeviceList({
 		};
 	}
 
+	const [orderDTO, setOrderDTO] = useState({
+		orderType: '',
+		orderWord: '',
+	});
+
 	return (
 		<>
 			<SearchCondition {...searchConditionProps} />
@@ -115,6 +121,10 @@ export default function DeviceList({
 				pagination={{
 					defaultPagination: false,
 					customPagination: <Pagination {...paginationProps} />,
+				}}
+				onSortParams={{
+					params,
+					setParams,
 				}}
 			/>
 		</>

@@ -30,12 +30,11 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 
 	const { call, isMobile } = useCall();
 
-	console.log('tableData: ', tableData);
 	/** 목록 테이블의 열을 구성하기 위한 데이터 */
 	const columns: TableColumn<AliveListType>[] = [
 		//{ name: '순번', selector: (row) => row.no },
-		{ name: '고장장소', selector: (row) => row['aliveName'], sortable: true },
-		{ name: '라우터번호', selector: (row) => row['aliveSerial'], sortable: true },
+		{ name: '고장장소', selector: (row) => row['aliveName'], sortable: true, sortField: 'aliveName' },
+		{ name: '라우터번호', selector: (row) => row['aliveSerial'], sortable: true, sortField: 'aliveSerial' },
 		{
 			name: '전화번호',
 			cell: (row) => {
@@ -50,7 +49,7 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 			},
 			sortable: true,
 		},
-		{ name: '고장일시', selector: (row) => row['aliveDate'], sortable: true },
+		{ name: '고장일시', selector: (row) => row['aliveDate'], sortable: true, sortField: 'aliveDate' },
 	];
 
 	const paginationProps = {
@@ -90,6 +89,10 @@ export default function AliveList({ initialParams, params, data, pageMap, setPar
 				pagination={{
 					defaultPagination: false,
 					customPagination: <Pagination {...paginationProps} />,
+				}}
+				onSortParams={{
+					params,
+					setParams,
 				}}
 			/>
 		</>

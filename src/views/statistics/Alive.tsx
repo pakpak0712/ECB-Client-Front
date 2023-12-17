@@ -59,6 +59,8 @@ export default function Alive() {
 		handleAliveClick,
 	};
 
+	console.log('고장 통계 params: ', params);
+
 	return (
 		<div className="page">
 			<PageHeader title="고장 통계">
