@@ -39,6 +39,7 @@ export default function Device() {
 			pagePerRow: 10,
 		},
 	};
+	const pageTitle = '비상벨 관리';
 
 	const [_, setId] = useRecoilState(deviceIdState);
 	const { openContentModal } = useContentsModal();
@@ -75,8 +76,8 @@ export default function Device() {
 
 	return (
 		<div className="page">
-			<PageHeader title="비상벨 관리">
-				<ButtonExcel queryKey={deviceQueryKey.excel()} params={params} />
+			<PageHeader title={pageTitle}>
+				<ButtonExcel queryKey={deviceQueryKey.excel()} params={params} filename={pageTitle} />
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="비상벨 목록">

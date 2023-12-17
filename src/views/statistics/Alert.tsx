@@ -36,6 +36,8 @@ export default function Alert() {
 			pagePerRow: 10,
 		},
 	};
+	const pageTitle = '알림 통계';
+
 	const [_, setId] = useRecoilState(alertIdState);
 	const { openContentModal } = useContentsModal();
 
@@ -61,8 +63,8 @@ export default function Alert() {
 
 	return (
 		<div className="page">
-			<PageHeader title="알림 통계">
-				<ButtonExcel queryKey={statisticsQueryKey.alertExcel()} params={params} />
+			<PageHeader title={pageTitle}>
+				<ButtonExcel queryKey={statisticsQueryKey.alertExcel()} params={params} filename={pageTitle} />
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="알림 목록">
