@@ -85,6 +85,12 @@
 		}
 	}
 
+	&.modal-push {
+		.modal-content {
+			position: absolute;
+		}
+	}
+
 	&.modal-dim {
 		background-color: rgba(0, 0, 0, 0.6);
 

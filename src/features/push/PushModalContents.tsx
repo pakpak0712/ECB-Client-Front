@@ -1,13 +1,13 @@
 import CustomText from '@/features/ui/form/CustomText';
 import CustomRow from '@/features/ui/layout/CustomRow';
-import { useContentsModal } from '@/hooks/useContentsModal';
+import { usePushModal } from '@/hooks/usePushModal';
 
 interface Props {
 	data: any;
 }
 
-export default function PushModal({ data }: Props) {
-	const { closeContentModal, goAlertLink } = useContentsModal();
+export default function PushModalContents({ data }: Props) {
+	const { closePushModal, goAlertLink } = usePushModal();
 
 	return (
 		<>
@@ -17,12 +17,11 @@ export default function PushModal({ data }: Props) {
 					type="button"
 					className="btn-close btn-close-white"
 					aria-label="Close"
-					onClick={() => closeContentModal()}
+					onClick={() => closePushModal()}
 				></button>
 			</div>
 			<div
 				className="form-info form-info-vertical px-2"
-				style={{ maxWidth: '600px', width: '90vw' }}
 				//onClick={() => goAlertLink()}
 			>
 				<div className="modal-body">
@@ -31,7 +30,7 @@ export default function PushModal({ data }: Props) {
 							<CustomText labelTitle="알림장소" text={data.data.alertName} />
 						</div>
 						<div className="form-grid">
-							<CustomText labelTitle="알림유형" text={data.data.alertType} />
+							<CustomText labelTitle="알림유형" text={data.data.alertType} style={{ height: '100%' }} />
 						</div>
 					</CustomRow>
 					<CustomRow>

@@ -113,6 +113,9 @@ input:-webkit-autofill:active {
 		}
 	}
 	&-text {
+		display: flex;
+		align-items: center;
+		height: 100%;
 		margin: 0;
 		padding: 0.5rem;
 		font-size: inherit;
@@ -189,7 +192,7 @@ input:-webkit-autofill:active {
 		background-color: var(--page-contents-header-bg);
 	}
 	.col-form-box {
-		min-height: 100%;
+		height: 100%;
 		padding: 0.5rem;
 		background-color: var(--app-component-bg);
 	}

@@ -12,6 +12,7 @@ import '@/assets/styles/app.scss';
 import AlertModal from '@/features/ui/modal/AlertModal';
 import ConfirmModal from '@/features/ui/modal/ConfirmModal';
 import ContentsModal from '@/features/ui/modal/ContentsModal';
+import PushModal from '@/features/ui/modal/PushModal';
 import router from '@/router';
 
 const queryClient = new QueryClient({
@@ -32,6 +33,7 @@ ReactDom.createRoot(document.getElementById('root') as HTMLElement).render(
 			<AlertModal />
 			<ConfirmModal />
 			<ContentsModal />
+			<PushModal />
 			<ReactQueryDevtools initialIsOpen={false} />
 		</RecoilRoot>
 	</QueryClientProvider>,

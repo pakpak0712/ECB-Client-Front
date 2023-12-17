@@ -73,8 +73,6 @@ export default function Device() {
 		handleDeviceClick,
 	};
 
-	console.log('initialParams', initialParams);
-
 	return (
 		<div className="page">
 			<PageHeader title="비상벨 관리">

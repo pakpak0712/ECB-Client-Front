@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import PushModal from '@/features/push/PushModal';
 import Footer from '@/features/ui/layout/Footer';
 import { useAlert } from '@/hooks/useAlert';
 import { useContentsModal } from '@/hooks/useContentsModal';
@@ -53,7 +52,7 @@ export default function Login() {
 	const bc = new BroadcastChannel('fcm');
 
 	bc.onmessage = function (e) {
-		openContentModal(<PushModal data={e} />);
+		// openContentModal(<PushModal data={e} />);
 	};
 
 	return (

@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-import PushModal from '@/features/push/PushModal';
+import PushModalContents from '@/features/push/PushModalContents';
 import Footer from '@/features/ui/layout/Footer';
 import Header from '@/features/ui/layout/Header';
 import Sidebar from '@/features/ui/sidebar/Sidebar';
-import { useContentsModal } from '@/hooks/useContentsModal';
+import { usePushModal } from '@/hooks/usePushModal';
 import { hookReceiver } from '@/plugin/hookReceiver';
 import { navbarToggleState } from '@/state/common';
 
@@ -21,11 +21,12 @@ function App() {
 	}, [hookReceiver.location]);
 
 	// 푸시 알림 모달 띄우기
-	const { openContentModal } = useContentsModal();
+	const { openPushModal } = usePushModal();
 	const bc = new BroadcastChannel('fcm');
 
 	bc.onmessage = function (e) {
-		openContentModal(<PushModal data={e} />);
+		console.log('onmessage: ', e);
+		openPushModal(<PushModalContents data={e} />);
 	};
 
 	return (
