@@ -28,6 +28,7 @@ export const deviceQueryKey = (() => {
 		delete: () => [endpoint, 'delete'], // 비상벨 삭제
 		update: () => [endpoint, 'update'], // 비상벨 수정
 		insert: () => [endpoint, 'insert'], // 비상벨 등록
+		excel: () => [endpoint, 'excel'], // 엑셀 다운로드
 	};
 })();
 
@@ -39,6 +40,7 @@ export const statisticsQueryKey = (() => {
 	return {
 		alertList: () => [endpoint, alert, 'list'], // 알림 목록
 		alertDetail: () => [endpoint, alert, 'detail'], // 알림 상세
+		alertExcel: () => [endpoint, 'excel'], // 엑셀 다운로드
 		aliveList: () => [endpoint, alive, 'list'], // 고장 목록
 		aliveDetail: () => [endpoint, alive, 'detail'], // 고장 상세
 	};

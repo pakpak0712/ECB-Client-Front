@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 
 import DeviceInfo from '@/features/device/DeviceInfo';
 import DeviceList from '@/features/device/DeviceList';
+import ButtonExcel from '@/features/ui/button/ButtonExcel';
 import ButtonRefetch from '@/features/ui/button/ButtonRefetch';
 import LoadingFrame from '@/features/ui/common/LoadingFrame';
 import PageBody from '@/features/ui/layout/PageBody';
@@ -20,6 +21,8 @@ export default function Device() {
 	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 	const { member_flag: memberFlag } = userInfo;
+	const isAdmin = memberFlag === 1;
+
 	const initialParams = {
 		searchDTO: {
 			memberFlag: userInfo && memberFlag ? memberFlag.toString() : '',
@@ -70,13 +73,16 @@ export default function Device() {
 		handleDeviceClick,
 	};
 
+	console.log('initialParams', initialParams);
+
 	return (
 		<div className="page">
 			<PageHeader title="비상벨 관리">
+				<ButtonExcel queryKey={deviceQueryKey.excel()} params={params} />
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="비상벨 목록">
-				{memberFlag === 1 && (
+				{isAdmin && (
 					<div className="d-flex justify-content-end">
 						<button type="button" className="btn btn-navy" onClick={handleRegisterationClick}>
 							등록하기

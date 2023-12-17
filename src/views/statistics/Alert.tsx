@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 
 import AlertInfo from '@/features/statistics/AlertInfo';
 import AlertList from '@/features/statistics/AlertList';
+import ButtonExcel from '@/features/ui/button/ButtonExcel';
 import ButtonRefetch from '@/features/ui/button/ButtonRefetch';
 import LoadingFrame from '@/features/ui/common/LoadingFrame';
 import PageBody from '@/features/ui/layout/PageBody';
@@ -61,6 +62,7 @@ export default function Alert() {
 	return (
 		<div className="page">
 			<PageHeader title="알림 통계">
+				<ButtonExcel queryKey={statisticsQueryKey.alertExcel()} params={params} />
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="알림 목록">

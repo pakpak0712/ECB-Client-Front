@@ -60,7 +60,7 @@
 		display: flex;
 		align-items: center;
 		font-size: 13px;
-		color: #888;
+		color: var(--app-component-color) !important;
 	}
 	&-button {
 		width: 100%;
