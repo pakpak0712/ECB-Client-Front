@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Footer from '@/features/ui/layout/Footer';
 import { useAlert } from '@/hooks/useAlert';
-import { useContentsModal } from '@/hooks/useContentsModal';
+import usePushAlarm from '@/hooks/usePushAlarm';
 import { SecureStorage } from '@/plugin/crypto';
 import { commonQueryKey } from '@/queries/_querykey';
 import { postMutation } from '@/queries/_utils';
@@ -48,61 +48,64 @@ export default function Login() {
 	}, []);
 
 	// 푸시 알림 모달 띄우기
-	const { openContentModal } = useContentsModal();
 	const bc = new BroadcastChannel('fcm');
+	const { renderPushAlarm, setMessageData } = usePushAlarm();
 
 	bc.onmessage = function (e) {
-		// openContentModal(<PushModal data={e} />);
+		setMessageData(e.data);
 	};
 
 	return (
-		<div className="login">
-			<div className="login-cover"></div>
+		<>
+			<div className="login">
+				<div className="login-cover"></div>
 
-			<div className="login-container" style={{ maxWidth: '400px' }}>
-				<div className="login-header">
-					<h1 className="login-title text-center">(주)세이프티랩 비상벨통합관제시스템</h1>
-				</div>
-				<div className="login-content">
-					<form onSubmit={handleLogin} className="login-form row">
-						<div className="col-md-8">
-							<div className="form-floating">
-								<input
-									type="text"
-									className="login-form-control form-control"
-									placeholder="아이디를 입력해주세요."
-									aria-label="login-id-input"
-									value={memberId}
-									onChange={(e) => setMemberId(e.target.value.trim())}
-								/>
-								<label htmlFor="id" className="login-label">
-									아이디
-								</label>
+				<div className="login-container" style={{ maxWidth: '400px' }}>
+					<div className="login-header">
+						<h1 className="login-title text-center">(주)세이프티랩 비상벨통합관제시스템</h1>
+					</div>
+					<div className="login-content">
+						<form onSubmit={handleLogin} className="login-form row">
+							<div className="col-md-8">
+								<div className="form-floating">
+									<input
+										type="text"
+										className="login-form-control form-control"
+										placeholder="아이디를 입력해주세요."
+										aria-label="login-id-input"
+										value={memberId}
+										onChange={(e) => setMemberId(e.target.value.trim())}
+									/>
+									<label htmlFor="id" className="login-label">
+										아이디
+									</label>
+								</div>
+								<div className="form-floating">
+									<input
+										type="password"
+										className="login-form-control form-control"
+										placeholder="비밀번호를 입력해주세요."
+										aria-label="login-password-input"
+										autoComplete="off"
+										value={memberPw}
+										onChange={(e) => setMemberPw(e.target.value.trim())}
+									/>
+									<label htmlFor="password" className="login-label">
+										비밀번호
+									</label>
+								</div>
 							</div>
-							<div className="form-floating">
-								<input
-									type="password"
-									className="login-form-control form-control"
-									placeholder="비밀번호를 입력해주세요."
-									aria-label="login-password-input"
-									autoComplete="off"
-									value={memberPw}
-									onChange={(e) => setMemberPw(e.target.value.trim())}
-								/>
-								<label htmlFor="password" className="login-label">
-									비밀번호
-								</label>
+							<div className="col-md-4">
+								<button type="submit" className="login-button btn btn-navy" aria-label="login-button">
+									로그인
+								</button>
 							</div>
-						</div>
-						<div className="col-md-4">
-							<button type="submit" className="login-button btn btn-navy" aria-label="login-button">
-								로그인
-							</button>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
+			{renderPushAlarm()}
+		</>
 	);
 }

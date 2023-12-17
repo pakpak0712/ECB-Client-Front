@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-import { AlertModalType, ConfirmModalType, ContentsModalType, PushModalType } from '@/types/Modal.types';
+import { AlertModalType, ConfirmModalType, ContentsModalType } from '@/types/Modal.types';
 
 export const alertState = atom<AlertModalType>({
 	key: 'alertState',
@@ -25,15 +25,5 @@ export const contentsModalState = atom<ContentsModalType>({
 	default: {
 		isShow: false,
 		content: undefined,
-	},
-});
-
-export const pushModalState = atom<PushModalType>({
-	key: 'pushModalState',
-	default: {
-		isShow: false,
-		isPushShow: false,
-		push: undefined,
-		pushCount: 0,
 	},
 });
