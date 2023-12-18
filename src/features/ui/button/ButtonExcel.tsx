@@ -22,7 +22,7 @@ export default function ButtonExcel<T>({ queryKey, params, filename }: Props<T>)
 
 		const link = document.createElement('a');
 		link.href = url;
-		link.setAttribute('download', `${time} ${filename} 목록.xlsx`);
+		link.setAttribute('download', `${time} ${filename} 목록.xls`);
 		document.body.appendChild(link);
 		link.click();
 		window.URL.revokeObjectURL(url);
