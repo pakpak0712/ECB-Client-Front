@@ -74,10 +74,13 @@ export default function Device() {
 		handleDeviceClick,
 	};
 
+	const isMobile = /Mobi/i.test(window.navigator.userAgent);
+
 	return (
 		<div className="page">
+			isMobile
 			<PageHeader title={pageTitle}>
-				<ButtonExcel queryKey={deviceQueryKey.excel()} params={params} filename={pageTitle} />
+				{!isMobile && <ButtonExcel queryKey={deviceQueryKey.excel()} params={params} filename={pageTitle} />}
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="비상벨 목록">
