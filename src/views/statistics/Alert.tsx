@@ -11,7 +11,7 @@ import PageBody from '@/features/ui/layout/PageBody';
 import PageHeader from '@/features/ui/layout/PageHeader';
 import { useContentsModal } from '@/hooks/useContentsModal';
 import { SecureStorage } from '@/plugin/crypto';
-import { statisticsQueryKey } from '@/queries/_querykey';
+import { deviceQueryKey, statisticsQueryKey } from '@/queries/_querykey';
 import { postQuery } from '@/queries/_utils';
 import { alertIdState } from '@/state/alert';
 import { AlertListType } from '@/types/Statistics.types';
@@ -63,10 +63,12 @@ export default function Alert() {
 
 	console.log('알림 통계 params: ', params);
 
+	const isMobile = /Mobi/i.test(window.navigator.userAgent);
+
 	return (
 		<div className="page">
 			<PageHeader title={pageTitle}>
-				<ButtonExcel queryKey={statisticsQueryKey.alertExcel()} params={params} filename={pageTitle} />
+				{!isMobile && <ButtonExcel queryKey={statisticsQueryKey.alertExcel()} params={params} filename={pageTitle} />}
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="알림 목록">
