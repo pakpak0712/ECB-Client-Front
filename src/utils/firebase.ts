@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { Messaging, getMessaging, getToken } from 'firebase/messaging';
 import { Dispatch, SetStateAction } from 'react';
 
+import { useAlert } from '@/hooks/useAlert';
 import { SecureStorage } from '@/plugin/crypto';
 import { getValueOrEmptyFromObject } from '@/utils/objectUtils';
 
@@ -43,6 +44,8 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 	const AppFirebaseToken = memberToken ? memberToken : firebaseToken;
 	console.log('AppFirebaseToken: ' + AppFirebaseToken);
 
+	const { alertMessage } = useAlert();
+
 	if (AppFirebaseToken) {
 		setState(AppFirebaseToken);
 		return;
@@ -66,6 +69,9 @@ export async function requestPermission(setState: Dispatch<SetStateAction<string
 						}
 					} else {
 						console.log('알림 권한이 허용되지 않음');
+
+						alertMessage('먼저 [알림 표시] 권한 요청을 허용해주세요.');
+						return false;
 					}
 				})
 				.catch((err) => {

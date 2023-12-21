@@ -78,7 +78,6 @@ export default function Device() {
 
 	return (
 		<div className="page">
-			isMobile
 			<PageHeader title={pageTitle}>
 				{!isMobile && <ButtonExcel queryKey={deviceQueryKey.excel()} params={params} filename={pageTitle} />}
 				<ButtonRefetch />

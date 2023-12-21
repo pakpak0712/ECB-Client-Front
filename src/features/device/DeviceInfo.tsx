@@ -121,7 +121,10 @@ export default function DeviceInfo() {
 	return (
 		<>
 			<div className="modal-header">
-				<h4 className="modal-title">{`비상벨 ${id ? '정보 수정' : '신규 등록'}`}</h4>
+				<h4 className="modal-title">
+					{isAdmin ? `비상벨 ${id ? '정보 수정' : '신규 등록'}` : ''}
+					{!isAdmin ? `비상벨 ${id ? '정보' : '신규 등록'}` : ''}
+				</h4>
 			</div>
 			<form
 				className="form-info form-info-vertical px-2"
