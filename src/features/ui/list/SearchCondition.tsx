@@ -45,7 +45,7 @@ export default function SearchCondition({ initialParams, params, setParams, type
 				<CustomInput
 					name="searchWord"
 					defaultValue={searchCondition.searchDTO.searchWord}
-					placeholder={searchCondition.searchDTO.searchType ? '검색 내용을 입력해주세요.' : '검색 항목을 선택해주세요'}
+					placeholder={searchCondition.searchDTO.searchType ? '검색어를 입력해주세요.' : '검색 항목을 선택해주세요.'}
 					handleState={handleSearchConditionChange}
 					disabled={!searchCondition.searchDTO.searchType ? true : false}
 				/>

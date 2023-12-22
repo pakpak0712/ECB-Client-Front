@@ -22,7 +22,7 @@ export default function useDuplicateCheck<T>(
 		{
 			onSuccess: (data) => {
 				if (data[duplicateDataKey]) {
-					alertMessage(`사용 중인 ${title}입니다. 다른 ${title}를 사용해주세요`);
+					alertMessage(`이미 사용중인 ${title}입니다. 다른 ${title}를 사용해주세요.`);
 					setIsDuplicateChecked(false);
 				} else {
 					alertMessage(`사용 가능한 ${title}입니다.`);
@@ -34,7 +34,7 @@ export default function useDuplicateCheck<T>(
 
 	const handleDuplicateCheck = (value: string) => {
 		if (value) duplicateMutation.mutate();
-		else alertMessage(`${title}를 입력해주세요`);
+		else alertMessage(`${title}를 입력해주세요.`);
 	};
 
 	useEffect(() => {

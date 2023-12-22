@@ -20,8 +20,10 @@ import { DeviceListType } from '@/types/Device.types';
 export default function Device() {
 	const secureStorage = new SecureStorage(localStorage);
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
-	const { member_flag: memberFlag } = userInfo;
+	const { member_name: memberName, member_flag: memberFlag } = userInfo;
 	const isAdmin = memberFlag === 1;
+	const isNoMem = memberFlag === 3;
+	const isSpMem = memberFlag === 0;
 
 	const initialParams = {
 		searchDTO: {
@@ -39,7 +41,8 @@ export default function Device() {
 			pagePerRow: 10,
 		},
 	};
-	const pageTitle = '비상벨 관리';
+	let pageTitle = memberName + ' 비상벨 현황';
+	pageTitle = '비상벨 현황';
 
 	const [_, setId] = useRecoilState(deviceIdState);
 	const { openContentModal } = useContentsModal();
@@ -79,7 +82,15 @@ export default function Device() {
 	return (
 		<div className="page">
 			<PageHeader title={pageTitle}>
-				{!isMobile && <ButtonExcel queryKey={deviceQueryKey.excel()} params={params} filename={pageTitle} />}
+				{!isMobile && isAdmin ? (
+					<ButtonExcel queryKey={deviceQueryKey.excelAdmin()} params={params} filename={pageTitle} />
+				) : null}
+				{!isMobile && isNoMem ? (
+					<ButtonExcel queryKey={deviceQueryKey.excelNoMem()} params={params} filename={pageTitle} />
+				) : null}
+				{!isMobile && isSpMem ? (
+					<ButtonExcel queryKey={deviceQueryKey.excelSpMem()} params={params} filename={pageTitle} />
+				) : null}
 				<ButtonRefetch />
 			</PageHeader>
 			<PageBody title="비상벨 목록">

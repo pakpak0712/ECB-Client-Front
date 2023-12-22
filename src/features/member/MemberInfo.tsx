@@ -223,7 +223,7 @@ export default function MemberInfo() {
 								handleState={handleMemberInfoChange}
 								isOnlyText={userInfo.member_flag != '1'}
 								pattern=".{5,20}"
-								title="5자 이상, 20자 이하를 입력해주세요"
+								title="5자 이상, 20자 이하를 입력해주세요."
 							/>
 						</div>
 					</CustomRow>
@@ -251,7 +251,7 @@ export default function MemberInfo() {
 										// handleValid={validatePasswordMatch(savedMemberInfo.memberPw)}
 										handleValid={validatePasswordMatch(memberInfo.memberPw)}
 										pattern=".{8,20}"
-										title="8자 이상, 20자 이하를 입력해주세요"
+										title="8자 이상, 20자 이하를 입력해주세요."
 										readOnly={
 											validatePasswordMatch(memberInfo.memberPw)(passwordChangeInfo.originalMemberPw) ? false : true
 										}
@@ -272,7 +272,7 @@ export default function MemberInfo() {
 									handleState={handleMemberInfoChange}
 									handlePattern={formatOnlyNumberEnglish}
 									pattern=".{8,20}"
-									title="8자 이상, 20자 이하를 입력해주세요"
+									title="8자 이상, 20자 이하를 입력해주세요."
 									type="password"
 								/>
 							</div>
@@ -286,7 +286,7 @@ export default function MemberInfo() {
 									handlePattern={formatOnlyNumberEnglish}
 									handleValid={validatePasswordMatch(memberInfo.memberPw)}
 									pattern=".{8,20}"
-									title="8자 이상, 20자 이하를 입력해주세요"
+									title="8자 이상, 20자 이하를 입력해주세요."
 									type="password"
 								/>
 							</div>

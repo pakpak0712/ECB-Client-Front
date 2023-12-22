@@ -28,7 +28,9 @@ export const deviceQueryKey = (() => {
 		delete: () => [endpoint, 'delete'], // 비상벨 삭제
 		update: () => [endpoint, 'update'], // 비상벨 수정
 		insert: () => [endpoint, 'insert'], // 비상벨 등록
-		excel: () => [endpoint, 'excel'], // 엑셀 다운로드
+		excelAdmin: () => [endpoint, 'excelAdmin'], // 엑셀 다운로드 (관리자)
+		excelNoMem: () => [endpoint, 'excelNoMem'], // 엑셀 다운로드 (일반 회원)
+		excelSpMem: () => [endpoint, 'excelSpMem'], // 엑셀 다운로드 (특수 회원 > 고장 X)
 	};
 })();
 

@@ -33,6 +33,7 @@ export default function DeviceList({
 	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
 
 	const isAdmin = userInfo.member_flag === 1;
+	const isNoMem = userInfo.member_flag === 3;
 
 	const tableData = useMemo(
 		() =>
@@ -53,7 +54,9 @@ export default function DeviceList({
 		{ name: '설치주소', selector: (row) => row['tcs_compAddr'], sortable: true, sortField: 'tcs_compAddr' },
 		{ name: '세부설치위치', selector: (row) => row['tcs_moreAddr'], sortable: true, sortField: 'tcs_moreAddr' },
 		{ name: '설치수량(S)', selector: (row) => row['tcs_num'], sortable: true, sortField: 'tcs_num' },
-		{ name: '가동상태', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true, sortField: 'tcs_flag' },
+		isAdmin || isNoMem
+			? { name: '가동상태', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true, sortField: 'tcs_flag' }
+			: {},
 		{ name: '라우터번호', selector: (row) => row['tcs_serial'], sortable: true, sortField: 'tcs_serial' },
 		{
 			name: '전화번호',
@@ -71,8 +74,12 @@ export default function DeviceList({
 			sortField: 'tcs_matchPhone',
 		},
 		isAdmin ? { name: 'MAC 주소', selector: (row) => row['tcs_mac'], sortable: true, sortField: 'tcs_mac' } : {},
-		{ name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true, sortField: 'tcs_date' },
-		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true, sortField: 'tcs_ALdate' },
+		isAdmin || isNoMem
+			? { name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true, sortField: 'tcs_date' }
+			: {},
+		isAdmin || isNoMem
+			? { name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true, sortField: 'tcs_ALdate' }
+			: {},
 		isAdmin ? { name: '메모', selector: (row) => row['tcs_memo'], sortable: true, sortField: 'tcs_memo' } : {},
 	];
 

@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { SecureStorage } from '@/plugin/crypto';
 import { PageMapType, SearchParamsType } from '@/types/Common.types';
 
 interface PaginationProps<T> {
@@ -20,6 +21,12 @@ export default function Pagination<T extends SearchParamsType>({ pageMap, setPar
 	const startPage = Math.max(1, (currentPageSection - 1) * buttonPerPage + 1);
 	const endPage = buttonPerPage * currentPageSection > totalPage ? totalPage : buttonPerPage * currentPageSection;
 	const buttonCount = endPage - startPage + 1;
+
+	const secureStorage = new SecureStorage(localStorage);
+	const userInfo = secureStorage.getItem('user-storage', 'user-storage');
+
+	const isAdmin = userInfo.member_flag === 1;
+	const isNoMem = userInfo.member_flag === 3;
 
 	const handleDataPerPageChange = (newPerPage: number) => {
 		setParams((prev) => ({ ...prev, pageDTO: { curPage: 1, pagePerRow: newPerPage } }));
@@ -44,7 +51,7 @@ export default function Pagination<T extends SearchParamsType>({ pageMap, setPar
 		<div className="pagination-wrapper">
 			<div className="form-content">
 				<div className="">
-					{aliveCount > 0 && deadCount > 0 ? (
+					{(isAdmin || isNoMem) && aliveCount > 0 && deadCount > 0 ? (
 						<>
 							전체: {totalCount}&nbsp;&nbsp;&nbsp;&nbsp;(<span style={{ color: '#00FF00' }}>정상: {aliveCount}</span>
 							&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;

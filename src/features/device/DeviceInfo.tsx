@@ -35,6 +35,7 @@ export default function DeviceInfo() {
 		tcsMac: '',
 		tcsSerial: '',
 		tcsMemo: '',
+		tcsMap: '',
 		hmId: userInfo.member_id,
 	};
 
@@ -62,6 +63,7 @@ export default function DeviceInfo() {
 				tcsMac: data.tcs_mac,
 				tcsSerial: data.tcs_serial,
 				tcsMemo: data.tcs_memo,
+				tcsMap: data.tcs_map,
 			};
 			setDeviceInfo(deviceInfo);
 			setSavedDeviceInfo(deviceInfo);
@@ -213,7 +215,7 @@ export default function DeviceInfo() {
 										</button>
 									}
 									pattern=".{17,17}"
-									title="12자리를 입력해주세요"
+									title="12 자리를 맞춰서 입력해주세요."
 									readOnly={!isSameTcsMac && isDuplicateChecked}
 								/>
 							</div>
@@ -230,7 +232,7 @@ export default function DeviceInfo() {
 								handleState={handleChangeDeviceInfo}
 								handlePattern={formatOnlyPhoneNumber}
 								pattern=".{11,}"
-								title="9자 이상을 입력해주세요"
+								title="9자 이상을 입력해주세요."
 							/>
 						</div>
 						<div className="form-grid">
@@ -255,8 +257,23 @@ export default function DeviceInfo() {
 									defaultValue={deviceInfo.tcsMemo}
 									isOnlyText={memberFlag !== 1}
 									handleState={handleChangeDeviceInfo}
-									pattern=".{0,30}"
-									title="30자 이하를 입력해주세요"
+									pattern=".{0,1000}"
+									title="1000자 이하로 입력해주세요."
+								/>
+							</div>
+						</CustomRow>
+					)}
+					{isAdmin && (
+						<CustomRow>
+							<div className="form-grid">
+								<CustomInput
+									labelTitle="지도 (위치)"
+									name="tcsMap"
+									defaultValue={deviceInfo.tcsMap}
+									isOnlyText={memberFlag !== 1}
+									handleState={handleChangeDeviceInfo}
+									pattern=".{0,1000}"
+									title="1000자 이하로 입력해주세요."
 								/>
 							</div>
 						</CustomRow>

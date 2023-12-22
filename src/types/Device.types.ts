@@ -12,6 +12,7 @@ export interface DeviceListType {
 	tcs_date: string;
 	tcs_ALdate: string;
 	tcs_memo: string;
+	tcs_map: string;
 	tcs_serial: string;
 	tcs_flag: number;
 }
@@ -29,4 +30,5 @@ export interface DeviceInfoDataType {
 	tcsMac: string;
 	tcsSerial: string;
 	tcsMemo: string;
+	tcsMap: string;
 }

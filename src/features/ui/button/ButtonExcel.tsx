@@ -18,13 +18,21 @@ export default function ButtonExcel<T>({ queryKey, params, filename }: Props<T>)
 			type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 		});
 		const url = window.URL.createObjectURL(blob);
-		const time = new Date().toLocaleDateString().replaceAll(' ', '');
+
+		const nowDate = new Date();
+
+		const nowYear = nowDate.getFullYear().toString();
+		const nowMonth = ('0' + (1 + nowDate.getMonth())).slice(-2);
+		const nowDay = ('0' + nowDate.getDate()).slice(-2);
+
+		const strNowDate = nowYear + '-' + nowMonth + '-' + nowDay;
 
 		const link = document.createElement('a');
 		link.href = url;
-		link.setAttribute('download', `${time} ${filename} 목록.xls`);
+		link.setAttribute('download', `${filename} (${strNowDate}).xls`);
 		document.body.appendChild(link);
 		link.click();
+
 		window.URL.revokeObjectURL(url);
 	};
 	const { mutate } = useMutation(downloadExcel);
