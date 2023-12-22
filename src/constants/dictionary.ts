@@ -9,13 +9,11 @@ export const memberSearchTypeDic = [
 ];
 
 export const deviceTypeDic = [
-	new Option('ECB-ST-20S', 'ECB-ST10K'),
-	new Option('ECB-ST-20T', 'ECB-ST20T'),
-	new Option('ECB-ST-20BK', 'ECB-ST20VK'),
-	new Option('ECB-ST-20VK', 'ECB-ST20BK'),
-	new Option('ECB-ST-30S', 'ECB-ST20VT'),
-	new Option('ECB-ST-30T', 'ECB-ST30T'),
-	new Option('ECB-ST-T', 'ECB-ST-T'),
+	new Option('ECB-ST-10K', 'ECB-ST-10K'),
+	new Option('ECB-ST-20T', 'ECB-ST-20T'),
+	new Option('ECB-ST-20BK', 'ECB-ST-20BK'),
+	new Option('ECB-ST-20VK', 'ECB-ST-20VK'),
+	new Option('ECB-ST-30T', 'ECB-ST-30T'),
 ];
 export const deviceSearchTypeDic = [
 	new Option('구매자', 'tcs_name'),
@@ -23,7 +21,7 @@ export const deviceSearchTypeDic = [
 	new Option('설치주소', 'tcs_compAddr'),
 	new Option('라우터번호', 'tcs_serial'),
 	new Option('전화번호', 'tcs_matchPhone'),
-	new Option('MAC', 'tcs_mac'),
+	new Option('MAC 주소', 'tcs_mac'),
 ];
 export const deviceSearchTypeDic2 = [
 	new Option('구매자', 'tcs_name'),
@@ -38,7 +36,7 @@ export const alertSearchTypeDic = [
 	new Option('알림유형', 'alert_type'),
 	new Option('라우터번호', 'alert_serial'),
 	new Option('전화번호', 'alert_phone'),
-	new Option('MAC', 'tcs_mac'),
+	new Option('MAC 주소', 'tcs_mac'),
 ];
 export const alertSearchTypeDic2 = [
 	new Option('알림장소', 'alert_name'),
@@ -51,7 +49,7 @@ export const aliveSearchTypeDic = [
 	new Option('고장장소', 'alive_name'),
 	new Option('라우터번호', 'alive_serial'),
 	new Option('전화번호', 'alive_phone'),
-	new Option('MAC', 'tcs_mac'),
+	new Option('MAC 주소', 'tcs_mac'),
 ];
 export const aliveSearchTypeDic2 = [
 	new Option('고장장소', 'alive_name'),

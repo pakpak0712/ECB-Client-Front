@@ -46,13 +46,14 @@ export default function DeviceList({
 
 	/** 목록 테이블의 열을 구성하기 위한 데이터  **/
 	const columns: TableColumn<DeviceListType>[] = [
-		//{ name: '순번', selector: (row) => row.no },
-		{ name: '모델', selector: (row) => row['tcs_deviceType'], sortable: true, sortField: 'tcs_deviceType' },
+		{ name: 'No.', selector: (row) => row.no },
 		{ name: '구매자', selector: (row) => row['tcs_name'], sortable: true, sortField: 'tcs_name' },
+		{ name: '설치모델', selector: (row) => row['tcs_deviceType'], sortable: true, sortField: 'tcs_deviceType' },
 		{ name: '설치장소', selector: (row) => row['tcs_simpAddr'], sortable: true, sortField: 'tcs_simpAddr' },
 		{ name: '설치주소', selector: (row) => row['tcs_compAddr'], sortable: true, sortField: 'tcs_compAddr' },
 		{ name: '세부설치위치', selector: (row) => row['tcs_moreAddr'], sortable: true, sortField: 'tcs_moreAddr' },
 		{ name: '설치수량(S)', selector: (row) => row['tcs_num'], sortable: true, sortField: 'tcs_num' },
+		{ name: '가동상태', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true, sortField: 'tcs_flag' },
 		{ name: '라우터번호', selector: (row) => row['tcs_serial'], sortable: true, sortField: 'tcs_serial' },
 		{
 			name: '전화번호',
@@ -69,10 +70,10 @@ export default function DeviceList({
 			sortable: true,
 			sortField: 'tcs_matchPhone',
 		},
+		isAdmin ? { name: 'MAC 주소', selector: (row) => row['tcs_mac'], sortable: true, sortField: 'tcs_mac' } : {},
 		{ name: '최초설치일시', selector: (row) => row['tcs_date'], sortable: true, sortField: 'tcs_date' },
 		{ name: '마지막신호', selector: (row) => row['tcs_ALdate'], sortable: true, sortField: 'tcs_ALdate' },
-		{ name: '고장여부', selector: (row) => decodingFlag(row['tcs_flag']), sortable: true, sortField: 'tcs_flag' },
-		isAdmin ? { name: '비고', selector: (row) => row['tcs_memo'], sortable: true, sortField: 'tcs_memo' } : {},
+		isAdmin ? { name: '메모', selector: (row) => row['tcs_memo'], sortable: true, sortField: 'tcs_memo' } : {},
 	];
 
 	const decodingFlag = (flag: string | number): string => {

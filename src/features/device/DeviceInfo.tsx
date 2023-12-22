@@ -92,7 +92,7 @@ export default function DeviceInfo() {
 
 	// 필수값 체크
 	const requiredDeviceInfo: Record<string, string | string[]> = {
-		tcsMac: 'MAC',
+		tcsMac: 'MAC 주소',
 	};
 	const requiredValueCheck = useRequiredValueCheck(deviceInfo, requiredDeviceInfo);
 	const handleSubmit = (event: any) => {
@@ -134,20 +134,20 @@ export default function DeviceInfo() {
 				<div className="modal-body">
 					<CustomRow>
 						<div className="form-grid">
-							<CustomSelect
-								labelTitle="모델"
-								name="tcsDeviceType"
-								defaultValue={deviceInfo.tcsDeviceType}
-								handleState={handleChangeDeviceInfo}
-								optionDictionary={deviceTypeDic}
-							/>
-						</div>
-						<div className="form-grid">
 							<CustomInput
 								labelTitle="구매자"
 								name="tcsName"
 								defaultValue={`${deviceInfo.tcsName}`}
 								handleState={handleChangeDeviceInfo}
+							/>
+						</div>
+						<div className="form-grid">
+							<CustomSelect
+								labelTitle="설치모델"
+								name="tcsDeviceType"
+								defaultValue={deviceInfo.tcsDeviceType}
+								handleState={handleChangeDeviceInfo}
+								optionDictionary={deviceTypeDic}
 							/>
 						</div>
 					</CustomRow>
@@ -193,7 +193,7 @@ export default function DeviceInfo() {
 								<CustomInput
 									_ref={inputMacRef}
 									required={true}
-									labelTitle="MAC"
+									labelTitle="MAC 주소"
 									name="tcsMac"
 									defaultValue={deviceInfo.tcsMac}
 									isOnlyText={memberFlag !== 1}

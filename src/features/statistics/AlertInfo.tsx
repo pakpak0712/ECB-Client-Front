@@ -81,19 +81,19 @@ export default function AlertInfo() {
 						</div>
 					</CustomRow>
 					<CustomRow>
-						{isAdmin && (
-							<div className="form-grid">
-								<CustomText labelTitle="MAC" text={alertInfo.alertMac} />
-							</div>
-						)}
 						<div className="form-grid">
 							<CustomText labelTitle="라우터번호" text={alertInfo.alertSerial} />
 						</div>
-					</CustomRow>
-					<CustomRow>
 						<div className="form-grid">
 							<CustomText labelTitle="전화번호" text={alertInfo.alertPhone} />
 						</div>
+					</CustomRow>
+					<CustomRow>
+						{isAdmin && (
+							<div className="form-grid">
+								<CustomText labelTitle="MAC 주소" text={alertInfo.alertMac} />
+							</div>
+						)}
 						<div className="form-grid">
 							<CustomText labelTitle="알림일시" text={alertInfo.alertDate} />
 						</div>

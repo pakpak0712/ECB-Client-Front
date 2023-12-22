@@ -75,11 +75,6 @@ export default function AliveInfo() {
 						<div className="form-grid">
 							<CustomText labelTitle="고장장소" text={aliveInfo.aliveName} />
 						</div>
-						{isAdmin && (
-							<div className="form-grid">
-								<CustomText labelTitle="MAC" text={aliveInfo.aliveMac} />
-							</div>
-						)}
 					</CustomRow>
 					<CustomRow>
 						<div className="form-grid">
@@ -90,6 +85,11 @@ export default function AliveInfo() {
 						</div>
 					</CustomRow>
 					<CustomRow>
+						{isAdmin && (
+							<div className="form-grid">
+								<CustomText labelTitle="MAC 주소" text={aliveInfo.aliveMac} />
+							</div>
+						)}
 						<div className="form-grid">
 							<CustomText labelTitle="고장일시" text={aliveInfo.aliveDate} />
 						</div>
