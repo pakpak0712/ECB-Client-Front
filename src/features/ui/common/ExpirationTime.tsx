@@ -1,13 +1,8 @@
 import { useLayoutEffect, useState } from 'react';
+import { clearTimeout, setTimeout } from 'worker-timers';
 
-import { useAlert } from '@/hooks/useAlert';
 import { SecureStorage } from '@/plugin/crypto';
 import { geDoubleDigits } from '@/utils/numberUtils';
-
-interface WebAppInterface {
-	closeApp(toast: string): never;
-}
-declare let android: WebAppInterface;
 
 const isMobile = /Mobi/i.test(window.navigator.userAgent);
 
@@ -21,8 +16,6 @@ export default function ExpirationTime() {
 
 	const [remainingMinutes, setRemainingMinutes] = useState(expiredMinutes);
 	const [remainingSeconds, setRemainingSeconds] = useState(initialSeconds);
-
-	const { alertMessage } = useAlert();
 
 	const timerCallback = () => {
 		setRemainingSeconds((prev) => prev - 1);
@@ -43,7 +36,6 @@ export default function ExpirationTime() {
 				if (!isMobile) {
 					location.reload();
 				} else {
-					//android.closeApp('앱을 다시 시작해주세요.');
 					location.href = '/login?firebaseToken=' + memberToken;
 				}
 			})();
