@@ -41,8 +41,8 @@ export default function Device() {
 			pagePerRow: 10,
 		},
 	};
-	let pageTitle = memberName + ' 비상벨 현황';
-	pageTitle = '비상벨 현황';
+	let pageTitle = memberName + ' 비상벨 관리';
+	pageTitle = '비상벨 관리';
 
 	const [_, setId] = useRecoilState(deviceIdState);
 	const { openContentModal } = useContentsModal();

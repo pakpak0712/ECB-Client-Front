@@ -1,13 +1,7 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { useAlert } from '@/hooks/useAlert';
 import { SecureStorage } from '@/plugin/crypto';
 import { geDoubleDigits } from '@/utils/numberUtils';
-
-interface WebAppInterface {
-  closeApp(toast: string): never;
-}
-declare let android: WebAppInterface;
 
 const isMobile = /Mobi/i.test(window.navigator.userAgent);
 
@@ -22,32 +16,36 @@ export default function ExpirationTime() {
   const [remainingMinutes, setRemainingMinutes] = useState(expiredMinutes);
   const [remainingSeconds, setRemainingSeconds] = useState(initialSeconds);
 
-  const { alertMessage } = useAlert();
-
   const timerCallback = () => {
     setRemainingSeconds((prev) => prev - 1);
+
     if (remainingSeconds === initialSeconds) {
       setRemainingSeconds(initialMinutes - 1);
       setRemainingMinutes((prev) => prev - 1);
     }
+    console.log(geDoubleDigits(remainingMinutes) + ':' + geDoubleDigits(remainingSeconds));
   };
 
+  const timerWorker: Worker = new Worker(new URL('src/utils/timerWorker.ts', import.meta.url));
+  timerWorker.postMessage(1000);
+
   useLayoutEffect(() => {
-    const timer = setTimeout(timerCallback, 1000);
+    timerWorker.onmessage = (e) => {
+      timerCallback();
+      timerWorker.terminate();
 
-    if (remainingMinutes <= initialSeconds && remainingSeconds <= initialSeconds) {
-      clearTimeout(timer);
-      (() => {
-        localStorage.removeItem('user-storage');
+      if (remainingMinutes <= initialSeconds && remainingSeconds <= initialSeconds) {
+        (() => {
+          localStorage.removeItem('user-storage');
 
-        if (!isMobile) {
-          location.reload();
-        } else {
-          //android.closeApp('앱을 다시 시작해주세요.');
-          location.href = '/login?firebaseToken=' + memberToken;
-        }
-      })();
-    }
+          if (!isMobile) {
+            location.reload();
+          } else {
+            location.href = '/login?firebaseToken=' + memberToken;
+          }
+        })();
+      }
+    };
   }, [remainingSeconds]);
 
   return (

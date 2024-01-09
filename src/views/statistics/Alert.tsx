@@ -36,7 +36,7 @@ export default function Alert() {
 			pagePerRow: 10,
 		},
 	};
-	const pageTitle = '알림 현황';
+	const pageTitle = '알림 통계';
 
 	const [_, setId] = useRecoilState(alertIdState);
 	const { openContentModal } = useContentsModal();
